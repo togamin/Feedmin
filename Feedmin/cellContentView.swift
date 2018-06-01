@@ -7,13 +7,15 @@
 //
 
 import UIKit
-class cellContentView:UITableView{
+class cellContentView:UITableViewCell{
     
     @IBOutlet weak var cellContentView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var character: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
     
-    func favorite(){
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
-    
 }

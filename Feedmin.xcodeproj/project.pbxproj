@@ -31,7 +31,7 @@
 		B7423A4B20C04BAF00F02BDF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B7423A4D20C0BCA100F02BDF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B7423A5720C1275400F02BDF /* cellContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellContentView.xib; sourceTree = "<group>"; };
-		B7423A5920C128F400F02BDF /* cellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = cellContentView.swift; path = Feedmin/cellContentView.swift; sourceTree = "<group>"; };
+		B7423A5920C128F400F02BDF /* cellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellContentView.swift; sourceTree = "<group>"; };
 		B7423A5C20C1294100F02BDF /* pengin00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin00.png; sourceTree = "<group>"; };
 		B7423A5E20C130BA00F02BDF /* back01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = back01.jpg; path = ../back01.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,7 +50,6 @@
 		B7423A2D20C041E000F02BDF = {
 			isa = PBXGroup;
 			children = (
-				B7423A5920C128F400F02BDF /* cellContentView.swift */,
 				B7423A3820C041E000F02BDF /* Feedmin */,
 				B7423A3720C041E000F02BDF /* Products */,
 			);
@@ -67,6 +66,7 @@
 		B7423A3820C041E000F02BDF /* Feedmin */ = {
 			isa = PBXGroup;
 			children = (
+				B7423A5920C128F400F02BDF /* cellContentView.swift */,
 				B7423A3920C041E000F02BDF /* AppDelegate.swift */,
 				B7423A5720C1275400F02BDF /* cellContentView.xib */,
 				B7423A3B20C041E000F02BDF /* ViewController.swift */,

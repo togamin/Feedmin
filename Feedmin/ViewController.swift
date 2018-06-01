@@ -38,10 +38,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.delegate = self
         myTableView.dataSource = self
         
-        /*
-        let nib = UINib(nibName:"cellContentView",Bundle:nil)
+        
+        //cellContentViewを呼び出し、myTableViewに登録
+        let nib = UINib(nibName:"cellContentView",bundle:nil)
         myTableView.register(nib, forCellReuseIdentifier: "cell")
-        */
+        myTableView.estimatedRowHeight = 250
+        myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
+        
+ 
+        
     }
     //画面が表示された直後に読み込まれる。
     override func viewDidAppear(_ animated: Bool){
@@ -56,8 +61,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     //セルのインスタンス化
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for:indexPath)
-        cell.textLabel!.text = self.items[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for:indexPath) as! cellContentView
+        cell.titleLabel.text = self.items[indexPath.row].title
         
         return cell
     }
