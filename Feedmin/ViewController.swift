@@ -38,10 +38,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.delegate = self
         myTableView.dataSource = self
         
-        //headerのセルを表示
         /*
-         let headerCell = myTableView.dequeueReusableCell(withIdentifier: "header")
-        myTableView.tableHeaderView = headerCell?.contentView
+        let nib = UINib(nibName:"cellContentView",Bundle:nil)
+        myTableView.register(nib, forCellReuseIdentifier: "cell")
         */
     }
     //画面が表示された直後に読み込まれる。
