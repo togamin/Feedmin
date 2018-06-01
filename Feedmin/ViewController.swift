@@ -48,6 +48,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
  
         
     }
+    
+/*---------------------------------------------------*/
     //画面が表示された直後に読み込まれる。
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
@@ -66,8 +68,27 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         return cell
     }
+    //セルをタップしたら発動する処理
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row,"だよん")
+        performSegue(withIdentifier: "go",sender:nil)
+    }
+    //画面遷移時に呼び出される
+    override func prepare(for segue:UIStoryboardSegue,sender:Any?){
+        print("画面遷移中")
+        if let indexPath = self.myTableView.indexPathForSelectedRow{
+            let item = items[indexPath.row]
+            
+            //遷移先のViewControllerを格納
+            let controller = segue.destination as! detailViewController
+            
+            //遷移先の変数に代入
+            controller.title = item.title
+            controller.link = item.link
+        }
+    }
     
-    
+/*---------------------------------------------------*/
     //インターネットからRSSのデータをダウンロード
     func startDownload(){
         self.items = []//古いデータと記事が重複しないように、空にする
@@ -120,18 +141,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.myTableView.reloadData()
     }
     
-    override func prepare(for segue:UIStoryboardSegue,sender:Any?){
-        if let indexPath = self.myTableView.indexPathForSelectedRow{
-            let item = items[indexPath.row]
-            
-            //遷移先のViewControllerを格納
-            let controller = segue.destination as! detailViewController
-            
-            //遷移先の変数に代入
-            controller.title = item.title
-            controller.link = item.link
-        }
-    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
