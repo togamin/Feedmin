@@ -6,6 +6,17 @@
 //  Copyright © 2018年 Togami Yuki. All rights reserved.
 //
 
+/*TODO
+ 投稿記事の最初の画像URLの取得
+ 多くの記事のRSSのデータ取得方法の模索
+ セルに編集したやつの表示
+ 他のブログのRSS対応
+ 複数のURL対応
+ 時間による比較、表示順の決定
+ URLの入力と保存
+ おきにいり登録.選んだやつのURL保存
+ */
+
 import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,XMLParserDelegate {
@@ -28,9 +39,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.dataSource = self
         
         //headerのセルを表示
-        let headerCell = myTableView.dequeueReusableCell(withIdentifier: "header")
+        /*
+         let headerCell = myTableView.dequeueReusableCell(withIdentifier: "header")
         myTableView.tableHeaderView = headerCell?.contentView
-        
+        */
     }
     //画面が表示された直後に読み込まれる。
     override func viewDidAppear(_ animated: Bool){
@@ -57,7 +69,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.items = []//古いデータと記事が重複しないように、空にする
         //ニュース記事があるWebサイトのURLを指定。
         if let url = URL(
-            string: "http://togamin.com/" + "?feed=rss2"){
+            string: "http://www.timeless-edition.com/" + "feed"){
             //「OptionalBinding」(オプショナルバインディング)という書式。nil以外であれば「true」を返し、nilなら「false」を返す。
             print(url)
             if let parser = XMLParser(contentsOf:url){//XMLparserのインスタンス作成。
@@ -84,6 +96,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         //print(string)
         self.currentString = string
+        print(string)
     }
     //終了タグが見つかるたびに呼び出されるメソッド。
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
@@ -95,14 +108,25 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         default :break
         }
         
-        //解析後myTableViewをリロードする
-        self.myTableView.reloadData()
-        print("リロード完了")
+        
     }
     //解析後myTableViewをリロードする.機能していない.
     func parserDidEndDocument(_ parser: XMLParser) {
         print("OK")
         self.myTableView.reloadData()
+    }
+    
+    override func prepare(for segue:UIStoryboardSegue,sender:Any?){
+        if let indexPath = self.myTableView.indexPathForSelectedRow{
+            let item = items[indexPath.row]
+            
+            //遷移先のViewControllerを格納
+            let controller = segue.destination as! detailViewController
+            
+            //遷移先の変数に代入
+            controller.title = item.title
+            controller.link = item.link
+        }
     }
     
     override func didReceiveMemoryWarning() {
