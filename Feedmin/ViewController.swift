@@ -9,6 +9,12 @@
 /*TODO
  ブログ・サイトタイトル取得と表示
  (完)投稿記事の最初の画像URLの取得(サムネイル)
+ (完)画像表示
+ サーバーでの処理方法考える
+ 記事から記事のリストに戻るときにエラーがでる
+ 画像が入っていない時の処理を考える。
+ 処理速度を速くする
+ 一度読み込んだら保存することで、次からの表示を速くする
  SNSで共有
  他のブログのRSS対応
  複数のURL対応
@@ -50,9 +56,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.register(nib, forCellReuseIdentifier: "cell")
         myTableView.estimatedRowHeight = 250
         myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
-        
- 
-        
     }
     
 /*---------------------------------------------------*/
@@ -72,16 +75,25 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for:indexPath) as! cellContentView
         cell.titleLabel.text = self.items[indexPath.row].title
         
+        
+        
+        
+        /*
         //画像のURLから画像を表示するまで
-        let url = NSURL(string: self.items[indexPath.row].thumbImageURL)
-        if let imageData = NSData(contentsOf: url! as URL){
-            cell.cellContentView.image = UIImage(data:imageData as Data)
-        }
+        if  let url = NSURL(string: self.items[indexPath.row].thumbImageURL){
+            let imageData = NSData(contentsOf: url as URL)
+            cell.cellContentView.image = UIImage(data:imageData as! Data)
+        }else{
+            cell.cellContentView.image = UIImage(named: "back02.jpg")
+        }*/
+        
+        
+        
         return cell
     }
     //セルをタップしたら発動する処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row,"だよん")
+        //print(indexPath.row,"だよん")
         performSegue(withIdentifier: "go",sender:nil)
     }
     //画面遷移時に呼び出される
@@ -99,7 +111,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
     }
     
-/*---------------------------------------------------*/
+/*----以下サーバーで処理して値だけ持ってくることはできないか?iPhoneでの処理とサーバーでの処理はどちらが早い?----*/
     //インターネットからRSSのデータをダウンロード
     func startDownload(){
         self.items = []//古いデータと記事が重複しないように、空にする
@@ -143,6 +155,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let str = code
         
         let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        
         //NSRegularExpression:挟まれた文字を抜き出す。今回は[src="]と["]の間の文字列
         //caseInsensitive:多文字と小文字を区別しない。
         //try!:エラーが発生した場合にクラッシュする。
@@ -154,7 +167,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         matches.forEach { (match) -> () in
             results.append( (str as NSString).substring(with: match.range(at: 1)) )
         }
-        //print(results)
+        print(results)
         
         return results[0]
     }
@@ -169,18 +182,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             case "link":
                 self.item?.link = currentString
             case "pubData":
-                self.item?.link = currentString
+                self.item?.pubDate = currentString
             case "description":
-                //print(currentString)
-                self.item?.thumbImageURL = getImageURL(code: currentString)
+                print(currentString)
+                //self.item?.thumbImageURL = getImageURL(code: currentString)
                 //print(self.item?.thumbImageURL)
             case "item": self.items.append(self.item!)
         default :break
         }
-    
-    
-        
-        
     }
     //解析後myTableViewをリロードする.機能していない.
     func parserDidEndDocument(_ parser: XMLParser){
