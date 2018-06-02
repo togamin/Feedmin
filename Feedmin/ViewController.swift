@@ -8,12 +8,11 @@
 
 /*TODO
  ブログ・サイトタイトル取得と表示
- 投稿記事の最初の画像URLの取得(サムネイル)
- 多くの記事のRSSのデータ取得方法の模索
+ (完)投稿記事の最初の画像URLの取得(サムネイル)
  SNSで共有
  他のブログのRSS対応
  複数のURL対応
- 時間による比較、表示順の決定
+ 時間による比較、表示順の決定(微妙)
  URLの入力と保存
  おきにいり登録.選んだやつのURL保存
  下にスライドすることによるアップデート
@@ -73,6 +72,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for:indexPath) as! cellContentView
         cell.titleLabel.text = self.items[indexPath.row].title
         
+        //画像のURLから画像を表示するまで
+        let url = NSURL(string: self.items[indexPath.row].thumbImageURL)
+        if let imageData = NSData(contentsOf: url! as URL){
+            cell.cellContentView.image = UIImage(data:imageData as Data)
+        }
         return cell
     }
     //セルをタップしたら発動する処理

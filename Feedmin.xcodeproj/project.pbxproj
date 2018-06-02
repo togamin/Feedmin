@@ -16,8 +16,7 @@
 		B7423A4E20C0BCA100F02BDF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7423A4D20C0BCA100F02BDF /* DetailViewController.swift */; };
 		B7423A5820C1275400F02BDF /* cellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7423A5720C1275400F02BDF /* cellContentView.xib */; };
 		B7423A5A20C128F400F02BDF /* cellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7423A5920C128F400F02BDF /* cellContentView.swift */; };
-		B7423A5D20C1294100F02BDF /* pengin00.png in Resources */ = {isa = PBXBuildFile; fileRef = B7423A5C20C1294100F02BDF /* pengin00.png */; };
-		B7423A5F20C130BA00F02BDF /* back01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B7423A5E20C130BA00F02BDF /* back01.jpg */; };
+		B7423A6420C2C8D500F02BDF /* myImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6320C2C8D500F02BDF /* myImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +31,7 @@
 		B7423A4D20C0BCA100F02BDF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B7423A5720C1275400F02BDF /* cellContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellContentView.xib; sourceTree = "<group>"; };
 		B7423A5920C128F400F02BDF /* cellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellContentView.swift; sourceTree = "<group>"; };
-		B7423A5C20C1294100F02BDF /* pengin00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin00.png; sourceTree = "<group>"; };
-		B7423A5E20C130BA00F02BDF /* back01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = back01.jpg; path = ../back01.jpg; sourceTree = "<group>"; };
+		B7423A6320C2C8D500F02BDF /* myImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,14 +64,14 @@
 		B7423A3820C041E000F02BDF /* Feedmin */ = {
 			isa = PBXGroup;
 			children = (
-				B7423A5920C128F400F02BDF /* cellContentView.swift */,
 				B7423A3920C041E000F02BDF /* AppDelegate.swift */,
-				B7423A5720C1275400F02BDF /* cellContentView.xib */,
 				B7423A3B20C041E000F02BDF /* ViewController.swift */,
+				B7423A5720C1275400F02BDF /* cellContentView.xib */,
+				B7423A5920C128F400F02BDF /* cellContentView.swift */,
 				B7423A3D20C041E000F02BDF /* Main.storyboard */,
-				B7423A5B20C1294100F02BDF /* images */,
 				B7423A4D20C0BCA100F02BDF /* DetailViewController.swift */,
 				B7423A4B20C04BAF00F02BDF /* Item.swift */,
+				B7423A6220C2C8D500F02BDF /* images */,
 				B7423A4020C041E400F02BDF /* Assets.xcassets */,
 				B7423A4220C041E400F02BDF /* LaunchScreen.storyboard */,
 				B7423A4520C041E400F02BDF /* Info.plist */,
@@ -81,11 +79,10 @@
 			path = Feedmin;
 			sourceTree = "<group>";
 		};
-		B7423A5B20C1294100F02BDF /* images */ = {
+		B7423A6220C2C8D500F02BDF /* images */ = {
 			isa = PBXGroup;
 			children = (
-				B7423A5E20C130BA00F02BDF /* back01.jpg */,
-				B7423A5C20C1294100F02BDF /* pengin00.png */,
+				B7423A6320C2C8D500F02BDF /* myImage.png */,
 			);
 			name = images;
 			path = ../../images;
@@ -149,12 +146,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7423A6420C2C8D500F02BDF /* myImage.png in Resources */,
 				B7423A4420C041E400F02BDF /* LaunchScreen.storyboard in Resources */,
 				B7423A4120C041E400F02BDF /* Assets.xcassets in Resources */,
 				B7423A5820C1275400F02BDF /* cellContentView.xib in Resources */,
 				B7423A3F20C041E000F02BDF /* Main.storyboard in Resources */,
-				B7423A5D20C1294100F02BDF /* pengin00.png in Resources */,
-				B7423A5F20C130BA00F02BDF /* back01.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
