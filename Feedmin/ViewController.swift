@@ -7,14 +7,21 @@
 //
 
 /*TODO
- 投稿記事の最初の画像URLの取得
+ ブログ・サイトタイトル取得と表示
+ 投稿記事の最初の画像URLの取得(サムネイル)
  多くの記事のRSSのデータ取得方法の模索
- セルに編集したやつの表示
+ SNSで共有
  他のブログのRSS対応
  複数のURL対応
  時間による比較、表示順の決定
  URLの入力と保存
  おきにいり登録.選んだやつのURL保存
+ 下にスライドすることによるアップデート
+ 上にスライドすることによる過去記事の表示
+ ペンギン画像ランダム表示
+ テキストデータを取得してWifiにつながなくても読める(お気に位入りのみ)。
+ 通知来る時間帯の設定
+ Infeed広告を入れる
  */
 
 import UIKit
@@ -94,9 +101,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.items = []//古いデータと記事が重複しないように、空にする
         //ニュース記事があるWebサイトのURLを指定。
         if let url = URL(
-            string: "http://www.timeless-edition.com/" + "feed"){
+            string: "http://togamin.com/feed/"){
             //「OptionalBinding」(オプショナルバインディング)という書式。nil以外であれば「true」を返し、nilなら「false」を返す。
-            print(url)
+            
             if let parser = XMLParser(contentsOf:url){//XMLparserのインスタンス作成。
                 self.parser = parser
                 self.parser.delegate = self
@@ -112,7 +119,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.currentString = ""
         //print(elementName)//タグすべてプリント
         if elementName == "item"{
-            //print("itemきました")
             self.item = Item()//タグ名がitemもときのみ、記事を入れる箱を作成
         }
         
@@ -121,24 +127,61 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         //print(string)
         self.currentString = string
-        print(string)
     }
+    
+    
+    
+    //コードの中に入っているimgタグの中のURLを取得する.
+    func getImageURL(code:String)->String{
+        let pattern = "src=\"(.*)\" alt"
+        //(.*)の部分を抜き出す.
+
+        let str = code
+        
+        let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        //NSRegularExpression:挟まれた文字を抜き出す。今回は[src="]と["]の間の文字列
+        //caseInsensitive:多文字と小文字を区別しない。
+        //try!:エラーが発生した場合にクラッシュする。
+        
+        let matches = regex.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count))
+        
+        var results: [String] = []
+        
+        matches.forEach { (match) -> () in
+            results.append( (str as NSString).substring(with: match.range(at: 1)) )
+        }
+        //print(results)
+        
+        return results[0]
+    }
+    
+    
+    
     //終了タグが見つかるたびに呼び出されるメソッド。
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         switch elementName {
-            case "title": self.item?.title = currentString
-            case "link": self.item?.link = currentString
-            case "pubData": self.item?.link = currentString
+            case "title":
+                self.item?.title = currentString
+            case "link":
+                self.item?.link = currentString
+            case "pubData":
+                self.item?.link = currentString
+            case "description":
+                //print(currentString)
+                self.item?.thumbImageURL = getImageURL(code: currentString)
+                //print(self.item?.thumbImageURL)
             case "item": self.items.append(self.item!)
         default :break
         }
+    
+    
         
         
     }
     //解析後myTableViewをリロードする.機能していない.
-    func parserDidEndDocument(_ parser: XMLParser) {
-        print("OK")
+    func parserDidEndDocument(_ parser: XMLParser){
         self.myTableView.reloadData()
+        print("リロード完了")
     }
     
     

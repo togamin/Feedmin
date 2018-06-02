@@ -7,9 +7,9 @@
 //
 
 
-
 class Item {
     var title = ""
     var link = ""
     var pubDate = ""
+    var thumbImageURL = ""
 }
