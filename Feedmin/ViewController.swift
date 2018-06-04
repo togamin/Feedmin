@@ -11,9 +11,10 @@
  (完)投稿記事の最初の画像URLの取得(サムネイル)
  (完)画像表示
  サーバーでの処理方法考える
+ キャッシュ
  記事から記事のリストに戻るときにエラーがでる
  画像が入っていない時の処理を考える。
- 処理速度を速くする
+ 
  一度読み込んだら保存することで、次からの表示を速くする
  SNSで共有
  他のブログのRSS対応
@@ -22,6 +23,7 @@
  URLの入力と保存
  おきにいり登録.選んだやつのURL保存
  下にスライドすることによるアップデート
+ refreshController
  上にスライドすることによる過去記事の表示
  ペンギン画像ランダム表示
  テキストデータを取得してWifiにつながなくても読める(お気に位入りのみ)。
@@ -31,7 +33,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,XMLParserDelegate {
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,XMLParserDelegate,UIScrollViewDelegate {
     
     
     /*########################################*/
@@ -40,29 +42,33 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var items:[Item] = []//複数の記事を格納するための配列
     var item:Item?
     var currentString = ""
+    var imageList = [""]
     /*########################################*/
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+     
         
+//tableView
         myTableView.delegate = self
         myTableView.dataSource = self
-        
         
         //cellContentViewを呼び出し、myTableViewに登録
         let nib = UINib(nibName:"cellContentView",bundle:nil)
         myTableView.register(nib, forCellReuseIdentifier: "cell")
         myTableView.estimatedRowHeight = 250
         myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
+        
+        
+        startDownload()
     }
     
 /*---------------------------------------------------*/
     //画面が表示された直後に読み込まれる。
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
-        startDownload()
     }
     
     //行数を決める
@@ -74,23 +80,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for:indexPath) as! cellContentView
         cell.titleLabel.text = self.items[indexPath.row].title
-        
-        
-        
-        
-        /*
-        //画像のURLから画像を表示するまで
-        if  let url = NSURL(string: self.items[indexPath.row].thumbImageURL){
-            let imageData = NSData(contentsOf: url as URL)
-            cell.cellContentView.image = UIImage(data:imageData as! Data)
-        }else{
-            cell.cellContentView.image = UIImage(named: "back02.jpg")
-        }*/
-        
-        
-        
+        //print(cell.titleLabel.text)
+        cell.cellContentView.image = items[indexPath.row].thumbImage
         return cell
     }
+    
+    
     //セルをタップしたら発動する処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print(indexPath.row,"だよん")
@@ -151,7 +146,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func getImageURL(code:String)->String{
         let pattern = "src=\"(.*)\" alt"
         //(.*)の部分を抜き出す.
-
+        
         let str = code
         
         let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
@@ -162,14 +157,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         let matches = regex.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count))
         
-        var results: [String] = []
+        var results:String!
         
         matches.forEach { (match) -> () in
-            results.append( (str as NSString).substring(with: match.range(at: 1)) )
+            results = (str as NSString).substring(with: match.range(at: 1))
         }
-        print(results)
         
-        return results[0]
+        //URLがなければ、デフォルト画像を設定する
+        if results == nil{
+            results = "back01.jpg"
+        }
+        return results
     }
     
     
@@ -184,14 +182,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             case "pubData":
                 self.item?.pubDate = currentString
             case "description":
-                print(currentString)
-                //self.item?.thumbImageURL = getImageURL(code: currentString)
-                //print(self.item?.thumbImageURL)
+                //descriptionのimgタグ内のURLを取得し、UIImageへ変換
+                let imgURL = getImageURL(code: currentString)
+                let url = NSURL(string:imgURL)
+                let imageData = NSData(contentsOf: url! as URL)
+                self.item?.thumbImage = UIImage(data:imageData! as Data)!
             case "item": self.items.append(self.item!)
         default :break
         }
     }
-    //解析後myTableViewをリロードする.機能していない.
+    //解析後myTableViewをリロードする.
     func parserDidEndDocument(_ parser: XMLParser){
         self.myTableView.reloadData()
         print("リロード完了")

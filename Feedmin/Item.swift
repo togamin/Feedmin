@@ -6,10 +6,10 @@
 //  Copyright © 2018年 Togami Yuki. All rights reserved.
 //
 
-
+import UIKit
 class Item {
     var title = ""
     var link = ""
     var pubDate = ""
-    var thumbImageURL = ""
+    var thumbImage:UIImage!
 }
