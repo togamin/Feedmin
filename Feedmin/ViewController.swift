@@ -63,12 +63,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     
     
-    
-    
-    
-    
-    
-    
 /*---------------------------------------------------*/
     //画面が表示された直後に読み込まれる。
     override func viewDidAppear(_ animated: Bool){

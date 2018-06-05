@@ -58,7 +58,7 @@ extension manyViewControllers {
         var viewControllers = [ViewController]()
         
         //なぜ2回繰り返す?
-        for nameList in ["dolphin", "whale", "turtle", "shark", "stingray","とがみんブログ", "dolphin", "whale", "turtle", "shark", "stingray","とがみんブログ"] {
+        for nameList in ["とがみんブログ","Think About","ペンギンの生態","Nexseed"] {
             
             //ストーリボード上のwithIdentifierクラスを取得
             let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")

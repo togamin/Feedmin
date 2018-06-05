@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back01.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0Tc-3n-1Iz">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Tc-3n-1Iz">
                     <rect key="frame" x="8" y="8" width="304" height="182"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pengin00.png" translatesAutoresizingMaskIntoConstraints="NO" id="w9f-WI-mWw">
@@ -60,7 +60,7 @@
         </view>
     </objects>
     <resources>
-        <image name="back01.jpg" width="1478" height="1108"/>
+        <image name="default.png" width="927" height="692"/>
         <image name="pengin00.png" width="48" height="62"/>
     </resources>
 </document>
