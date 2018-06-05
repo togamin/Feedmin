@@ -7,6 +7,12 @@
 //
 
 import UIKit
+
+class topItem {
+    var topTitle = ""
+    var topImage:UIImage!
+}
+
 class Item {
     var title = ""
     var link = ""

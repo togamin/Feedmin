@@ -20,6 +20,8 @@
 		B7423A7120C5064C00F02BDF /* back01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6D20C5064B00F02BDF /* back01.jpg */; };
 		B7423A7220C5064C00F02BDF /* pengin00.png in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6E20C5064B00F02BDF /* pengin00.png */; };
 		B7423A7320C5064C00F02BDF /* back02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6F20C5064C00F02BDF /* back02.jpg */; };
+		B7423A9720C5880600F02BDF /* PageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7423A9620C5880600F02BDF /* PageMenuView.swift */; };
+		B794E8CD20C673110037862E /* manyViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8CC20C673110037862E /* manyViewControllers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		B7423A6D20C5064B00F02BDF /* back01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back01.jpg; sourceTree = "<group>"; };
 		B7423A6E20C5064B00F02BDF /* pengin00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin00.png; sourceTree = "<group>"; };
 		B7423A6F20C5064C00F02BDF /* back02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back02.jpg; sourceTree = "<group>"; };
+		B7423A9620C5880600F02BDF /* PageMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuView.swift; sourceTree = "<group>"; };
+		B794E8CC20C673110037862E /* manyViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manyViewControllers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +79,10 @@
 				B7423A5720C1275400F02BDF /* cellContentView.xib */,
 				B7423A5920C128F400F02BDF /* cellContentView.swift */,
 				B7423A3D20C041E000F02BDF /* Main.storyboard */,
+				B794E8CC20C673110037862E /* manyViewControllers.swift */,
 				B7423A4D20C0BCA100F02BDF /* DetailViewController.swift */,
 				B7423A4B20C04BAF00F02BDF /* Item.swift */,
+				B7423A9620C5880600F02BDF /* PageMenuView.swift */,
 				B7423A6B20C5057100F02BDF /* images */,
 				B7423A4020C041E400F02BDF /* Assets.xcassets */,
 				B7423A4220C041E400F02BDF /* LaunchScreen.storyboard */,
@@ -173,6 +179,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7423A3C20C041E000F02BDF /* ViewController.swift in Sources */,
+				B794E8CD20C673110037862E /* manyViewControllers.swift in Sources */,
+				B7423A9720C5880600F02BDF /* PageMenuView.swift in Sources */,
 				B7423A4C20C04BAF00F02BDF /* Item.swift in Sources */,
 				B7423A3A20C041E000F02BDF /* AppDelegate.swift in Sources */,
 				B7423A5A20C128F400F02BDF /* cellContentView.swift in Sources */,

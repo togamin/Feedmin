@@ -8,14 +8,7 @@
 
 /*TODO
  ブログ・サイトタイトル取得と表示
- (完)投稿記事の最初の画像URLの取得(サムネイル)
- (完)画像表示
- サーバーでの処理方法考える
- キャッシュ
- 記事から記事のリストに戻るときにエラーがでる
  画像が入っていない時の処理を考える。
- 
- 一度読み込んだら保存することで、次からの表示を速くする
  SNSで共有
  他のブログのRSS対応
  複数のURL対応
@@ -33,25 +26,28 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,XMLParserDelegate,UIScrollViewDelegate {
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,XMLParserDelegate {
+    
+
     
     
     /*########################################*/
     @IBOutlet weak var myTableView: UITableView!
     var parser:XMLParser!//parser:構文解析
+     var topItem:topItem?//サイトトップの情報
     var items:[Item] = []//複数の記事を格納するための配列
     var item:Item?
     var currentString = ""
     var imageList = [""]
+    var siteURL = "http://togamin.com/feed/"
     /*########################################*/
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-     
         
-//tableView
+
         myTableView.delegate = self
         myTableView.dataSource = self
         
@@ -62,15 +58,23 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
         
         
-        startDownload()
+        startDownload(siteURL: siteURL)
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
 /*---------------------------------------------------*/
     //画面が表示された直後に読み込まれる。
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
     }
-    
+/*---------------------------------------------------*/
     //行数を決める
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
@@ -88,7 +92,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     //セルをタップしたら発動する処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print(indexPath.row,"だよん")
         performSegue(withIdentifier: "go",sender:nil)
     }
     //画面遷移時に呼び出される
@@ -106,13 +109,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
     }
     
-/*----以下サーバーで処理して値だけ持ってくることはできないか?iPhoneでの処理とサーバーでの処理はどちらが早い?----*/
-    //インターネットからRSSのデータをダウンロード
-    func startDownload(){
+
+/*---------------------------------------------------*/
+    
+    //インターネットからRSSのデータをダウンロード＆解析
+    func startDownload(siteURL:String){
         self.items = []//古いデータと記事が重複しないように、空にする
         //ニュース記事があるWebサイトのURLを指定。
         if let url = URL(
-            string: "http://togamin.com/feed/"){
+            string: siteURL){
             //「OptionalBinding」(オプショナルバインディング)という書式。nil以外であれば「true」を返し、nilなら「false」を返す。
             
             if let parser = XMLParser(contentsOf:url){//XMLparserのインスタンス作成。
@@ -132,7 +137,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         if elementName == "item"{
             self.item = Item()//タグ名がitemもときのみ、記事を入れる箱を作成
         }
-        
     }
     //タグで囲まれた内容が見つかるたびに呼び出されるメソッド。
     func parser(_ parser: XMLParser, foundCharacters string: String) {
@@ -141,7 +145,26 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     
-    
+    //終了タグが見つかるたびに呼び出されるメソッド。
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        print(elementName)
+        switch elementName {
+            case "title":
+                self.item?.title = currentString
+            case "link":
+                self.item?.link = currentString
+            case "pubData":
+                self.item?.pubDate = currentString
+            case "description":
+                //descriptionのimgタグ内のURLを取得し、UIImageへ変換
+                let imgURL = getImageURL(code: currentString)
+                let url = NSURL(string:imgURL)
+                let imageData = NSData(contentsOf: url! as URL)
+                self.item?.thumbImage = UIImage(data:imageData! as Data)!
+            case "item": self.items.append(self.item!)
+        default :break
+        }
+    }
     //コードの中に入っているimgタグの中のURLを取得する.
     func getImageURL(code:String)->String{
         let pattern = "src=\"(.*)\" alt"
@@ -169,35 +192,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         return results
     }
-    
-    
-    
-    //終了タグが見つかるたびに呼び出されるメソッド。
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        switch elementName {
-            case "title":
-                self.item?.title = currentString
-            case "link":
-                self.item?.link = currentString
-            case "pubData":
-                self.item?.pubDate = currentString
-            case "description":
-                //descriptionのimgタグ内のURLを取得し、UIImageへ変換
-                let imgURL = getImageURL(code: currentString)
-                let url = NSURL(string:imgURL)
-                let imageData = NSData(contentsOf: url! as URL)
-                self.item?.thumbImage = UIImage(data:imageData! as Data)!
-            case "item": self.items.append(self.item!)
-        default :break
-        }
-    }
     //解析後myTableViewをリロードする.
     func parserDidEndDocument(_ parser: XMLParser){
         self.myTableView.reloadData()
         print("リロード完了")
     }
     
-    
+    /*---------------------------------------------------*/
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
