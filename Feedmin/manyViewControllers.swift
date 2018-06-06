@@ -57,17 +57,30 @@ extension manyViewControllers {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var viewControllers = [ViewController]()
         
+        let siteInfo = [["とがみんブログ","http://togamin.com/feed/"],["Think About","https://corp.netprotections.com/thinkabout/feed/"]]
+        
         //なぜ2回繰り返す?
-        for nameList in ["とがみんブログ","Think About","ペンギンの生態","Nexseed"] {
-            
+        for siteInfo in siteInfo{
+            print(siteInfo)
             //ストーリボード上のwithIdentifierクラスを取得
             let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
             print(viewController)
             
-            viewController.title = nameList
+            
+            //ViewControllerのtitleを代入
+            viewController.title = siteInfo[0]
+            //
+            //
+            //
+            //ViewControllerにリンクを渡したい(未解決)
+            //ViewControllerクラスのsiteURLにrssURLを代入
+            //siteURL = siteInfo[1]
+            //
+            //
+            //
             viewControllers.append(viewController as! ViewController)
         }
-        print(viewControllers)
+        //print(viewControllers)
         return viewControllers
     }
     //ページメニューのオプション

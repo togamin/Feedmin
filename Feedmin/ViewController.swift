@@ -24,22 +24,31 @@
  Infeed広告を入れる
  */
 
+/*このファイルで行なっている作業の概要
+ 
+ 
+ 
+ */
+
+
 import UIKit
+
+//解析するRSSのURLが代入される
+//var siteURL:String!
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,XMLParserDelegate {
     
 
-    
-    
     /*########################################*/
     @IBOutlet weak var myTableView: UITableView!
     var parser:XMLParser!//parser:構文解析
-     var topItem:topItem?//サイトトップの情報
+    var topItem:topItem?//サイトトップの情報
     var items:[Item] = []//複数の記事を格納するための配列
     var item:Item?
     var currentString = ""
-    var imageList = [""]
-    var siteURL = "http://togamin.com/feed/"
+    var imageList = [""]//サムネイル画像のデータが代入される
+    //var siteURL:String! = "https://corp.netprotections.com/thinkabout/feed/"
+    var siteURL:String! = "http://togamin.com/feed/"
     /*########################################*/
     
     
@@ -57,7 +66,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.estimatedRowHeight = 250
         myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
         
-        
+        print("siteURL:" + siteURL)
         startDownload(siteURL: siteURL)
     }
     
@@ -141,7 +150,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     //終了タグが見つかるたびに呼び出されるメソッド。
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        print(elementName)
+        //print(elementName)
         switch elementName {
             case "title":
                 self.item?.title = currentString
@@ -150,40 +159,68 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             case "pubData":
                 self.item?.pubDate = currentString
             case "description":
+                //
                 //descriptionのimgタグ内のURLを取得し、UIImageへ変換
                 let imgURL = getImageURL(code: currentString)
-                let url = NSURL(string:imgURL)
-                let imageData = NSData(contentsOf: url! as URL)
-                self.item?.thumbImage = UIImage(data:imageData! as Data)!
+                print("imgURL:\(imgURL)")
+                if imgURL != nil{
+                    let url = NSURL(string:imgURL!)
+                    //print("url:\(url)")
+                    let imageData = NSData(contentsOf: url! as URL)
+                    self.item?.thumbImage = UIImage(data:imageData as! Data)!
+                }else if imgURL == nil{
+                    self.item?.thumbImage = UIImage(named:"default.png")
+                    print("default画像挿入")
+                }
+                print("保存する画像データ\(self.item?.thumbImage)")
+                //
+                //
             case "item": self.items.append(self.item!)
         default :break
         }
     }
     //コードの中に入っているimgタグの中のURLを取得する.
-    func getImageURL(code:String)->String{
-        let pattern = "src=\"(.*)\" alt"
+    func getImageURL(code:String)->String?{
+        
+        var results:String?
+        
+        let pattern1 = "<img(.*)/>"
+        let pattern2 = "src=\"(.*?)\""
         //(.*)の部分を抜き出す.
         
-        let str = code
+        let str1:String = code
+        //print(str1)
         
-        let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+        let regex1 = try! NSRegularExpression(pattern: pattern1, options: .caseInsensitive)
+        let regex2 = try! NSRegularExpression(pattern: pattern2, options: .caseInsensitive)
         
-        //NSRegularExpression:挟まれた文字を抜き出す。今回は[src="]と["]の間の文字列
+        //NSRegularExpression:挟まれた文字を抜き出す。
         //caseInsensitive:多文字と小文字を区別しない。
         //try!:エラーが発生した場合にクラッシュする。
         
-        let matches = regex.matches(in: str, options: [], range: NSMakeRange(0, str.characters.count))
+        let matches1 = regex1.matches(in: str1, options: [], range: NSMakeRange(0, str1.characters.count))
         
-        var results:String!
+        var str2:String!
         
-        matches.forEach { (match) -> () in
-            results = (str as NSString).substring(with: match.range(at: 1))
+        matches1.forEach { (match) -> () in
+            str2 = (str1 as NSString).substring(with: match.range(at: 1))
         }
+        //str2には[<img]~[/>]までの文字が入る.なければ[nil]
+        print("str2:\(str2)")
         
-        //URLがなければ、デフォルト画像を設定する
-        if results == nil{
-            results = "back01.jpg"
+        if str2 != nil{
+            
+            let matches2 = regex2.matches(in: str2!, options: [], range: NSMakeRange(0, str2.characters.count))
+            
+            matches2.forEach { (match) -> () in
+                results = (str2 as NSString).substring(with: match.range(at: 1))
+            }
+        }else if str2 == nil{
+            results = nil
         }
+       
+        print("results:\(results)")
+
         return results
     }
     //解析後myTableViewをリロードする.
