@@ -6,6 +6,8 @@
 //  Copyright © 2017 com.wataru.maeda. All rights reserved.
 //
 
+var ViewControllerNow:Int!
+
 import UIKit
 
 protocol PageMenuViewDelegate: class {
@@ -59,6 +61,7 @@ struct PageMenuOption {
 class PageMenuView: UIView {
 
   var delegate: PageMenuViewDelegate?
+  
   
   fileprivate let cellId = "PageMenuCell"
   fileprivate var option = PageMenuOption(frame: .zero)
@@ -236,8 +239,7 @@ extension PageMenuView: UIScrollViewDelegate {
 
 // MARK: - Collection View (ViewControllers)
 
-extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
-  
+extension PageMenuView: UICollectionViewDelegate,UICollectionViewDataSource {
   fileprivate func setupPageView() {
     // CollectionView Layout
     let collectionViewHeight = frame.size.height - menuScrollView.frame.maxY
@@ -266,6 +268,8 @@ extension PageMenuView: UICollectionViewDelegate, UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+    ViewControllerNow = indexPath.row
+    //print("ViewContollerNew\(indexPath.row)")
     guard let controllerView = viewControllers[indexPath.row].view else {
       return UICollectionViewCell()
     }

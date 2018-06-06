@@ -13,6 +13,7 @@ class manyViewControllers:UIViewController{
         super.viewDidLoad()
 
         initPageMenu()
+
     }
     func initPageMenu() {
         
@@ -40,7 +41,7 @@ class manyViewControllers:UIViewController{
 //どのページからどのページに遷移したかをメモする。
 extension manyViewControllers: PageMenuViewDelegate {
     
-    func willMoveToPage(_ pageMenu: PageMenuView, from viewController: UIViewController, index currentViewControllerIndex: Int) {
+    func willMoveToPage(_ pageMenu: PageMenuView, from viewController: UIViewController, index currentViewControllerIndex: Int){
         print(currentViewControllerIndex)
     }
     
@@ -57,27 +58,17 @@ extension manyViewControllers {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var viewControllers = [ViewController]()
         
-        let siteInfo = [["とがみんブログ","http://togamin.com/feed/"],["Think About","https://corp.netprotections.com/thinkabout/feed/"]]
+        let siteInfo = ["とがみんブログ","Think About","ペンギンの生態"]
         
         //なぜ2回繰り返す?
         for siteInfo in siteInfo{
-            print(siteInfo)
+            //print(siteInfo)
             //ストーリボード上のwithIdentifierクラスを取得
             let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
-            print(viewController)
-            
             
             //ViewControllerのtitleを代入
-            viewController.title = siteInfo[0]
-            //
-            //
-            //
-            //ViewControllerにリンクを渡したい(未解決)
-            //ViewControllerクラスのsiteURLにrssURLを代入
-            //siteURL = siteInfo[1]
-            //
-            //
-            //
+            viewController.title = siteInfo
+
             viewControllers.append(viewController as! ViewController)
         }
         //print(viewControllers)

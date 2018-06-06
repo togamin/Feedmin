@@ -9,6 +9,7 @@
 /*TODO
  ブログ・サイトタイトル取得と表示
  画像が入っていない時の処理を考える。
+ マルチスレッド機能
  SNSで共有
  他のブログのRSS対応
  複数のURL対応
@@ -29,14 +30,13 @@
  
  
  */
-
+var siteURLList = ["http://togamin.com/feed/","https://corp.netprotections.com/thinkabout/feed/","http://feedblog.ameba.jp/rss/ameblo/pure-tenkataihei"]
 
 import UIKit
 
-//解析するRSSのURLが代入される
-//var siteURL:String!
-
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,XMLParserDelegate {
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,XMLParserDelegate{
+    
+    
     
 
     /*########################################*/
@@ -47,8 +47,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var item:Item?
     var currentString = ""
     var imageList = [""]//サムネイル画像のデータが代入される
+    //var siteURL:String!
     //var siteURL:String! = "https://corp.netprotections.com/thinkabout/feed/"
-    var siteURL:String! = "http://togamin.com/feed/"
+    //var siteURL:String! = "http://togamin.com/feed/"//WordPress
+    //var siteURL:String! = "http://why-not-1017.hatenablog.com/feed"//はてなブログ
     /*########################################*/
     
     
@@ -56,7 +58,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-
+        
         myTableView.delegate = self
         myTableView.dataSource = self
         
@@ -66,8 +68,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.estimatedRowHeight = 250
         myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
         
-        print("siteURL:" + siteURL)
-        startDownload(siteURL: siteURL)
+        print("------------------------------")
+        print("ViewContollerIndex\(ViewControllerNow!)")
+        startDownload(siteURL: siteURLList[ViewControllerNow])
     }
     
     
@@ -162,7 +165,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 //
                 //descriptionのimgタグ内のURLを取得し、UIImageへ変換
                 let imgURL = getImageURL(code: currentString)
-                print("imgURL:\(imgURL)")
+                //print("imgURL:\(imgURL)")
                 if imgURL != nil{
                     let url = NSURL(string:imgURL!)
                     //print("url:\(url)")
@@ -170,9 +173,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                     self.item?.thumbImage = UIImage(data:imageData as! Data)!
                 }else if imgURL == nil{
                     self.item?.thumbImage = UIImage(named:"default.png")
-                    print("default画像挿入")
+                    //print("default画像挿入")
                 }
-                print("保存する画像データ\(self.item?.thumbImage)")
+                //print("保存する画像データ\(self.item?.thumbImage)")
                 //
                 //
             case "item": self.items.append(self.item!)
@@ -206,7 +209,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             str2 = (str1 as NSString).substring(with: match.range(at: 1))
         }
         //str2には[<img]~[/>]までの文字が入る.なければ[nil]
-        print("str2:\(str2)")
+        //print("str2:\(str2)")
         
         if str2 != nil{
             
@@ -219,7 +222,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             results = nil
         }
        
-        print("results:\(results)")
+        //print("results:\(results)")
 
         return results
     }
