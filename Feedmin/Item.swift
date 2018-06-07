@@ -18,4 +18,5 @@ class Item {
     var link = ""
     var pubDate = ""
     var thumbImage:UIImage!
+    var description = ""
 }

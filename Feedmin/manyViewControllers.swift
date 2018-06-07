@@ -58,16 +58,16 @@ extension manyViewControllers {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var viewControllers = [ViewController]()
         
-        let siteInfo = ["とがみんブログ","Think About","ペンギンの生態"]
+        let siteTitle = ["とがみんブログ","Think About","宇宙の本質を語る"]
         
         //なぜ2回繰り返す?
-        for siteInfo in siteInfo{
+        for siteTitle in siteTitle{
             //print(siteInfo)
             //ストーリボード上のwithIdentifierクラスを取得
             let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
             
             //ViewControllerのtitleを代入
-            viewController.title = siteInfo
+            viewController.title = siteTitle
 
             viewControllers.append(viewController as! ViewController)
         }

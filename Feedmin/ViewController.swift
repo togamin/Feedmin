@@ -7,20 +7,19 @@
 //
 
 /*TODO
+ナビゲーションについて聞く。
+マルチスレッド機能.画像読み込みと他の処理を同時に行う。
+リンクとタイトルの記入欄とUserDefaultsに登録する方法
+おきにいり登録.選んだやつのURL保存.テキストデータ保存
+
  ブログ・サイトタイトル取得と表示
- 画像が入っていない時の処理を考える。
- マルチスレッド機能
+ 
  SNSで共有
  他のブログのRSS対応
- 複数のURL対応
- 時間による比較、表示順の決定(微妙)
- URLの入力と保存
- おきにいり登録.選んだやつのURL保存
+
  下にスライドすることによるアップデート
  refreshController
- 上にスライドすることによる過去記事の表示
  ペンギン画像ランダム表示
- テキストデータを取得してWifiにつながなくても読める(お気に位入りのみ)。
  通知来る時間帯の設定
  Infeed広告を入れる
  */
@@ -30,7 +29,7 @@
  
  
  */
-var siteURLList = ["http://togamin.com/feed/","https://corp.netprotections.com/thinkabout/feed/","http://feedblog.ameba.jp/rss/ameblo/pure-tenkataihei"]
+var siteURLList = ["http://togamin.com/feed/","https://corp.netprotections.com/thinkabout/feed/","http://feedblog.ameba.jp/rss/ameblo/oranger13"]
 
 import UIKit
 
@@ -47,10 +46,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var item:Item?
     var currentString = ""
     var imageList = [""]//サムネイル画像のデータが代入される
-    //var siteURL:String!
-    //var siteURL:String! = "https://corp.netprotections.com/thinkabout/feed/"
-    //var siteURL:String! = "http://togamin.com/feed/"//WordPress
-    //var siteURL:String! = "http://why-not-1017.hatenablog.com/feed"//はてなブログ
+    let queue:DispatchQueue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)//マルチスレッド用
     /*########################################*/
     
     
@@ -71,6 +67,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         print("------------------------------")
         print("ViewContollerIndex\(ViewControllerNow!)")
         startDownload(siteURL: siteURLList[ViewControllerNow])
+        
+        //マルチスレッド.別スレッドで画像の処理をさせることにより、その他の表示を早くすることで操作性をあげる。
+        queue.async {() -> Void in
+            //サムネイルの画像をItemクラスのインスタンスに代入
+            for i in 0..<self.items.count{
+                self.items[i].thumbImage = self.getImage(code:self.items[i].description)
+                print(self.items[i].thumbImage)
+            }
+            self.myTableView.reloadData()
+            print("画像取得後のリロード完了")
+        }
+        
     }
     
     
@@ -89,9 +97,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //セルのインスタンス化
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for:indexPath) as! cellContentView
+        
+        
+        
         cell.titleLabel.text = self.items[indexPath.row].title
         //print(cell.titleLabel.text)
-        cell.cellContentView.image = items[indexPath.row].thumbImage
+        
+        //print("Itemの中のサムネイル表示\(items[indexPath.row].thumbImage)")
+        if items[indexPath.row].thumbImage != nil{
+            cell.cellContentView.image = items[indexPath.row].thumbImage
+            //print("サムネイル画像取得完了")
+        }else{
+            cell.cellContentView.image = UIImage(named: "default.png")
+            //print("default画像")
+        }
+
+        
         return cell
     }
     
@@ -162,30 +183,39 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             case "pubData":
                 self.item?.pubDate = currentString
             case "description":
+                self.item?.description = currentString
                 //
-                //descriptionのimgタグ内のURLを取得し、UIImageへ変換
-                let imgURL = getImageURL(code: currentString)
-                //print("imgURL:\(imgURL)")
-                if imgURL != nil{
-                    let url = NSURL(string:imgURL!)
-                    //print("url:\(url)")
-                    let imageData = NSData(contentsOf: url! as URL)
-                    self.item?.thumbImage = UIImage(data:imageData as! Data)!
-                }else if imgURL == nil{
-                    self.item?.thumbImage = UIImage(named:"default.png")
-                    //print("default画像挿入")
-                }
-                //print("保存する画像データ\(self.item?.thumbImage)")
+                //
+                /*
+                //別スレッドで処理をさせることにより高速化を図る
+                    //descriptionのimgタグ内のURLを取得し、UIImageへ変換
+                    let imgURL = self.getImageURL(code: self.currentString)
+                    //print("imgURL:\(imgURL)")
+                    if imgURL != nil{
+                        let url = NSURL(string:imgURL!)
+                        //print("url:\(url)")
+                        let imageData = NSData(contentsOf: url! as URL)
+                        self.item?.thumbImage = UIImage(data:imageData as! Data)!
+                    }else if imgURL == nil{
+                        self.item?.thumbImage = UIImage(named:"default.png")
+                        //print("default画像挿入")
+                    }
+            
+                    //print("保存する画像データ\(self.item?.thumbImage)")
+                */
+                //
                 //
                 //
             case "item": self.items.append(self.item!)
         default :break
         }
     }
-    //コードの中に入っているimgタグの中のURLを取得する.
-    func getImageURL(code:String)->String?{
+    //コードの中に入っているimgタグの中のURLを取得しUIImageに変換。画像のURLがない場合、デフォルト画像を取得する.
+    func getImage(code:String)->UIImage?{
         
-        var results:String?
+        var result:UIImage?
+        var results:[UIImage]
+        var url:String?
         
         let pattern1 = "<img(.*)/>"
         let pattern2 = "src=\"(.*?)\""
@@ -213,23 +243,31 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         if str2 != nil{
             
+            //imgタグの中のURLの部分のみを取得
             let matches2 = regex2.matches(in: str2!, options: [], range: NSMakeRange(0, str2.characters.count))
             
             matches2.forEach { (match) -> () in
-                results = (str2 as NSString).substring(with: match.range(at: 1))
+                url = (str2 as NSString).substring(with: match.range(at: 1))
             }
+            
+            //URLから画像データに変換
+            let url = NSURL(string:url!)
+            let imageData = NSData(contentsOf: url! as URL)
+            result = UIImage(data:imageData! as Data)!
+            
+            
         }else if str2 == nil{
-            results = nil
+            result = UIImage(named:"default.png")
         }
        
-        //print("results:\(results)")
+        //print("result:\(result)")
 
-        return results
+        return result
     }
     //解析後myTableViewをリロードする.
     func parserDidEndDocument(_ parser: XMLParser){
         self.myTableView.reloadData()
-        print("リロード完了")
+        print("RSS解析後のリロード完了")
     }
     
     /*---------------------------------------------------*/
