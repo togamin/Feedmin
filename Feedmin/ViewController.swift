@@ -46,7 +46,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var item:Item?
     var currentString = ""
     var imageList = [""]//サムネイル画像のデータが代入される
-    let queue:DispatchQueue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)//マルチスレッド用
+    //let queue:DispatchQueue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)//マルチスレッド用
+    let queue:DispatchQueue = DispatchQueue(label: "com.togamin.queue")//マルチスレッド用
     /*########################################*/
     
     
@@ -64,21 +65,33 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.estimatedRowHeight = 250
         myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
         
-        print("------------------------------")
-        print("ViewContollerIndex\(ViewControllerNow!)")
-        startDownload(siteURL: siteURLList[ViewControllerNow])
+        
+        //print("\(ViewControllerNow!)番目のView")
+        
+        
+        
+        //myTableView.isHidden = true
+        //indicator.startAnimating()
+        queue.async {() -> Void in
+            print("画面表示中")
+            self.startDownload(siteURL: siteURLList[ViewControllerNow])
+        }
+        //myTableView.isHidden = false
+        //self.myTableView.reloadData()
+        //self.indicator.stopAnimating()
+        
+        
+        
         
         //マルチスレッド.別スレッドで画像の処理をさせることにより、その他の表示を早くすることで操作性をあげる。
         queue.async {() -> Void in
             //サムネイルの画像をItemクラスのインスタンスに代入
+            print("サムネイル画像取得中")
             for i in 0..<self.items.count{
                 self.items[i].thumbImage = self.getImage(code:self.items[i].description)
-                print(self.items[i].thumbImage)
+            print(self.items[i].thumbImage)
             }
-            self.myTableView.reloadData()
-            print("画像取得後のリロード完了")
         }
-        
     }
     
     
@@ -184,28 +197,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 self.item?.pubDate = currentString
             case "description":
                 self.item?.description = currentString
-                //
-                //
-                /*
-                //別スレッドで処理をさせることにより高速化を図る
-                    //descriptionのimgタグ内のURLを取得し、UIImageへ変換
-                    let imgURL = self.getImageURL(code: self.currentString)
-                    //print("imgURL:\(imgURL)")
-                    if imgURL != nil{
-                        let url = NSURL(string:imgURL!)
-                        //print("url:\(url)")
-                        let imageData = NSData(contentsOf: url! as URL)
-                        self.item?.thumbImage = UIImage(data:imageData as! Data)!
-                    }else if imgURL == nil{
-                        self.item?.thumbImage = UIImage(named:"default.png")
-                        //print("default画像挿入")
-                    }
-            
-                    //print("保存する画像データ\(self.item?.thumbImage)")
-                */
-                //
-                //
-                //
             case "item": self.items.append(self.item!)
         default :break
         }
@@ -214,7 +205,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func getImage(code:String)->UIImage?{
         
         var result:UIImage?
-        var results:[UIImage]
         var url:String?
         
         let pattern1 = "<img(.*)/>"
