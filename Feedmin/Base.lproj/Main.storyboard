@@ -174,13 +174,25 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="その他" id="aCp-tD-DsI">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0tG-vp-PsP">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="FvS-QP-CRT" style="IBUITableViewCellStyleDefault" id="0tG-vp-PsP">
                                         <rect key="frame" x="0.0" y="343.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0tG-vp-PsP" id="oI1-7w-L2V">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="開発者プロフィール" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FvS-QP-CRT">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="MGu-q6-mHW" kind="show" id="8bA-g7-JPo"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="yIX-r1-uJr">
                                         <rect key="frame" x="0.0" y="387.5" width="375" height="44"/>
@@ -215,27 +227,36 @@
             </objects>
             <point key="canvasLocation" x="2855" y="1746"/>
         </scene>
-        <!--Table View Controller-->
+        <!--View Controller-->
+        <scene sceneID="ReR-GJ-NYL">
+            <objects>
+                <viewController id="MGu-q6-mHW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Ds-hv-twn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="sW2-T7-tcg"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0JB-g4-phP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3741" y="1961"/>
+        </scene>
+        <!--Webサイト一覧-->
         <scene sceneID="UgO-cv-8ne">
             <objects>
-                <tableViewController id="2RF-iC-FaI" sceneMemberID="viewController">
+                <tableViewController id="2RF-iC-FaI" customClass="getURL" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dbY-oF-XRS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Efm-wt-ULE">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="urlCell" id="T15-qP-vBy">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Efm-wt-ULE" id="N4b-OS-mdg">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T15-qP-vBy" id="sAM-3B-s8k">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XFV-5v-VSO">
-                                            <rect key="frame" x="0.0" y="-1" width="375" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        </navigationBar>
-                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -244,10 +265,17 @@
                             <outlet property="delegate" destination="2RF-iC-FaI" id="5Ft-sl-xtC"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Webサイト一覧" id="gUz-NS-9bI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="EoY-ts-tJq">
+                            <connections>
+                                <action selector="addURL:" destination="2RF-iC-FaI" id="IOJ-FD-Tvy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfJ-sv-XWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3563" y="1747"/>
+            <point key="canvasLocation" x="3751" y="1228"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="fqF-Uw-Xpm">
