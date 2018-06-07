@@ -8,7 +8,7 @@
 
 /*TODO
 ナビゲーションについて聞く。
-マルチスレッド機能.画像読み込みと他の処理を同時に行う。
+
 リンクとタイトルの記入欄とUserDefaultsに登録する方法
 おきにいり登録.選んだやつのURL保存.テキストデータ保存
 
@@ -89,7 +89,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             print("サムネイル画像取得中")
             for i in 0..<self.items.count{
                 self.items[i].thumbImage = self.getImage(code:self.items[i].description)
-            print(self.items[i].thumbImage)
+            //print(self.items[i].thumbImage)
             }
         }
     }

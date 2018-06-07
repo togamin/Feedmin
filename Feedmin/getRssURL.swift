@@ -10,7 +10,15 @@
  URLの登録をすると、配列にrssのURLが入れ込まれる。登録したら、rssデータを読み込み、ページメニューに表示する。
  ・トップページのURLでない場合、トップページのURLに戻った上で、rssデータを取得する.
  ・様々なサイトのrssデータを取得できるようにする。
+ http://rssblog.ameba.jp/［アメーバID］/rss.html
  ・rss情報がなかった場合の処理
+ 
+ 
+ 
+ ・出力データ
+    siteURLList
+    siteTitle
+ 
  */
 import Foundation
 

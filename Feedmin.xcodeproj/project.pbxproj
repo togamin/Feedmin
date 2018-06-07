@@ -24,6 +24,8 @@
 		B794E8CD20C673110037862E /* manyViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8CC20C673110037862E /* manyViewControllers.swift */; };
 		B794E8CF20C741700037862E /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = B794E8CE20C741700037862E /* default.png */; };
 		B794E8D120C74C8A0037862E /* getRssURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D020C74C8A0037862E /* getRssURL.swift */; };
+		B794E8D320C9624E0037862E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D220C9624D0037862E /* SettingViewController.swift */; };
+		B794E8D520C982A20037862E /* urlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D420C982A20037862E /* urlTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		B794E8CC20C673110037862E /* manyViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manyViewControllers.swift; sourceTree = "<group>"; };
 		B794E8CE20C741700037862E /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		B794E8D020C74C8A0037862E /* getRssURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getRssURL.swift; sourceTree = "<group>"; };
+		B794E8D220C9624D0037862E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		B794E8D420C982A20037862E /* urlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 		B7423A3820C041E000F02BDF /* Feedmin */ = {
 			isa = PBXGroup;
 			children = (
+				B794E8D420C982A20037862E /* urlTableViewController.swift */,
+				B794E8D220C9624D0037862E /* SettingViewController.swift */,
 				B7423A3920C041E000F02BDF /* AppDelegate.swift */,
 				B7423A3B20C041E000F02BDF /* ViewController.swift */,
 				B7423A5720C1275400F02BDF /* cellContentView.xib */,
@@ -186,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7423A3C20C041E000F02BDF /* ViewController.swift in Sources */,
+				B794E8D520C982A20037862E /* urlTableViewController.swift in Sources */,
 				B794E8CD20C673110037862E /* manyViewControllers.swift in Sources */,
 				B7423A9720C5880600F02BDF /* PageMenuView.swift in Sources */,
 				B7423A4C20C04BAF00F02BDF /* Item.swift in Sources */,
@@ -193,6 +200,7 @@
 				B794E8D120C74C8A0037862E /* getRssURL.swift in Sources */,
 				B7423A5A20C128F400F02BDF /* cellContentView.swift in Sources */,
 				B7423A4E20C0BCA100F02BDF /* DetailViewController.swift in Sources */,
+				B794E8D320C9624E0037862E /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
