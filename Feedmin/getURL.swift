@@ -55,22 +55,33 @@ class getURL:UITableViewController{
         //alertを作る
         let alertController = UIAlertController(title: "サイトURLの登録 ", message: "登録したいサイトのタイトルとURLを入力してください。", preferredStyle: .alert)
         
-        
-        func hyouzi(){
-            print ("URL登録処理を行います")
-        }
-        
-        print("Alert")
         alertController.addAction(UIAlertAction(title: "登録", style: .default, handler: {action in hyouzi()}))
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {action in print("キャンセル")}))
+        
+        // テキストフィールドを追加
+        alertController.addTextField(configurationHandler: {(addTitleField: UITextField!) -> Void in
+            addTitleField.placeholder = "タイトルを入力してください。"//プレースホルダー
+        })
+        alertController.addTextField(configurationHandler: {(addURLField: UITextField!) -> Void in
+            addURLField.placeholder = "URLを入力してください。"//プレースホルダー
+        })
         
         //その他アラートオプション
         //alertController.view.backgroundColor = UIColor.cyan//背景色
         alertController.view.layer.cornerRadius = 25 //角丸にする。
         
         present(alertController,animated: true,completion: {()->Void in print("表示されたよん")})//completionは動作完了時に発動。
+        
+        
+        func hyouzi(){
+            print ("URL登録処理を行います")
+        }
+        
+        
     }
+    
+
     
     
     
