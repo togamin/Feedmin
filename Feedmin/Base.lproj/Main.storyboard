@@ -242,10 +242,10 @@
             </objects>
             <point key="canvasLocation" x="3741" y="1961"/>
         </scene>
-        <!--Webサイト一覧-->
+        <!--登録Webサイト一覧-->
         <scene sceneID="UgO-cv-8ne">
             <objects>
-                <tableViewController id="2RF-iC-FaI" customClass="getURL" sceneMemberID="viewController">
+                <tableViewController id="2RF-iC-FaI" customClass="getURL" customModule="Feedmin" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dbY-oF-XRS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -265,7 +265,7 @@
                             <outlet property="delegate" destination="2RF-iC-FaI" id="5Ft-sl-xtC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Webサイト一覧" id="gUz-NS-9bI">
+                    <navigationItem key="navigationItem" title="登録Webサイト一覧" id="gUz-NS-9bI">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="EoY-ts-tJq">
                             <connections>
                                 <action selector="addURL:" destination="2RF-iC-FaI" id="IOJ-FD-Tvy"/>
@@ -310,7 +310,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hH7-Ol-Ops" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="372" y="490"/>
+            <point key="canvasLocation" x="1156" y="490"/>
         </scene>
         <!--Item-->
         <scene sceneID="p5Q-Tk-eu3">

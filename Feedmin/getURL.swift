@@ -26,12 +26,6 @@ class getURL:UITableViewController{
     
     
     
-    
-    
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -48,7 +42,7 @@ class getURL:UITableViewController{
     
     //セルの内容
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "urlCell",for:indexPath) as! cellContentView
+        let cell = tableView.dequeueReusableCell(withIdentifier: "urlCell",for:indexPath) as! UITableViewCell
         return cell
     }
     
@@ -57,6 +51,25 @@ class getURL:UITableViewController{
     
     //クリックするとアラート表示.タイトルとURLを入力する画面を表示.入力後、RSS用URLに変換し、タイトルとURLの配列に代入する。そして、Viewのセルにタイトルの一覧を表示する。
     @IBAction func addURL(_ sender: UIBarButtonItem) {
+        
+        //alertを作る
+        let alertController = UIAlertController(title: "サイトURLの登録 ", message: "登録したいサイトのタイトルとURLを入力してください。", preferredStyle: .alert)
+        
+        
+        func hyouzi(){
+            print ("URL登録処理を行います")
+        }
+        
+        print("Alert")
+        alertController.addAction(UIAlertAction(title: "登録", style: .default, handler: {action in hyouzi()}))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {action in print("キャンセル")}))
+        
+        //その他アラートオプション
+        //alertController.view.backgroundColor = UIColor.cyan//背景色
+        alertController.view.layer.cornerRadius = 25 //角丸にする。
+        
+        present(alertController,animated: true,completion: {()->Void in print("表示されたよん")})//completionは動作完了時に発動。
     }
     
     
