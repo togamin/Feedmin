@@ -29,7 +29,7 @@
  
  
  */
-var siteURLList = ["http://togamin.com/feed/","https://corp.netprotections.com/thinkabout/feed/","http://feedblog.ameba.jp/rss/ameblo/oranger13"]
+
 
 import UIKit
 

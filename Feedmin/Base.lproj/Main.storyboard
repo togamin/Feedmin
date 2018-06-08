@@ -272,6 +272,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="getURLTableView" destination="dbY-oF-XRS" id="unt-Ne-wgR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfJ-sv-XWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
