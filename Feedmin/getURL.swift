@@ -50,7 +50,10 @@ class getURL:UITableViewController{
     //セルの内容
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "urlCell",for:indexPath) as! UITableViewCell
+
+        
         cell.textLabel?.text = siteTitleList[indexPath.row]
+        cell.detailTextLabel?.text = siteURLList[indexPath.row]
         return cell
     }
     
