@@ -21,9 +21,12 @@
  
  */
 
-var siteURLList = ["http://togamin.com/feed/","https://corp.netprotections.com/thinkabout/feed/","http://feedblog.ameba.jp/rss/ameblo/oranger13"]
+var siteURLList = ["http://togamin.com/feed/","https://corp.netprotections.com/thinkabout/feed/","http://feedblog.ameba.jp/rss/ameblo/oranger13","http://why-not-1017.hatenablog.com/rss"]
 
-var siteTitleList = ["とがみんブログ","Think About","宇宙の本質を語る"]
+var siteTitleList = ["とがみんブログ","Think About","宇宙の本質を語る","たか"]
+
+var favTitleList:String?
+var favURLList:String?
 
 
 
@@ -96,18 +99,29 @@ class getURL:UITableViewController{
             
 /*-----------------------------------------------#
 得たURLの処理をする。
-
-
-
+* WordPress
+http://togamin.com/feed/
+http://togamin.com/rss/
+* はてなブログ
+http://why-not-1017.hatenablog.com/rss
+* アメーバブログ
+http://feedblog.ameba.jp/rss/ameblo/oranger13
 
 #-----------------------------------------------*/
             
+            var rssText = urlText + "/rss"
+            print("タイトルのリスト：\(titleText):\(rssText)")
             
             
             siteTitleList.append(titleText)
-            siteURLList.append(urlText)
+            siteURLList.append(rssText)
+        
             
-
+            //上手くいっていない
+            manyViewControllers().viewDidLoad()
+            print("リロード完了")
+            
+            
             //print("タイトルのリスト：\(siteTitleList)")
             //print("URLのリスト：\(siteURLList)")
             
@@ -124,9 +138,7 @@ class getURL:UITableViewController{
 
     
     
-    
-    
-    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

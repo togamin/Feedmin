@@ -13,8 +13,15 @@ class manyViewControllers:UIViewController{
         super.viewDidLoad()
 
         initPageMenu()
+        print("ViewDidLoad")
 
     }
+    
+    func test(){
+        print("test")
+    }
+    
+    
     func initPageMenu() {
         
         //複数のViewControllerを用意

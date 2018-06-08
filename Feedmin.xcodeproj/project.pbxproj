@@ -26,6 +26,7 @@
 		B794E8D120C74C8A0037862E /* getURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D020C74C8A0037862E /* getURL.swift */; };
 		B794E8D320C9624E0037862E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D220C9624D0037862E /* SettingViewController.swift */; };
 		B794E8D520C982A20037862E /* urlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D420C982A20037862E /* urlTableViewController.swift */; };
+		B794E8D920CB38420037862E /* favTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D820CB38420037862E /* favTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		B794E8D020C74C8A0037862E /* getURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getURL.swift; sourceTree = "<group>"; };
 		B794E8D220C9624D0037862E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B794E8D420C982A20037862E /* urlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlTableViewController.swift; sourceTree = "<group>"; };
+		B794E8D820CB38420037862E /* favTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = favTableViewController.swift; path = Feedmin/favTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		B7423A2D20C041E000F02BDF = {
 			isa = PBXGroup;
 			children = (
+				B794E8D820CB38420037862E /* favTableViewController.swift */,
 				B7423A3820C041E000F02BDF /* Feedmin */,
 				B7423A3720C041E000F02BDF /* Products */,
 			);
@@ -197,6 +200,7 @@
 				B7423A9720C5880600F02BDF /* PageMenuView.swift in Sources */,
 				B7423A4C20C04BAF00F02BDF /* Item.swift in Sources */,
 				B7423A3A20C041E000F02BDF /* AppDelegate.swift in Sources */,
+				B794E8D920CB38420037862E /* favTableViewController.swift in Sources */,
 				B794E8D120C74C8A0037862E /* getURL.swift in Sources */,
 				B7423A5A20C128F400F02BDF /* cellContentView.swift in Sources */,
 				B7423A4E20C0BCA100F02BDF /* DetailViewController.swift in Sources */,
