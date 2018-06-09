@@ -15,15 +15,22 @@ class cellContentView:UITableViewCell{
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     
-    var currentLiki:Bool = false//likeButtonを押したか押していないか。
+    var currentLike:Bool = false//likeButtonを押したか押していないか。
 
     //LikeButtonが押された時、そのセルのItemをfavListに登録する。
     @IBAction func likeButton(_ sender: UIButton) {
-        print("大好き")
-        if currentLiki {
-            likeButton.tintColor = UIColor.red
+        
+        if currentLike {
+            likeButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+            likeButton.backgroundColor = UIColor.darkGray
+            print("大嫌い")
+            self.currentLike = false
         }else{
-            likeButton.tintColor = UIColor.lightGray
+            likeButton.setTitleColor(UIColor.magenta, for: UIControlState.normal)
+            
+            likeButton.backgroundColor = UIColor(red: 1.0, green: 0.8, blue: 1.0, alpha: 1.0)
+            print("大好き")
+            self.currentLike = true
         }
     }
     

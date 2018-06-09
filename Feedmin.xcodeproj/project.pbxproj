@@ -51,7 +51,7 @@
 		B794E8D020C74C8A0037862E /* getURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getURL.swift; sourceTree = "<group>"; };
 		B794E8D220C9624D0037862E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B794E8D420C982A20037862E /* urlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlTableViewController.swift; sourceTree = "<group>"; };
-		B794E8D820CB38420037862E /* favTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = favTableViewController.swift; path = Feedmin/favTableViewController.swift; sourceTree = "<group>"; };
+		B794E8D820CB38420037862E /* favTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,6 @@
 		B7423A2D20C041E000F02BDF = {
 			isa = PBXGroup;
 			children = (
-				B794E8D820CB38420037862E /* favTableViewController.swift */,
 				B7423A3820C041E000F02BDF /* Feedmin */,
 				B7423A3720C041E000F02BDF /* Products */,
 			);
@@ -85,6 +84,7 @@
 		B7423A3820C041E000F02BDF /* Feedmin */ = {
 			isa = PBXGroup;
 			children = (
+				B794E8D820CB38420037862E /* favTableViewController.swift */,
 				B794E8D420C982A20037862E /* urlTableViewController.swift */,
 				B794E8D220C9624D0037862E /* SettingViewController.swift */,
 				B7423A3920C041E000F02BDF /* AppDelegate.swift */,

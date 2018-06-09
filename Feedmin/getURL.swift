@@ -21,9 +21,9 @@
  
  */
 
-var siteURLList = ["http://togamin.com/feed/","https://corp.netprotections.com/thinkabout/feed/","http://feedblog.ameba.jp/rss/ameblo/oranger13","http://why-not-1017.hatenablog.com/rss"]
+var siteURLList = ["http://togamin.com/feed/","http://feedblog.ameba.jp/rss/ameblo/oranger13","http://why-not-1017.hatenablog.com/rss"]
 
-var siteTitleList = ["とがみんブログ","Think About","宇宙の本質を語る","たか"]
+var siteTitleList = ["とがみんブログ","宇宙の本質を語る","たか"]
 
 var favTitleList:String?
 var favURLList:String?
