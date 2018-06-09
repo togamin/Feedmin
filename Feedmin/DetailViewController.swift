@@ -22,5 +22,11 @@ class detailViewController:UIViewController{
             self.webView.loadRequest(request)
             //self.ArticleNav.topItem!.title = title
         }
+        
+    }
+}
+class navToArticle:UINavigationBar{
+    @IBAction func navToArticle(_ sender: UIBarButtonItem) {
+        print("ok")
     }
 }
