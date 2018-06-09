@@ -23,15 +23,23 @@ class cellContentView:UITableViewCell{
         if currentLike {
             likeButton.setTitleColor(UIColor.white, for: UIControlState.normal)
             likeButton.backgroundColor = UIColor.darkGray
-            print("大嫌い")
+            favDislike()
             self.currentLike = false
         }else{
             likeButton.setTitleColor(UIColor.magenta, for: UIControlState.normal)
             
             likeButton.backgroundColor = UIColor(red: 1.0, green: 0.8, blue: 1.0, alpha: 1.0)
-            print("大好き")
+            favLike()
             self.currentLike = true
         }
+    }
+    
+    func favLike(){
+        print("大好き")
+        print("\(ViewController().items)")
+    }
+    func favDislike(){
+        print("大嫌い")
     }
     
     

@@ -8,15 +8,11 @@
 
 import UIKit
 
-class topItem {
-    var topTitle = ""
-    var topImage:UIImage!
-}
-
 class Item {
     var title = ""
     var link = ""
     var pubDate = ""
     var thumbImage:UIImage!
     var description = ""
+    var fav:Bool = false
 }

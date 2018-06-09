@@ -8,12 +8,14 @@
 
 /*TODO
 * ナビゲーションについて.WebViewから前のViewに戻る方法(上手くいかない)
-*「Like」ボタン押しても動作しない。(上手くいかない)
 * URL登録ボタン押してから、再読み込みしない。(上手くいかない)
-
+* Likeボタンを押して、そのセルの情報を抽出し保存
  
  
+ お気にいりようのnibファイル作成。
  リンクとタイトルの記入欄とUserDefaultsに登録する方法
+ スライドで登録しているURLを削除できるようにする。
+ スライドで登録しているお気に入り削除できるようにする。
  おきにいり登録.選んだやつのURL保存.テキストデータ保存
  ブログ・サイトタイトル取得と表示
  
@@ -45,7 +47,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     /*########################################*/
     @IBOutlet weak var myTableView: UITableView!
     var parser:XMLParser!//parser:構文解析
-    var topItem:topItem?//サイトトップの情報
     var items:[Item] = []//複数の記事を格納するための配列
     var item:Item?
     var currentString = ""
@@ -121,8 +122,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         //print(cell.titleLabel.text)
         
         //print("Itemの中のサムネイル表示\(items[indexPath.row].thumbImage)")
+        
         if items[indexPath.row].thumbImage != nil{
             cell.cellContentView.image = items[indexPath.row].thumbImage
+            
+            //print(items[indexPath.row].thumbImage)
             //print("サムネイル画像取得完了")
         }else{
             cell.cellContentView.image = UIImage(named: "default.png")
