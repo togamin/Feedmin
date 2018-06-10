@@ -9,7 +9,7 @@
 /*TODO
 * ナビゲーションについて.WebViewから前のViewに戻る方法(上手くいかない)
 * URL登録ボタン押してから、再読み込みしない。(上手くいかない)
-* Likeボタンを押して、そのセルの情報を抽出し保存
+* タップされた時のセルの情報を取得する方法
  
  
  お気にいりようのnibファイル作成。
@@ -42,10 +42,9 @@ import UIKit
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,XMLParserDelegate{
     
     
-    
-
     /*########################################*/
     @IBOutlet weak var myTableView: UITableView!
+    var test = "test"
     var parser:XMLParser!//parser:構文解析
     var items:[Item] = []//複数の記事を格納するための配列
     var item:Item?
@@ -72,7 +71,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         
         //print("\(ViewControllerNow!)番目のView")
-        
         
         
         //myTableView.isHidden = true
@@ -277,4 +275,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
 
 }
+
+
 

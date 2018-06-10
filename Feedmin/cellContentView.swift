@@ -35,8 +35,15 @@ class cellContentView:UITableViewCell{
     }
     
     func favLike(){
+        //やることViewControllerごとにそのViewControllerの番号、記事情報を保持できるようにし、ここでLikeを押した記事の情報を取り出せるようにする。
         print("大好き")
-        print("\(ViewController().items)")
+        //print(favTest)
+        print("\(NowViewNum)")//表示されているViewCobntrollerの番号
+        print("\(viewControllers![NowViewNum].title)")
+        //print("\(viewControllers![NowViewNum].test)")
+        
+
+        
     }
     func favDislike(){
         print("大嫌い")

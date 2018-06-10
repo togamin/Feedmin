@@ -8,7 +8,12 @@
 
 import UIKit
 
+var viewControllers:[UIViewController]?
+var NowViewNum:Int! = 0
+
 class manyViewControllers:UIViewController{
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,14 +30,14 @@ class manyViewControllers:UIViewController{
     func initPageMenu() {
         
         //複数のViewControllerを用意
-        let viewControllers = getViewControllers()
+        viewControllers = getViewControllers()
  
         //メニューバーのレイアウト
         let option = getPageMenuOption()
         
         //PageMenuViewインスタンス作成
         let pageMenu = PageMenuView(
-            viewControllers: viewControllers,
+            viewControllers: viewControllers!,
             option: option)
         
         //デリゲート
@@ -49,11 +54,11 @@ class manyViewControllers:UIViewController{
 extension manyViewControllers: PageMenuViewDelegate {
     
     func willMoveToPage(_ pageMenu: PageMenuView, from viewController: UIViewController, index currentViewControllerIndex: Int){
-        print(currentViewControllerIndex)
+        //print(currentViewControllerIndex)
     }
     
     func didMoveToPage(_ pageMenu: PageMenuView, to viewController: UIViewController, index currentViewControllerIndex: Int) {
-        print(currentViewControllerIndex)
+        NowViewNum = currentViewControllerIndex
     }
 }
 
@@ -114,8 +119,25 @@ extension manyViewControllers {
     
 }
 
-
-
+/*
+//画面最前面のUIViewControllerの取得用(まだ理解していない)
+extension UIApplication {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return topViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
+    }
+}
+*/
 
 
 
