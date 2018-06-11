@@ -74,11 +74,9 @@ class favTableViewController:UITableViewController{
 
     //セルのインスタンス化
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("なんでも")
         let cell =  tableView.dequeueReusableCell(withIdentifier: "favCell",for:indexPath) as! favCellView
-        print("ないさー")
         cell.favTitle.text = favTitleList[indexPath.row]
-        //cell.favImageView.image = favImageList[indexPath.row]
+        cell.favImageView.image = favImageList[indexPath.row]
         return cell
     }
     

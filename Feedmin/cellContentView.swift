@@ -38,9 +38,7 @@ class cellContentView:UITableViewCell{
     func favLike(){
         //やることViewControllerごとにそのViewControllerの番号、記事情報を保持できるようにし、ここでLikeを押した記事の情報を取り出せるようにする。
         print("大好き")
-        //print(favTest)
         //print("\(NowViewNum)")//表示されているViewCobntrollerの番号
-        //print("\(viewControllers![NowViewNum].title)")
         print("タイトル：\(self.titleLabel.text!)")
         print("画像：\(self.cellView!)")
         print("リンク：\(self.cellWenLink!)")
@@ -57,6 +55,23 @@ class cellContentView:UITableViewCell{
     }
     func favDislike(){
         print("大嫌い")
+        
+        print("タイトル：\(self.titleLabel.text!)")
+        print("画像：\(self.cellView!)")
+        print("リンク：\(self.cellWenLink!)")
+        
+        print("タイトルリスト：\(favTitleList!)")
+        do{
+            favTitleList.remove(at: favTitleList.index(of: self.titleLabel.text!)!)
+            favImageList!.remove(at: favImageList!.index(of: self.cellView!.image!)!)
+            favLinkList!.remove(at: favLinkList!.index(of: self.cellWenLink!)!)
+            
+        }catch{
+            print("エラー",error)
+        }
+        
+        print("タイトルリスト削除後：\(favTitleList!)")
+        
     }
     override func awakeFromNib() {
         super.awakeFromNib()
