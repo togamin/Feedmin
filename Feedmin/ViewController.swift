@@ -122,12 +122,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         //print("Itemの中のサムネイル表示\(items[indexPath.row].thumbImage)")
         
         if items[indexPath.row].thumbImage != nil{
-            cell.cellContentView.image = items[indexPath.row].thumbImage
+            cell.cellView.image = items[indexPath.row].thumbImage
             
             //print(items[indexPath.row].thumbImage)
             //print("サムネイル画像取得完了")
         }else{
-            cell.cellContentView.image = UIImage(named: "default.png")
+            cell.cellView.image = UIImage(named: "default.png")
             //print("default画像")
         }
 

@@ -75,7 +75,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="cellContentView" destination="0Tc-3n-1Iz" id="gkz-Rc-lFC"/>
+                <outlet property="cellView" destination="0Tc-3n-1Iz" id="N2x-EC-vDr"/>
                 <outlet property="character" destination="w9f-WI-mWw" id="qkD-Lv-6ll"/>
                 <outlet property="likeButton" destination="wXY-V4-77A" id="Qyf-A9-6Ig"/>
                 <outlet property="titleLabel" destination="f7t-qy-YN8" id="Nop-C1-umf"/>

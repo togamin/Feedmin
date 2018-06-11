@@ -10,7 +10,7 @@ import UIKit
 
 class cellContentView:UITableViewCell{
     
-    @IBOutlet weak var cellContentView: UIImageView!
+    @IBOutlet weak var cellView: UIImageView!
     @IBOutlet weak var character: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
@@ -42,27 +42,23 @@ class cellContentView:UITableViewCell{
         //print("\(NowViewNum)")//表示されているViewCobntrollerの番号
         //print("\(viewControllers![NowViewNum].title)")
         print("タイトル：\(self.titleLabel.text!)")
-        print("画像：\(self.cellContentView!)")
+        print("画像：\(self.cellView!)")
         print("リンク：\(self.cellWenLink!)")
         
-        favTitle.append(self.titleLabel.text!)
-        favImage.append(self.cellContentView!)
-        favLink.append(self.cellWenLink!)
+        favTitleList.append(self.titleLabel.text!)
+        favImageList.append(self.cellView!.image!)
+        favLinkList.append(self.cellWenLink!)
         
-        print("タイトルリスト：\(favTitle!)")
-        print("画像リスト：\(favImage!)")
-        print("リンクリスト：\(favLink!)")
+        print("タイトルリスト：\(favTitleList!)")
+        print("画像リスト：\(favImageList!)")
+        print("リンクリスト：\(favLinkList!)")
         
         
     }
     func favDislike(){
         print("大嫌い")
     }
-    
-    //nibファイルに登録されたのオブジェクト間のインスタンス変数の自動接続が終了すると送信されるメッセージ.
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
     }
 }

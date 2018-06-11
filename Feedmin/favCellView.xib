@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="favCell" id="0ga-0E-KPg" customClass="favCellView" customModule="Feedmin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="259"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default02.png" translatesAutoresizingMaskIntoConstraints="NO" id="eQc-CZ-ykh">
+                    <rect key="frame" x="8" y="8" width="304" height="191"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pengin02.png" translatesAutoresizingMaskIntoConstraints="NO" id="zFL-fq-nwF">
+                    <rect key="frame" x="257" y="156" width="55" height="95"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="86" id="Wfe-wX-JHD"/>
+                        <constraint firstAttribute="width" constant="55" id="kKY-C2-CrY"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1XS-07-coK">
+                    <rect key="frame" x="8" y="207" width="241" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Szq-fd-L7D"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="eQc-CZ-ykh" firstAttribute="centerX" secondItem="0ga-0E-KPg" secondAttribute="centerX" id="0FM-aZ-5HD"/>
+                <constraint firstItem="1XS-07-coK" firstAttribute="bottom" secondItem="zFL-fq-nwF" secondAttribute="bottom" id="0nh-Xo-YcZ"/>
+                <constraint firstItem="1XS-07-coK" firstAttribute="top" secondItem="eQc-CZ-ykh" secondAttribute="bottom" constant="8" symbolic="YES" id="1q5-8X-TTM"/>
+                <constraint firstItem="zFL-fq-nwF" firstAttribute="leading" secondItem="1XS-07-coK" secondAttribute="trailing" constant="8" id="8vx-Y8-aa0"/>
+                <constraint firstItem="1XS-07-coK" firstAttribute="top" secondItem="eQc-CZ-ykh" secondAttribute="bottom" constant="8" id="G15-YW-Sh7"/>
+                <constraint firstItem="eQc-CZ-ykh" firstAttribute="leading" secondItem="1XS-07-coK" secondAttribute="leading" id="IHB-H7-cjj"/>
+                <constraint firstItem="1XS-07-coK" firstAttribute="leading" secondItem="JVu-8e-B0W" secondAttribute="leading" constant="8" id="KHZ-DM-S5L"/>
+                <constraint firstItem="eQc-CZ-ykh" firstAttribute="leading" secondItem="JVu-8e-B0W" secondAttribute="leading" constant="8" id="UHr-vb-xpl"/>
+                <constraint firstItem="zFL-fq-nwF" firstAttribute="leading" secondItem="1XS-07-coK" secondAttribute="trailing" constant="8" symbolic="YES" id="iYZ-rg-78Z"/>
+                <constraint firstItem="eQc-CZ-ykh" firstAttribute="top" secondItem="JVu-8e-B0W" secondAttribute="top" constant="8" id="ouJ-Qb-sA3"/>
+                <constraint firstItem="zFL-fq-nwF" firstAttribute="top" secondItem="JVu-8e-B0W" secondAttribute="top" constant="156" id="qAy-yf-rDX"/>
+                <constraint firstItem="eQc-CZ-ykh" firstAttribute="trailing" secondItem="zFL-fq-nwF" secondAttribute="trailing" id="qno-GS-EuG"/>
+                <constraint firstItem="JVu-8e-B0W" firstAttribute="bottom" secondItem="1XS-07-coK" secondAttribute="bottom" constant="8" id="sR9-IM-t1q"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="JVu-8e-B0W"/>
+            <connections>
+                <outlet property="character" destination="zFL-fq-nwF" id="Ztw-ld-cSM"/>
+                <outlet property="favImageView" destination="eQc-CZ-ykh" id="AAj-7g-1aw"/>
+                <outlet property="favTitle" destination="1XS-07-coK" id="Jmc-ul-1yr"/>
+            </connections>
+            <point key="canvasLocation" x="237" y="189.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="default02.png" width="857" height="642"/>
+        <image name="pengin02.png" width="86" height="97"/>
+    </resources>
+</document>

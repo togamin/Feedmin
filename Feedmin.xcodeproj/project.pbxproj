@@ -17,9 +17,7 @@
 		B7423A5820C1275400F02BDF /* cellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7423A5720C1275400F02BDF /* cellContentView.xib */; };
 		B7423A5A20C128F400F02BDF /* cellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7423A5920C128F400F02BDF /* cellContentView.swift */; };
 		B7423A7020C5064C00F02BDF /* myImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6C20C5064B00F02BDF /* myImage.png */; };
-		B7423A7120C5064C00F02BDF /* back01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6D20C5064B00F02BDF /* back01.jpg */; };
 		B7423A7220C5064C00F02BDF /* pengin00.png in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6E20C5064B00F02BDF /* pengin00.png */; };
-		B7423A7320C5064C00F02BDF /* back02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6F20C5064C00F02BDF /* back02.jpg */; };
 		B7423A9720C5880600F02BDF /* PageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7423A9620C5880600F02BDF /* PageMenuView.swift */; };
 		B794E8CD20C673110037862E /* manyViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8CC20C673110037862E /* manyViewControllers.swift */; };
 		B794E8CF20C741700037862E /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = B794E8CE20C741700037862E /* default.png */; };
@@ -28,6 +26,10 @@
 		B794E8D520C982A20037862E /* urlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D420C982A20037862E /* urlTableViewController.swift */; };
 		B794E8D920CB38420037862E /* favTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D820CB38420037862E /* favTableViewController.swift */; };
 		B7FE8FD620CE4A0A0095F455 /* favWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */; };
+		B7FE8FD820CE78760095F455 /* favCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7FE8FD720CE78760095F455 /* favCellView.xib */; };
+		B7FE8FDA20CE7A1D0095F455 /* default02.png in Resources */ = {isa = PBXBuildFile; fileRef = B7FE8FD920CE7A1C0095F455 /* default02.png */; };
+		B7FE8FDC20CE7E450095F455 /* pengin02.png in Resources */ = {isa = PBXBuildFile; fileRef = B7FE8FDB20CE7E450095F455 /* pengin02.png */; };
+		B7FE8FDE20CE7ED60095F455 /* favCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FE8FDD20CE7ED60095F455 /* favCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,9 +45,7 @@
 		B7423A5720C1275400F02BDF /* cellContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellContentView.xib; sourceTree = "<group>"; };
 		B7423A5920C128F400F02BDF /* cellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellContentView.swift; sourceTree = "<group>"; };
 		B7423A6C20C5064B00F02BDF /* myImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myImage.png; sourceTree = "<group>"; };
-		B7423A6D20C5064B00F02BDF /* back01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back01.jpg; sourceTree = "<group>"; };
 		B7423A6E20C5064B00F02BDF /* pengin00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin00.png; sourceTree = "<group>"; };
-		B7423A6F20C5064C00F02BDF /* back02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back02.jpg; sourceTree = "<group>"; };
 		B7423A9620C5880600F02BDF /* PageMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuView.swift; sourceTree = "<group>"; };
 		B794E8CC20C673110037862E /* manyViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manyViewControllers.swift; sourceTree = "<group>"; };
 		B794E8CE20C741700037862E /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
@@ -54,6 +54,10 @@
 		B794E8D420C982A20037862E /* urlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlTableViewController.swift; sourceTree = "<group>"; };
 		B794E8D820CB38420037862E /* favTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favTableViewController.swift; sourceTree = "<group>"; };
 		B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favWebViewController.swift; sourceTree = "<group>"; };
+		B7FE8FD720CE78760095F455 /* favCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = favCellView.xib; sourceTree = "<group>"; };
+		B7FE8FD920CE7A1C0095F455 /* default02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default02.png; sourceTree = "<group>"; };
+		B7FE8FDB20CE7E450095F455 /* pengin02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin02.png; sourceTree = "<group>"; };
+		B7FE8FDD20CE7ED60095F455 /* favCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,12 +90,14 @@
 		B7423A3820C041E000F02BDF /* Feedmin */ = {
 			isa = PBXGroup;
 			children = (
+				B7FE8FD720CE78760095F455 /* favCellView.xib */,
 				B794E8D820CB38420037862E /* favTableViewController.swift */,
 				B794E8D420C982A20037862E /* urlTableViewController.swift */,
 				B794E8D220C9624D0037862E /* SettingViewController.swift */,
 				B7423A3920C041E000F02BDF /* AppDelegate.swift */,
 				B7423A3B20C041E000F02BDF /* ViewController.swift */,
 				B7423A5720C1275400F02BDF /* cellContentView.xib */,
+				B7FE8FDD20CE7ED60095F455 /* favCellView.swift */,
 				B7423A5920C128F400F02BDF /* cellContentView.swift */,
 				B7423A3D20C041E000F02BDF /* Main.storyboard */,
 				B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */,
@@ -111,9 +117,9 @@
 		B7423A6B20C5057100F02BDF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B7FE8FDB20CE7E450095F455 /* pengin02.png */,
+				B7FE8FD920CE7A1C0095F455 /* default02.png */,
 				B794E8CE20C741700037862E /* default.png */,
-				B7423A6D20C5064B00F02BDF /* back01.jpg */,
-				B7423A6F20C5064C00F02BDF /* back02.jpg */,
 				B7423A6C20C5064B00F02BDF /* myImage.png */,
 				B7423A6E20C5064B00F02BDF /* pengin00.png */,
 			);
@@ -178,14 +184,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7FE8FDA20CE7A1D0095F455 /* default02.png in Resources */,
 				B7423A7220C5064C00F02BDF /* pengin00.png in Resources */,
 				B7423A7020C5064C00F02BDF /* myImage.png in Resources */,
 				B7423A4420C041E400F02BDF /* LaunchScreen.storyboard in Resources */,
 				B7423A4120C041E400F02BDF /* Assets.xcassets in Resources */,
-				B7423A7320C5064C00F02BDF /* back02.jpg in Resources */,
+				B7FE8FDC20CE7E450095F455 /* pengin02.png in Resources */,
+				B7FE8FD820CE78760095F455 /* favCellView.xib in Resources */,
 				B7423A5820C1275400F02BDF /* cellContentView.xib in Resources */,
 				B7423A3F20C041E000F02BDF /* Main.storyboard in Resources */,
-				B7423A7120C5064C00F02BDF /* back01.jpg in Resources */,
 				B794E8CF20C741700037862E /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +216,7 @@
 				B7423A5A20C128F400F02BDF /* cellContentView.swift in Sources */,
 				B7423A4E20C0BCA100F02BDF /* DetailViewController.swift in Sources */,
 				B794E8D320C9624E0037862E /* SettingViewController.swift in Sources */,
+				B7FE8FDE20CE7ED60095F455 /* favCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

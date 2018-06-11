@@ -6,9 +6,9 @@
 //  Copyright © 2018年 Togami Yuki. All rights reserved.
 //
 
-var favTitle:[String]! = []
-var favImage:[UIImageView]! = []
-var favLink:[String]! = []
+var favTitleList:[String]! = []
+var favImageList:[UIImage]! = []
+var favLinkList:[String]! = []
 
 var favItemList:[favItem] = []
 
@@ -30,12 +30,19 @@ class favTableViewController:UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //cellContentViewを呼び出し、myTableViewに登録
-        let nib = UINib(nibName:"cellContentView",bundle:nil)
+        // Do any additional setup after loading the view, typically from a nib
+        
+        
+        //favCellViewを呼び出し、favTableViewに登録
+        let nib = UINib(nibName:"favCellView",bundle:nil)
         favTableView.register(nib, forCellReuseIdentifier: "favCell")
+        favTableView.estimatedRowHeight = 250
+        favTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
         
         
+        
+        
+        print("リフレッシュコントローラー作成")
         //リフレッシュコントロールを作成する。
         let refresh = UIRefreshControl()
         //インジケーターの下に表示する文字列を設定する。
@@ -47,27 +54,31 @@ class favTableViewController:UITableViewController{
         //テーブルビューコントローラーのプロパティにリフレッシュコントロールを設定する。
         self.refreshControl = refresh
         print("リフレッシュコントローラーの設定完了")
+        
+        
     
     }
     //テーブルビュー引っ張り時の呼び出しメソッド
     @objc func relode(_ sender: UIRefreshControl){
         print("再読み込み")
         //テーブルを再読み込みする。
-        tableView.reloadData()
+        favTableView.reloadData()
         //読込中の表示を消す。
         refreshControl?.endRefreshing()
     }
 
     //行数を決める
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favTitle.count
+        return favTitleList.count
     }
 
     //セルのインスタンス化
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "favCell",for:indexPath) as! cellContentView
-        cell.titleLabel.text = favTitle[indexPath.row]
-        cell.cellContentView = favImage[indexPath.row]
+        print("なんでも")
+        let cell =  tableView.dequeueReusableCell(withIdentifier: "favCell",for:indexPath) as! favCellView
+        print("ないさー")
+        cell.favTitle.text = favTitleList[indexPath.row]
+        //cell.favImageView.image = favImageList[indexPath.row]
         return cell
     }
     
@@ -79,8 +90,8 @@ class favTableViewController:UITableViewController{
     override func prepare(for segue:UIStoryboardSegue,sender:Any?){
         print("画面遷移中")
         if let indexPath = self.favTableView.indexPathForSelectedRow{
-            let title = favTitle[indexPath.row]
-            let link = favLink[indexPath.row]
+            let title = favTitleList[indexPath.row]
+            let link = favLinkList[indexPath.row]
             //遷移先のViewControllerを格納
             let controller = segue.destination as! fabWevViewController
             
