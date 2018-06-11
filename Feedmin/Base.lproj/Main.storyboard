@@ -94,7 +94,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Lx6-be-DuX" kind="show" id="yaF-Ln-YhE"/>
+                                    <segue destination="Lx6-be-DuX" kind="show" identifier="goTofavWeb" id="yaF-Ln-YhE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -110,12 +110,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYi-ld-fB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2968.8000000000002" y="849.62518740629696"/>
+            <point key="canvasLocation" x="2895" y="850"/>
         </scene>
-        <!--View Controller-->
+        <!--Fab Wev View Controller-->
         <scene sceneID="LOm-e1-m61">
             <objects>
-                <viewController id="Lx6-be-DuX" sceneMemberID="viewController">
+                <viewController id="Lx6-be-DuX" customClass="fabWevViewController" customModule="Feedmin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DLW-LY-WsI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,6 +129,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="3D6-B4-UC1"/>
                     </view>
+                    <connections>
+                        <outlet property="favWebView" destination="dJy-Ce-boq" id="p2K-71-FHG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFu-d6-GXb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -409,7 +412,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFQ-Hx-3c3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2925.5999999999999" y="119.1904047976012"/>
+            <point key="canvasLocation" x="3014" y="119"/>
         </scene>
     </scenes>
 </document>

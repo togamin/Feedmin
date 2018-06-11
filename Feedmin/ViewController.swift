@@ -44,7 +44,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     /*########################################*/
     @IBOutlet weak var myTableView: UITableView!
-    var test = "test"
     var parser:XMLParser!//parser:構文解析
     var items:[Item] = []//複数の記事を格納するための配列
     var item:Item?
@@ -117,6 +116,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         
         cell.titleLabel.text = self.items[indexPath.row].title
+        cell.cellWenLink = self.items[indexPath.row].link
         //print(cell.titleLabel.text)
         
         //print("Itemの中のサムネイル表示\(items[indexPath.row].thumbImage)")

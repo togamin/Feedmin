@@ -8,7 +8,9 @@
 
 import UIKit
 
+//登録しているWebサイトのURLの数のViewControllerが格納
 var viewControllers:[UIViewController]?
+//今いるViewコントローラーの番号
 var NowViewNum:Int! = 0
 
 class manyViewControllers:UIViewController{
@@ -18,12 +20,8 @@ class manyViewControllers:UIViewController{
         super.viewDidLoad()
 
         initPageMenu()
-        print("ViewDidLoad")
+        //print("ViewDidLoad")
 
-    }
-    
-    func test(){
-        print("test")
     }
     
     
@@ -118,26 +116,6 @@ extension manyViewControllers {
     }
     
 }
-
-/*
-//画面最前面のUIViewControllerの取得用(まだ理解していない)
-extension UIApplication {
-    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-        if let navigationController = controller as? UINavigationController {
-            return topViewController(controller: navigationController.visibleViewController)
-        }
-        if let tabController = controller as? UITabBarController {
-            if let selected = tabController.selectedViewController {
-                return topViewController(controller: selected)
-            }
-        }
-        if let presented = controller?.presentedViewController {
-            return topViewController(controller: presented)
-        }
-        return controller
-    }
-}
-*/
 
 
 
