@@ -9,6 +9,7 @@
 import UIKit
 class favCellView:UITableViewCell{
     
+    @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var favImageView: UIImageView!
     @IBOutlet weak var favTitle: UILabel!
     @IBOutlet weak var character: UIImageView!

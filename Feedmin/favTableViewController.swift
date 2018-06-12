@@ -11,6 +11,7 @@
 var favTitleList:[String]! = []
 var favImageList:[UIImage]! = []
 var favLinkList:[String]! = []
+var favMainTitleList:[String]! = []
 
 var favItemList:[favItem] = []
 
@@ -90,6 +91,7 @@ class favTableViewController:UITableViewController{
         let cell =  tableView.dequeueReusableCell(withIdentifier: "favCell",for:indexPath) as! favCellView
         cell.favTitle.text = favTitleList[indexPath.row]
         cell.favImageView.image = favImageList[indexPath.row]
+        cell.mainTitle.text = favMainTitleList[indexPath.row]
         return cell
     }
     
@@ -117,6 +119,7 @@ class favTableViewController:UITableViewController{
             favImageList.remove(at: indexPath.row)
             favLinkList.remove(at: indexPath.row)
             favTableView.deleteRows(at: [indexPath], with: .fade)
+            favMainTitleList.remove(at: indexPath.row)
         }
     }
     

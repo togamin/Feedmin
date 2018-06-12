@@ -35,6 +35,16 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAS-k6-yWg">
+                    <rect key="frame" x="8" y="8" width="64" height="25"/>
+                    <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="iEM-si-AVk"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -46,6 +56,8 @@
                 <constraint firstItem="eQc-CZ-ykh" firstAttribute="leading" secondItem="1XS-07-coK" secondAttribute="leading" id="IHB-H7-cjj"/>
                 <constraint firstItem="1XS-07-coK" firstAttribute="leading" secondItem="JVu-8e-B0W" secondAttribute="leading" constant="8" id="KHZ-DM-S5L"/>
                 <constraint firstItem="eQc-CZ-ykh" firstAttribute="leading" secondItem="JVu-8e-B0W" secondAttribute="leading" constant="8" id="UHr-vb-xpl"/>
+                <constraint firstItem="ZAS-k6-yWg" firstAttribute="top" secondItem="JVu-8e-B0W" secondAttribute="top" constant="8" id="cWm-Ku-cob"/>
+                <constraint firstItem="ZAS-k6-yWg" firstAttribute="leading" secondItem="JVu-8e-B0W" secondAttribute="leading" constant="8" id="iGL-Eo-N2x"/>
                 <constraint firstItem="zFL-fq-nwF" firstAttribute="leading" secondItem="1XS-07-coK" secondAttribute="trailing" constant="8" symbolic="YES" id="iYZ-rg-78Z"/>
                 <constraint firstItem="eQc-CZ-ykh" firstAttribute="top" secondItem="JVu-8e-B0W" secondAttribute="top" constant="8" id="ouJ-Qb-sA3"/>
                 <constraint firstItem="zFL-fq-nwF" firstAttribute="top" secondItem="JVu-8e-B0W" secondAttribute="top" constant="156" id="qAy-yf-rDX"/>
@@ -58,6 +70,7 @@
                 <outlet property="character" destination="zFL-fq-nwF" id="Ztw-ld-cSM"/>
                 <outlet property="favImageView" destination="eQc-CZ-ykh" id="AAj-7g-1aw"/>
                 <outlet property="favTitle" destination="1XS-07-coK" id="Jmc-ul-1yr"/>
+                <outlet property="mainTitle" destination="ZAS-k6-yWg" id="UyH-B8-Y5s"/>
             </connections>
             <point key="canvasLocation" x="237" y="189.5"/>
         </view>

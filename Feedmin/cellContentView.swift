@@ -46,6 +46,7 @@ class cellContentView:UITableViewCell{
         favTitleList.insert(self.titleLabel.text!, at: 0)
         favImageList.insert(self.cellView!.image!, at: 0)
         favLinkList.insert(self.cellWenLink!, at: 0)
+        favMainTitleList.insert(siteTitleList[ViewControllerNow!],at: 0)
         
         
         print("タイトルリスト：\(favTitleList!)")
@@ -71,6 +72,7 @@ class cellContentView:UITableViewCell{
             favTitleList.remove(at: favTitleList.index(of: self.titleLabel.text!)!)
             favImageList!.remove(at: favImageList!.index(of: self.cellView!.image!)!)
             favLinkList!.remove(at: favLinkList!.index(of: self.cellWenLink!)!)
+            favMainTitleList.remove(at: favLinkList!.index(of: self.cellWenLink!)!)
         }else{
             print("お気に入りなし")
         }
