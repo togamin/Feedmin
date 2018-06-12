@@ -21,9 +21,9 @@
  
  */
 
-var siteURLList = ["http://togamin.com/feed/","http://feedblog.ameba.jp/rss/ameblo/oranger13","http://why-not-1017.hatenablog.com/rss"]
+var siteURLList = ["http://togamin.com/feed/","http://www.mikytechblog.com/rss","http://sodekoo.com/feed/","https://haxpig.com/feed","http://diamondxitiao.site/feed"]
 
-var siteTitleList = ["とがみんブログ","宇宙の本質を語る","たかひろ"]
+var siteTitleList = ["とがみんブログ","マイク","そでこ","れおさん","ダイヤ"]
 
 
 

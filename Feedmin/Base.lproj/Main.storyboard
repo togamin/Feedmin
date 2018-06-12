@@ -32,6 +32,19 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K3P-2l-79n">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="615"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLi-CW-Uim">
+                                <rect key="frame" x="33" y="78" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="backMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P08-7S-esz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -44,38 +57,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="記事一覧" leftItemsSupplementBackButton="YES" id="q5l-ea-uKP"/>
                     <connections>
+                        <outlet property="backMenu" destination="fLi-CW-Uim" id="J4G-9r-A7O"/>
                         <outlet property="myTableView" destination="c4C-u7-t1n" id="21P-n3-aPJ"/>
-                        <segue destination="flw-D7-Unl" kind="show" identifier="go" id="wR4-Zx-VC2"/>
+                        <outlet property="webSiteView" destination="K3P-2l-79n" id="Vlx-YK-sxj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2919" y="119"/>
-        </scene>
-        <!--Detail View Controller-->
-        <scene sceneID="ga8-9t-Km7">
-            <objects>
-                <viewController id="flw-D7-Unl" customClass="detailViewController" customModule="Feedmin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xhK-EX-mLF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="acM-YM-OSt">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="dmW-1I-t55"/>
-                    </view>
-                    <connections>
-                        <outlet property="webView" destination="acM-YM-OSt" id="5Sp-OR-Bru"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SFK-xk-ZIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3559" y="118"/>
+            <point key="canvasLocation" x="2917.5999999999999" y="118.29085457271366"/>
         </scene>
         <!--Fav Table View Controller-->
         <scene sceneID="gMQ-jM-M0R">
