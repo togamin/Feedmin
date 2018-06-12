@@ -43,6 +43,7 @@ class cellContentView:UITableViewCell{
         print("画像：\(self.cellView!)")
         print("リンク：\(self.cellWenLink!)")
         
+        //後で、favTitleList、favImageList、favLinkListをまとめる必要あり。
         favTitleList.append(self.titleLabel.text!)
         favImageList.append(self.cellView!.image!)
         favLinkList.append(self.cellWenLink!)

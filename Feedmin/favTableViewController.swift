@@ -6,6 +6,8 @@
 //  Copyright © 2018年 Togami Yuki. All rights reserved.
 //
 
+
+//後で、favTitleList、favImageList、favLinkListをまとめる必要あり。
 var favTitleList:[String]! = []
 var favImageList:[UIImage]! = []
 var favLinkList:[String]! = []
@@ -42,6 +44,10 @@ class favTableViewController:UITableViewController{
         
         
         
+        
+        
+        
+        
         print("リフレッシュコントローラー作成")
         //リフレッシュコントロールを作成する。
         let refresh = UIRefreshControl()
@@ -56,8 +62,11 @@ class favTableViewController:UITableViewController{
         print("リフレッシュコントローラーの設定完了")
         
         
-    
     }
+    
+    
+    
+    
     //テーブルビュー引っ張り時の呼び出しメソッド
     @objc func relode(_ sender: UIRefreshControl){
         print("再読み込み")
@@ -66,6 +75,10 @@ class favTableViewController:UITableViewController{
         //読込中の表示を消す。
         refreshControl?.endRefreshing()
     }
+    
+ 
+ 
+ 
 
     //行数を決める
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

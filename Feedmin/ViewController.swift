@@ -10,6 +10,8 @@
 * ナビゲーションについて.WebViewから前のViewに戻る方法(上手くいかない)
 * URL登録ボタン押してから、再読み込みしない。(上手くいかない)
 * タップされた時のセルの情報を取得する方法
+* 記事情報にお気に入りかどうかの情報を入れる(True false)
+    * Likeでfalseをtrueに、DisLikeでfalseに。
  
  
  お気にいりようのnibファイル作成。
@@ -72,15 +74,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         //print("\(ViewControllerNow!)番目のView")
         
         
-        //myTableView.isHidden = true
-        //indicator.startAnimating()
+
         queue.async {() -> Void in
             print("画面表示中")
             self.startDownload(siteURL: siteURLList[ViewControllerNow])
         }
-        //myTableView.isHidden = false
-        //self.myTableView.reloadData()
-        //self.indicator.stopAnimating()
+
         
         
         
@@ -94,8 +93,32 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             //print(self.items[i].thumbImage)
             }
         }
+        
+        
+        
+        print("リフレッシュコントローラー作成")
+        //リフレッシュコントロールを作成する。
+        let refresh = UIRefreshControl()
+        //インジケーターの下に表示する文字列を設定する。
+        refresh.attributedTitle = NSAttributedString(string: "読込中")
+        //インジケーターの色を設定する。
+        refresh.tintColor = UIColor.gray
+        //テーブルビューを引っ張ったときの呼び出しメソッドを登録する。関数をうまく呼び出せていない
+        refresh.addTarget(self, action: #selector(ViewController.relode(_: )), for: .valueChanged)
+        //テーブルビューコントローラーのプロパティにリフレッシュコントロールを設定する。
+        myTableView.addSubview(refresh)
+        print("リフレッシュコントローラーの設定完了")
+        
+        
     }
-    
+    //テーブルビュー引っ張り時の呼び出しメソッド
+    @objc func relode(_ sender: UIRefreshControl){
+        print("再読み込み")
+        //テーブルを再読み込みする。
+        myTableView.reloadData()
+        //読込中の表示を消す。
+        sender.endRefreshing()
+    }
     
     
 /*---------------------------------------------------*/
