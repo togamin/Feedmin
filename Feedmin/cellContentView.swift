@@ -61,13 +61,14 @@ class cellContentView:UITableViewCell{
         print("リンク：\(self.cellWenLink!)")
         
         print("タイトルリスト：\(favTitleList!)")
-        do{
+        
+        //後で、favTitleList、favImageList、favLinkListをまとめる必要あり。
+        if favTitleList.index(of: self.titleLabel.text!) != nil{
             favTitleList.remove(at: favTitleList.index(of: self.titleLabel.text!)!)
             favImageList!.remove(at: favImageList!.index(of: self.cellView!.image!)!)
             favLinkList!.remove(at: favLinkList!.index(of: self.cellWenLink!)!)
-            
-        }catch{
-            print("エラー",error)
+        }else{
+            print("お気に入りなし")
         }
         
         print("タイトルリスト削除後：\(favTitleList!)")

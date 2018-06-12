@@ -98,6 +98,14 @@ class favTableViewController:UITableViewController{
             controller.link = link
         }
     }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            favTitleList.remove(at: indexPath.row)
+            favImageList.remove(at: indexPath.row)
+            favLinkList.remove(at: indexPath.row)
+            favTableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
     
     
     
