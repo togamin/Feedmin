@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import WebKit
+
 class fabWevViewController:UIViewController{
     
-    @IBOutlet weak var favWebView: UIWebView!
+    @IBOutlet weak var favWebKitView: WKWebView!
     
     var link:String!
     
@@ -17,7 +19,7 @@ class fabWevViewController:UIViewController{
         super.viewDidLoad()
         if let url = URL(string: self.link){
             let request = URLRequest(url:url)
-            self.favWebView.loadRequest(request)
+            self.favWebKitView.load(request)
             //self.ArticleNav.topItem!.title = title
         }
         
