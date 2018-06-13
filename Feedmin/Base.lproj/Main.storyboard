@@ -32,18 +32,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ewe-nn-4hK">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ewe-nn-4hK">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="615"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLi-CW-Uim">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLi-CW-Uim">
                                 <rect key="frame" x="33" y="78" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="backMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P08-7S-esz"/>
@@ -52,10 +50,16 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="c4C-u7-t1n" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4fP-nI-yPi"/>
-                            <constraint firstItem="c4C-u7-t1n" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="86l-oZ-MME"/>
-                            <constraint firstAttribute="trailing" secondItem="c4C-u7-t1n" secondAttribute="trailing" id="A8i-zB-D8v"/>
-                            <constraint firstItem="c4C-u7-t1n" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="E4y-Ct-Tmq"/>
+                            <constraint firstItem="ewe-nn-4hK" firstAttribute="trailing" secondItem="c4C-u7-t1n" secondAttribute="trailing" id="20d-5y-LQN"/>
+                            <constraint firstItem="fLi-CW-Uim" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="33" id="8SO-7D-gK0"/>
+                            <constraint firstItem="ewe-nn-4hK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FeI-pY-XSD"/>
+                            <constraint firstItem="c4C-u7-t1n" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Gwk-Lh-BxM"/>
+                            <constraint firstItem="fLi-CW-Uim" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="REM-6K-DTt"/>
+                            <constraint firstAttribute="trailing" secondItem="ewe-nn-4hK" secondAttribute="trailing" id="Te0-30-Knn"/>
+                            <constraint firstItem="c4C-u7-t1n" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="YJA-yJ-dvX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ewe-nn-4hK" secondAttribute="bottom" constant="52" id="ZVs-ut-Gv7"/>
+                            <constraint firstItem="c4C-u7-t1n" firstAttribute="top" secondItem="ewe-nn-4hK" secondAttribute="top" id="ooZ-VX-ifq"/>
+                            <constraint firstItem="ewe-nn-4hK" firstAttribute="leading" secondItem="c4C-u7-t1n" secondAttribute="leading" id="qnd-H4-a7g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -113,9 +117,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2s-T3-dau">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2s-T3-dau">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -124,6 +127,12 @@
                             </wkWebView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="O2s-T3-dau" firstAttribute="leading" secondItem="DLW-LY-WsI" secondAttribute="leading" id="PJm-vD-q6h"/>
+                            <constraint firstItem="O2s-T3-dau" firstAttribute="top" secondItem="3D6-B4-UC1" secondAttribute="top" id="YQN-Kq-3ju"/>
+                            <constraint firstItem="O2s-T3-dau" firstAttribute="bottom" secondItem="3D6-B4-UC1" secondAttribute="bottom" id="jUB-zo-EQU"/>
+                            <constraint firstAttribute="trailing" secondItem="O2s-T3-dau" secondAttribute="trailing" id="uMZ-P7-v0h"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="3D6-B4-UC1"/>
                     </view>
                     <connections>

@@ -18,6 +18,10 @@
 		B7423A7020C5064C00F02BDF /* myImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6C20C5064B00F02BDF /* myImage.png */; };
 		B7423A7220C5064C00F02BDF /* pengin00.png in Resources */ = {isa = PBXBuildFile; fileRef = B7423A6E20C5064B00F02BDF /* pengin00.png */; };
 		B7423A9720C5880600F02BDF /* PageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7423A9620C5880600F02BDF /* PageMenuView.swift */; };
+		B780FE6220D0E64400814088 /* ArticleData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B780FE6020D0E64300814088 /* ArticleData.xcdatamodeld */; };
+		B780FE6520D0E97A00814088 /* Entity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B780FE6320D0E97A00814088 /* Entity+CoreDataClass.swift */; };
+		B780FE6620D0E97A00814088 /* Entity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B780FE6420D0E97A00814088 /* Entity+CoreDataProperties.swift */; };
+		B780FE6820D1011000814088 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B780FE6720D1011000814088 /* CoreData.swift */; };
 		B794E8CD20C673110037862E /* manyViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8CC20C673110037862E /* manyViewControllers.swift */; };
 		B794E8CF20C741700037862E /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = B794E8CE20C741700037862E /* default.png */; };
 		B794E8D120C74C8A0037862E /* getURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D020C74C8A0037862E /* getURL.swift */; };
@@ -45,6 +49,10 @@
 		B7423A6C20C5064B00F02BDF /* myImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myImage.png; sourceTree = "<group>"; };
 		B7423A6E20C5064B00F02BDF /* pengin00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pengin00.png; sourceTree = "<group>"; };
 		B7423A9620C5880600F02BDF /* PageMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuView.swift; sourceTree = "<group>"; };
+		B780FE6120D0E64400814088 /* ArticleData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArticleData.xcdatamodel; sourceTree = "<group>"; };
+		B780FE6320D0E97A00814088 /* Entity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B780FE6420D0E97A00814088 /* Entity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B780FE6720D1011000814088 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		B794E8CC20C673110037862E /* manyViewControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manyViewControllers.swift; sourceTree = "<group>"; };
 		B794E8CE20C741700037862E /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		B794E8D020C74C8A0037862E /* getURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getURL.swift; sourceTree = "<group>"; };
@@ -72,6 +80,8 @@
 		B7423A2D20C041E000F02BDF = {
 			isa = PBXGroup;
 			children = (
+				B780FE6320D0E97A00814088 /* Entity+CoreDataClass.swift */,
+				B780FE6420D0E97A00814088 /* Entity+CoreDataProperties.swift */,
 				B7423A3820C041E000F02BDF /* Feedmin */,
 				B7423A3720C041E000F02BDF /* Products */,
 			);
@@ -88,21 +98,23 @@
 		B7423A3820C041E000F02BDF /* Feedmin */ = {
 			isa = PBXGroup;
 			children = (
-				B7FE8FD720CE78760095F455 /* favCellView.xib */,
+				B7423A3920C041E000F02BDF /* AppDelegate.swift */,
 				B794E8D820CB38420037862E /* favTableViewController.swift */,
+				B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */,
+				B7FE8FDD20CE7ED60095F455 /* favCellView.swift */,
+				B7FE8FD720CE78760095F455 /* favCellView.xib */,
 				B794E8D420C982A20037862E /* urlTableViewController.swift */,
 				B794E8D220C9624D0037862E /* SettingViewController.swift */,
-				B7423A3920C041E000F02BDF /* AppDelegate.swift */,
 				B7423A3B20C041E000F02BDF /* ViewController.swift */,
 				B7423A5720C1275400F02BDF /* cellContentView.xib */,
-				B7FE8FDD20CE7ED60095F455 /* favCellView.swift */,
 				B7423A5920C128F400F02BDF /* cellContentView.swift */,
 				B7423A3D20C041E000F02BDF /* Main.storyboard */,
-				B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */,
-				B794E8D020C74C8A0037862E /* getURL.swift */,
 				B794E8CC20C673110037862E /* manyViewControllers.swift */,
 				B7423A4B20C04BAF00F02BDF /* Item.swift */,
 				B7423A9620C5880600F02BDF /* PageMenuView.swift */,
+				B794E8D020C74C8A0037862E /* getURL.swift */,
+				B780FE6720D1011000814088 /* CoreData.swift */,
+				B780FE6020D0E64300814088 /* ArticleData.xcdatamodeld */,
 				B7423A6B20C5057100F02BDF /* images */,
 				B7423A4020C041E400F02BDF /* Assets.xcassets */,
 				B7423A4220C041E400F02BDF /* LaunchScreen.storyboard */,
@@ -201,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B780FE6620D0E97A00814088 /* Entity+CoreDataProperties.swift in Sources */,
 				B7423A3C20C041E000F02BDF /* ViewController.swift in Sources */,
 				B794E8D520C982A20037862E /* urlTableViewController.swift in Sources */,
 				B794E8CD20C673110037862E /* manyViewControllers.swift in Sources */,
@@ -210,8 +223,11 @@
 				B794E8D920CB38420037862E /* favTableViewController.swift in Sources */,
 				B7FE8FD620CE4A0A0095F455 /* favWebViewController.swift in Sources */,
 				B794E8D120C74C8A0037862E /* getURL.swift in Sources */,
+				B780FE6220D0E64400814088 /* ArticleData.xcdatamodeld in Sources */,
 				B7423A5A20C128F400F02BDF /* cellContentView.swift in Sources */,
+				B780FE6820D1011000814088 /* CoreData.swift in Sources */,
 				B794E8D320C9624E0037862E /* SettingViewController.swift in Sources */,
+				B780FE6520D0E97A00814088 /* Entity+CoreDataClass.swift in Sources */,
 				B7FE8FDE20CE7ED60095F455 /* favCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +426,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B780FE6020D0E64300814088 /* ArticleData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B780FE6120D0E64400814088 /* ArticleData.xcdatamodel */,
+			);
+			currentVersion = B780FE6120D0E64400814088 /* ArticleData.xcdatamodel */;
+			path = ArticleData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B7423A2E20C041E000F02BDF /* Project object */;
 }

@@ -13,25 +13,51 @@
  http://rssblog.ameba.jp/［アメーバID］/rss.html
  ・rss情報がなかった場合の処理
  
- 
- 
  ・出力データ
     siteURLList
     siteTitle
  
+ 
+ 
+ ・CoreDataに保存したいこと
+    登録したサイトのURL
+    登録したサイトのタイトル
+    登録したサイトの記事情報
+        記事タイトル
+        画像データ
+        記事URL
+        お気に入りかどうか
  */
+//----------------------------------------------
+
+
 
 var siteURLList = ["http://togamin.com/feed/","http://www.mikytechblog.com/rss","http://sodekoo.com/feed/","https://haxpig.com/feed","http://diamondxitiao.site/feed"]
 
 var siteTitleList = ["とがみんブログ","マイク","そでこ","れおさん","ダイヤ"]
 
+//後で、favTitleList、favImageList、favLinkListをまとめる必要あり。
+var favTitleList:[String]! = []
+var favImageList:[UIImage]! = []
+var favLinkList:[String]! = []
+var favMainTitleList:[String]! = []
+
+var favItemList:[favItem] = []
+
+class favItem {
+    var title = ""
+    var URL = ""
+    var thumbImage:UIImage!
+}
 
 
+//----------------------------------------------
 
 
 
 
 import UIKit
+import CoreData
 
 class getURL:UITableViewController{
     
@@ -94,10 +120,10 @@ class getURL:UITableViewController{
             var urlText = alert.textFields![1].text!
             
             
-            print("タイトルのリスト：\(titleText):\(urlText)")
+            print("サイト情報：\(titleText):\(urlText)")
             
 /*-----------------------------------------------#
-得たURLの処理をする。
+ここで得たURLの処理をする。
 * WordPress
 http://togamin.com/feed/
 http://togamin.com/rss/
@@ -107,13 +133,20 @@ http://why-not-1017.hatenablog.com/rss
 http://feedblog.ameba.jp/rss/ameblo/oranger13
 
 #-----------------------------------------------*/
+//CoreData
             
-            var rssText = urlText + "/rss"
-            print("タイトルのリスト：\(titleText):\(rssText)")
+            
+            writeSiteInfo(titleText: titleText,urlText: urlText)
+            readSiteInfo()
+            
+            
+//-----------------------------------------------
+            
+
             
             
             siteTitleList.append(titleText)
-            siteURLList.append(rssText)
+            siteURLList.append(urlText)
         
             
             //上手くいっていない
@@ -137,16 +170,8 @@ http://feedblog.ameba.jp/rss/ameblo/oranger13
 
     
     
-
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
-    
-    
-    
 }

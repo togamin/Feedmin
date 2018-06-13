@@ -7,22 +7,6 @@
 //
 
 
-//後で、favTitleList、favImageList、favLinkListをまとめる必要あり。
-var favTitleList:[String]! = []
-var favImageList:[UIImage]! = []
-var favLinkList:[String]! = []
-var favMainTitleList:[String]! = []
-
-var favItemList:[favItem] = []
-
-class favItem {
-    var title = ""
-    var URL = ""
-    var thumbImage:UIImage!
-}
-
-
-
 
 import UIKit
 
