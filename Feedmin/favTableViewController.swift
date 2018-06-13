@@ -97,6 +97,7 @@ class favTableViewController:UITableViewController{
             controller.link = link
         }
     }
+    //セルを横にスライドさせた時に呼ばれる
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             favTitleList.remove(at: indexPath.row)

@@ -20,10 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         //??うまく表示されない
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        print("データベースのファイルのパス\(urls[urls.count-1] as URL)")
-        let path = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
-        print("データベースのファイルのパス\(path)")
+        //let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        //print("データベースのファイルのパス\(urls[urls.count-1] as URL)")
+        //let path = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
+        //print("データベースのファイルのパス\(path)")
         
         return true
     }

@@ -29,12 +29,14 @@
         お気に入りかどうか
  */
 //----------------------------------------------
-
-
-
+var siteURLList:[String?] = ["https://togamin.com/feed/"]
+var siteTitleList:[String?] = ["とがみんブログ"]
+/*
 var siteURLList = ["http://togamin.com/feed/","http://www.mikytechblog.com/rss","http://sodekoo.com/feed/","https://haxpig.com/feed","http://diamondxitiao.site/feed"]
 
 var siteTitleList = ["とがみんブログ","マイク","そでこ","れおさん","ダイヤ"]
+*/
+
 
 //後で、favTitleList、favImageList、favLinkListをまとめる必要あり。
 var favTitleList:[String]! = []
@@ -83,6 +85,15 @@ class getURL:UITableViewController{
         cell.textLabel?.text = siteTitleList[indexPath.row]
         cell.detailTextLabel?.text = siteURLList[indexPath.row]
         return cell
+    }
+    //セルを横にスライドさせた時に呼ばれる
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print("スライドしたよね?")
+        print(indexPath.row)
+        deleteSiteInfo(Index: indexPath.row)
+        siteTitleList.remove(at: indexPath.row)
+        siteURLList.remove(at: indexPath.row)
+        getURLTableView.reloadData()
     }
     
     
@@ -135,9 +146,7 @@ http://feedblog.ameba.jp/rss/ameblo/oranger13
 #-----------------------------------------------*/
 //CoreData
             
-            
             writeSiteInfo(titleText: titleText,urlText: urlText)
-            readSiteInfo()
             
             
 //-----------------------------------------------

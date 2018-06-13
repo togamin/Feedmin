@@ -46,7 +46,7 @@ class cellContentView:UITableViewCell{
         favTitleList.insert(self.titleLabel.text!, at: 0)
         favImageList.insert(self.cellView!.image!, at: 0)
         favLinkList.insert(self.cellWenLink!, at: 0)
-        favMainTitleList.insert(siteTitleList[ViewControllerNow!],at: 0)
+        favMainTitleList.insert(siteTitleList[ViewControllerNow!]!, at: 0)
         
         
         print("タイトルリスト：\(favTitleList!)")
