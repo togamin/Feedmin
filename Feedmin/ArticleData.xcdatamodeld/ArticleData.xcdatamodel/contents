@@ -10,7 +10,7 @@
     <entity name="SiteInfo" representedClassName="SiteInfo" syncable="YES" codeGenerationType="class">
         <attribute name="siteTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="siteURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="articles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="siteInfo" inverseEntity="Article" syncable="YES"/>
+        <relationship name="articles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Article" inverseName="siteInfo" inverseEntity="Article" syncable="YES"/>
     </entity>
     <elements>
         <element name="SiteInfo" positionX="-63" positionY="-18" width="128" height="90"/>

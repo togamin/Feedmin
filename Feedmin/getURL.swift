@@ -29,8 +29,8 @@
         お気に入りかどうか
  */
 //----------------------------------------------
-var siteURLList:[String?] = ["https://togamin.com/feed/"]
-var siteTitleList:[String?] = ["とがみんブログ"]
+var siteURLList:[String?] = []
+var siteTitleList:[String?] = []
 /*
 var siteURLList = ["http://togamin.com/feed/","http://www.mikytechblog.com/rss","http://sodekoo.com/feed/","https://haxpig.com/feed","http://diamondxitiao.site/feed"]
 

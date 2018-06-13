@@ -34,7 +34,7 @@ func writeSiteInfo(titleText:String,urlText:String){
 
 
 
-//SiteInfoのデータ読み込み用
+//SiteInfoのデータ読み込み用.[サイトタイトルとサイトURL]
 func readSiteInfo()->[[String]]{
     var siteInfo = [[],[]]
     //AppDelegateを使う用意をしておく

@@ -19,12 +19,17 @@ class manyViewControllers:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
+//CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
         var Info = readSiteInfo()
         if Info[0] != [] {
             siteTitleList = Info[0]
             siteURLList = Info[1]
             print("タイトルリスト：\(siteTitleList),URLリスト：\(siteURLList)")
+        }else{
+            writeSiteInfo(titleText: "とがみんブログ",urlText: "https://togamin.com/feed/")
+            Info = readSiteInfo()
+            siteTitleList = Info[0]
+            siteURLList = Info[1]
         }
         
 
