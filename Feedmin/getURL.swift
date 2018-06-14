@@ -70,7 +70,7 @@ class getURL:UITableViewController{
     
     //行数を決める
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return siteTitleList.count
+        return siteInfoList.count
     }
     
     
@@ -79,28 +79,27 @@ class getURL:UITableViewController{
         let cell =  tableView.dequeueReusableCell(withIdentifier: "urlCell",for:indexPath) as! UITableViewCell
 
         
-        cell.textLabel?.text = siteTitleList[indexPath.row]
-        cell.detailTextLabel?.text = siteURLList[indexPath.row]
+        cell.textLabel?.text = siteInfoList[indexPath.row]?.siteTitle
+        cell.detailTextLabel?.text = siteInfoList[indexPath.row]?.siteURL
         return cell
     }
     //セルを横にスライドさせた時に呼ばれる
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         print("スライドしたよね?")
-        var Info = readSiteInfo()
-        /*
-        if Info[0].count > 1{
+        
+        if siteInfoList.count > 1{
             print(indexPath.row)
             deleteSiteInfo(Index: indexPath.row)
-            siteTitleList.remove(at: indexPath.row)
-            siteURLList.remove(at: indexPath.row)
+            siteInfoList.remove(at: indexPath.row)
+            //index.rowより大きいIDを1減らす。
             getURLTableView.reloadData()
         }else{
             let alert = UIAlertController(title: "エラー", message: "登録しているサイトが1つの場合、削除できません。", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {action in print("OK")}))
             alert.view.layer.cornerRadius = 25 //角丸にする。
             present(alert,animated: true,completion: {()->Void in print("URL削除時のエラー")})
-        }*/
+        }
     }
     
     
@@ -134,11 +133,9 @@ class getURL:UITableViewController{
         func getInfo(){
             print ("URL登録処理を行います")
             
-            var titleText = alert.textFields![0].text!
-            var urlText = alert.textFields![1].text!
-            
-            
-            print("サイト情報：\(titleText):\(urlText)")
+            var siteID = siteInfoList.count
+            var siteTitle = alert.textFields![0].text!
+            var siteURL = alert.textFields![1].text!
             
 /*-----------------------------------------------#
 ここで得たURLの処理をする。
@@ -153,28 +150,16 @@ http://feedblog.ameba.jp/rss/ameblo/oranger13
 #-----------------------------------------------*/
 //CoreData
             
-            //writeSiteInfo(titleText: titleText,urlText: urlText)
+            writeSiteInfo(siteID: siteID,siteTitle: siteTitle,siteURL: siteURL)
+            siteInfoList = readSiteInfo()
             
             
 //-----------------------------------------------
             
 
-            
-            
-            siteTitleList.append(titleText)
-            siteURLList.append(urlText)
-        
-            
-            //上手くいっていない
-            manyViewControllers().viewDidLoad()
+    
+            //ここでmanyViewControllerのviewDidLoadをもう一度
             print("リロード完了")
-            
-            
-            //print("タイトルのリスト：\(siteTitleList)")
-            //print("URLのリスト：\(siteURLList)")
-            
-            
-            
             
             getURLTableView.reloadData()
             
