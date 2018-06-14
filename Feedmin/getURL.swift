@@ -88,7 +88,7 @@ class getURL:UITableViewController{
         
         print("スライドしたよね?")
         var Info = readSiteInfo()
-        
+        /*
         if Info[0].count > 1{
             print(indexPath.row)
             deleteSiteInfo(Index: indexPath.row)
@@ -100,7 +100,7 @@ class getURL:UITableViewController{
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {action in print("OK")}))
             alert.view.layer.cornerRadius = 25 //角丸にする。
             present(alert,animated: true,completion: {()->Void in print("URL削除時のエラー")})
-        }
+        }*/
     }
     
     
@@ -153,7 +153,7 @@ http://feedblog.ameba.jp/rss/ameblo/oranger13
 #-----------------------------------------------*/
 //CoreData
             
-            writeSiteInfo(titleText: titleText,urlText: urlText)
+            //writeSiteInfo(titleText: titleText,urlText: urlText)
             
             
 //-----------------------------------------------

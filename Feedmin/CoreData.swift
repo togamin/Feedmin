@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 //SiteInfoへのデータの書き込み
-func writeSiteInfo(titleText:String,urlText:String){
+func writeSiteInfo(siteID:Int,siteTitle:String,siteURL:String){
     print("SiteInfoのCoreDataへの登録")
     //AppDelegateを使う用意をしておく
     let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -21,8 +21,9 @@ func writeSiteInfo(titleText:String,urlText:String){
     //SiteInfoエンティティに行を挿入するためのオブジェクトを作成
     let newRecode = NSManagedObject(entity: SiteInfo!, insertInto: viewContext)
     //値のセット
-    newRecode.setValue(titleText, forKey: "siteTitle")
-    newRecode.setValue(urlText, forKey: "siteURL")
+    newRecode.setValue(siteID, forKey: "siteID")
+    newRecode.setValue(siteTitle, forKey: "siteTitle")
+    newRecode.setValue(siteURL, forKey: "siteURL")
     do{
         //レコード(行)の即時保存
         try viewContext.save()
@@ -35,8 +36,9 @@ func writeSiteInfo(titleText:String,urlText:String){
 
 
 //SiteInfoのデータ読み込み用.[サイトタイトルとサイトURL]
-func readSiteInfo()->[[String]]{
-    var siteInfo = [[],[]]
+func readSiteInfo()->[siteInfo?]{
+    var siteInfo:siteInfo!
+    var InfoList:[siteInfo?] = []
     //AppDelegateを使う用意をしておく
     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     //Entityを操作するためのオブジェクトを作成
@@ -48,14 +50,14 @@ func readSiteInfo()->[[String]]{
         let fetchResults = try! viewContext.fetch(query)
         //データの取得
         for result:AnyObject in fetchResults{
-            let siteTitle:String? = result.value(forKey:"siteTitle") as? String
-            let siteURL:String? = result.value(forKey:"siteURL") as? String
-            siteInfo[0].append(siteTitle!)
-            siteInfo[1].append(siteURL!)
-            print("[CoreData]サイトタイトル：\(siteTitle!)サイトURL:\(siteURL!)")
+            siteInfo?.siteID = result.value(forKey:"siteID") as? Int
+            siteInfo?.siteTitle = result.value(forKey:"siteTitle") as? String
+            siteInfo?.siteURL = result.value(forKey:"siteURL") as? String
+            InfoList.append(siteInfo)
+            print("[CoreData(read関数)]サイトID:\(siteInfo?.siteID)サイトタイトル：\(siteInfo?.siteTitle)サイトURL:\(siteInfo?.siteURL)")
         }
     }
-    return siteInfo as! [[String]]
+    return InfoList as! [siteInfo?]
 }
 
 

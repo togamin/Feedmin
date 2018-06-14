@@ -8,6 +8,13 @@
 
 import UIKit
 
+class siteInfo{
+    var siteID:Int!
+    var siteTitle:String!
+    var siteURL:String!
+}
+var siteInfoList:[siteInfo?] = []
+
 //登録しているWebサイトのURLの数のViewControllerが格納
 var viewControllers:[UIViewController]?
 //今いるViewコントローラーの番号
@@ -20,16 +27,19 @@ class manyViewControllers:UIViewController{
         super.viewDidLoad()
         
 //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
-        var Info = readSiteInfo()
-        if Info[0] != [] {
-            siteTitleList = Info[0]
-            siteURLList = Info[1]
-            print("タイトルリスト：\(siteTitleList),URLリスト：\(siteURLList)")
+        siteInfoList = readSiteInfo()
+        
+        if siteInfoList[0] != nil {
+            for info in siteInfoList{
+                siteTitleList.append(info?.siteTitle)
+                siteURLList.append(info?.siteURL)
+                print("タイトルリスト：\(siteTitleList),URLリスト：\(siteURLList)")
+            }
         }else{
-            writeSiteInfo(titleText: "とがみんブログ",urlText: "https://togamin.com/feed/")
-            Info = readSiteInfo()
-            siteTitleList = Info[0]
-            siteURLList = Info[1]
+            writeSiteInfo(siteID:0,siteTitle: "とがみんブログ",siteURL: "https://togamin.com/feed/")
+            siteTitleList.append("とがみんブログ")
+            siteURLList.append("https://togamin.com/feed/")
+            print(siteTitleList,siteURLList)
         }
         
 
