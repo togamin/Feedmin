@@ -36,9 +36,8 @@ func writeSiteInfo(siteID:Int,siteTitle:String,siteURL:String){
 
 
 //SiteInfoのデータ読み込み用.[サイトタイトルとサイトURL]
-func readSiteInfo()->[siteInfo?]{
-    var siteInfo:siteInfo!
-    var InfoList:[siteInfo?] = []
+func readSiteInfo()->[siteInfo]{
+    var InfoList:[siteInfo] = []
     //AppDelegateを使う用意をしておく
     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     //Entityを操作するためのオブジェクトを作成
@@ -50,14 +49,15 @@ func readSiteInfo()->[siteInfo?]{
         let fetchResults = try! viewContext.fetch(query)
         //データの取得
         for result:AnyObject in fetchResults{
-            siteInfo?.siteID = result.value(forKey:"siteID") as? Int
-            siteInfo?.siteTitle = result.value(forKey:"siteTitle") as? String
-            siteInfo?.siteURL = result.value(forKey:"siteURL") as? String
-            InfoList.append(siteInfo)
-            print("[CoreData(read関数)]サイトID:\(siteInfo?.siteID)サイトタイトル：\(siteInfo?.siteTitle)サイトURL:\(siteInfo?.siteURL)")
+            InfoList.append(siteInfo(siteID:result.value(forKey:"siteID")! as! Int,siteTitle:result.value(forKey:"siteTitle")! as! String,siteURL:result.value(forKey:"siteURL")! as! String))
         }
+        for info in InfoList{
+            print("[CoreData]ID:\(info.siteID!),タイトル\(info.siteTitle!),URL\(info.siteURL!)")
+        }
+    }catch{
+        print("error:readSiteInfo",error)
     }
-    return InfoList as! [siteInfo?]
+    return InfoList as! [siteInfo]
 }
 
 

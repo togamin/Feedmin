@@ -73,7 +73,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
         queue.async {() -> Void in
             print("画面表示中")
-            self.startDownload(siteURL: siteURLList[ViewControllerNow]!)
+            self.startDownload(siteURL: (siteInfoList[ViewControllerNow]?.siteURL)!)
         }
 
         

@@ -8,10 +8,16 @@
 
 import UIKit
 
-class siteInfo{
+struct siteInfo{
     var siteID:Int!
     var siteTitle:String!
     var siteURL:String!
+    
+    init(siteID: Int, siteTitle: String,siteURL:String) {
+        self.siteID = siteID
+        self.siteTitle = siteTitle
+        self.siteURL = siteURL
+    }
 }
 var siteInfoList:[siteInfo?] = []
 
@@ -27,19 +33,14 @@ class manyViewControllers:UIViewController{
         super.viewDidLoad()
         
 //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
-        siteInfoList = readSiteInfo()
+        //deleteAllSiteInfo()//CoreData全削除
         
-        if siteInfoList[0] != nil {
-            for info in siteInfoList{
-                siteTitleList.append(info?.siteTitle)
-                siteURLList.append(info?.siteURL)
-                print("タイトルリスト：\(siteTitleList),URLリスト：\(siteURLList)")
-            }
-        }else{
+        siteInfoList = readSiteInfo()
+
+        
+        if siteInfoList.count == 0{
             writeSiteInfo(siteID:0,siteTitle: "とがみんブログ",siteURL: "https://togamin.com/feed/")
-            siteTitleList.append("とがみんブログ")
-            siteURLList.append("https://togamin.com/feed/")
-            print(siteTitleList,siteURLList)
+            siteInfoList = readSiteInfo()
         }
         
 
@@ -92,14 +93,13 @@ extension manyViewControllers {
         var viewControllers = [ViewController]()
         
 
-        //なぜ2回繰り返す?
-        for siteTitle in siteTitleList{
+        for info in siteInfoList{
             //print(siteInfo)
             //ストーリボード上のwithIdentifierクラスを取得
             let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
             
             //ViewControllerのtitleを代入
-            viewController.title = siteTitle
+            viewController.title = info?.siteTitle!
 
             viewControllers.append(viewController as! ViewController)
         }
