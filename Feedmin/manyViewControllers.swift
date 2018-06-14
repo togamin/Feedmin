@@ -47,6 +47,8 @@ class manyViewControllers:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("テスト\(readArticleInfo())")
+        
 //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
         //deleteAllSiteInfo()//CoreData全削除
         

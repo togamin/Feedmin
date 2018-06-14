@@ -9,6 +9,34 @@
 import UIKit
 import CoreData
 
+//Articleのデータ読み込み用
+func readArticleInfo()->[articleInfo]{
+    var InfoList:[articleInfo] = []
+    //AppDelegateを使う用意をしておく
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    //Entityを操作するためのオブジェクトを作成
+    let viewContext = appDelegate.persistentContainer.viewContext
+    //どのエンティティからdataを取得してくるかの設定
+    let query:NSFetchRequest<Article> = Article.fetchRequest()
+    do{
+        //データを一括取得
+        let fetchResults = try! viewContext.fetch(query)
+        //データの取得
+        for result:AnyObject in fetchResults{
+            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImage:result.value(forKey:"thumImage")! as! String,fav:result.value(forKey:"fav")! as! Bool))
+        }
+        for info in InfoList{
+            print("[CoreData]ID:\(info.siteID!),タイトル\(info.articleTitle!),URL\(info.articleURL!),画像データ\(info.thumbImage),お気に入り\(info.fav)")
+        }
+    }catch{
+        print("error:readSiteInfo",error)
+    }
+    return InfoList as! [articleInfo]
+}
+
+
+
+
 //SiteInfoへのデータの書き込み
 func writeSiteInfo(siteID:Int,siteTitle:String,siteURL:String){
     print("SiteInfoのCoreDataへの登録")
