@@ -19,6 +19,21 @@ struct siteInfo{
         self.siteURL = siteURL
     }
 }
+struct articleInfo{
+    var siteID:Int!
+    var articleTitle:String!
+    var articleURL:String!
+    var thumbImage:String!
+    var fav:Bool!
+    
+    init(siteID: Int, articleTitle: String,articleURL: String,thumbImage: String,fav: Bool) {
+        self.siteID = siteID
+        self.articleTitle = articleTitle
+        self.articleURL = articleURL
+        self.thumbImage = thumbImage
+        self.fav = fav
+    }
+}
 var siteInfoList:[siteInfo?] = []
 
 //登録しているWebサイトのURLの数のViewControllerが格納
