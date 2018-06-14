@@ -89,10 +89,12 @@ class getURL:UITableViewController{
         print("スライドしたよね?")
         
         if siteInfoList.count > 1{
-            print(indexPath.row)
             deleteSiteInfo(Index: indexPath.row)
             siteInfoList.remove(at: indexPath.row)
             //index.rowより大きいIDを1減らす。
+            for i in indexPath.row + 1..<siteInfoList.count+1{
+                updateSiteInfo(siteID: i)
+            }
             getURLTableView.reloadData()
         }else{
             let alert = UIAlertController(title: "エラー", message: "登録しているサイトが1つの場合、削除できません。", preferredStyle: .alert)

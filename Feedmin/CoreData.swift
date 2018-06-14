@@ -33,8 +33,6 @@ func writeSiteInfo(siteID:Int,siteTitle:String,siteURL:String){
     }
 }
 
-
-
 //SiteInfoのデータ読み込み用.[サイトタイトルとサイトURL]
 func readSiteInfo()->[siteInfo]{
     var InfoList:[siteInfo] = []
@@ -102,7 +100,35 @@ func deleteAllSiteInfo(){
         print("error")
     }
 }
-
+//データの更新.(siteIDを1低い値に更新する)
+func updateSiteInfo(siteID:Int){
+    //AppDelegateを使う用意をしておく
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    //Entityを操作するためのオブジェクトを作成
+    let viewContext = appDelegate.persistentContainer.viewContext
+    //どのエンティティからdataを取得してくるかの設定
+    let query:NSFetchRequest<SiteInfo> = SiteInfo.fetchRequest()
+    
+    //絞り込み検索
+    let namePredicte = NSPredicate(format: "%K = %d","siteID",siteID)
+    query.predicate = namePredicte
+    do{
+        //データを一括取得
+        let featchResults = try! viewContext.fetch(query)
+        //データの取得
+        for result:AnyObject in featchResults{
+            let recode = result as! NSManagedObject
+            //更新したいデータのセット
+            recode.setValue(siteID - 1,forKey:"siteID")
+            do{
+                //レコード(行)の即時保存
+                try viewContext.save()
+            }catch{
+                
+            }
+        }
+    }
+}
 
 
 
