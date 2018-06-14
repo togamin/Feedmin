@@ -29,13 +29,10 @@
         お気に入りかどうか
  */
 //----------------------------------------------
+
+//サイトタイトルとサイトURLを保存.
 var siteURLList:[String?] = []
 var siteTitleList:[String?] = []
-/*
-var siteURLList = ["http://togamin.com/feed/","http://www.mikytechblog.com/rss","http://sodekoo.com/feed/","https://haxpig.com/feed","http://diamondxitiao.site/feed"]
-
-var siteTitleList = ["とがみんブログ","マイク","そでこ","れおさん","ダイヤ"]
-*/
 
 
 //後で、favTitleList、favImageList、favLinkListをまとめる必要あり。
@@ -88,12 +85,22 @@ class getURL:UITableViewController{
     }
     //セルを横にスライドさせた時に呼ばれる
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         print("スライドしたよね?")
-        print(indexPath.row)
-        deleteSiteInfo(Index: indexPath.row)
-        siteTitleList.remove(at: indexPath.row)
-        siteURLList.remove(at: indexPath.row)
-        getURLTableView.reloadData()
+        var Info = readSiteInfo()
+        
+        if Info[0].count > 1{
+            print(indexPath.row)
+            deleteSiteInfo(Index: indexPath.row)
+            siteTitleList.remove(at: indexPath.row)
+            siteURLList.remove(at: indexPath.row)
+            getURLTableView.reloadData()
+        }else{
+            let alert = UIAlertController(title: "エラー", message: "登録しているサイトが1つの場合、削除できません。", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {action in print("OK")}))
+            alert.view.layer.cornerRadius = 25 //角丸にする。
+            present(alert,animated: true,completion: {()->Void in print("URL削除時のエラー")})
+        }
     }
     
     
