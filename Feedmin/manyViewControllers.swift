@@ -23,14 +23,14 @@ struct articleInfo{
     var siteID:Int!
     var articleTitle:String!
     var articleURL:String!
-    var thumbImage:String!
+    var thumbImageURL:String!
     var fav:Bool!
     
-    init(siteID: Int, articleTitle: String,articleURL: String,thumbImage: String,fav: Bool) {
+    init(siteID: Int, articleTitle: String,articleURL: String,thumbImageURL: String,fav: Bool) {
         self.siteID = siteID
         self.articleTitle = articleTitle
         self.articleURL = articleURL
-        self.thumbImage = thumbImage
+        self.thumbImageURL = thumbImageURL
         self.fav = fav
     }
 }
@@ -47,7 +47,9 @@ class manyViewControllers:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("テスト\(readArticleInfo())")
+        print("テスト0\(readArticleInfo())")
+        writeArticleInfo(siteID:1,articleTitle:"とがみんブログ",articleURL:"とがみんURL", thumbImageURL:"https://togamin.com/wp/wp-content/uploads/2018/06/pic_180612_01-300x208.png",fav:false)
+        print("テスト1\(readArticleInfo())")
         
 //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
         //deleteAllSiteInfo()//CoreData全削除
