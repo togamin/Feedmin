@@ -47,7 +47,7 @@ class manyViewControllers:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 //テスト---------------------------------------------------
-        //CoreData初期化
+ /*       //CoreData初期化
         deleteAllSiteInfo()
         deleteAllArticleInfo()
         
@@ -82,7 +82,7 @@ class manyViewControllers:UIViewController{
             print("[SiteInfo]articleTitlr:\(info.articleTitle)")
             print("[SiteInfo]siteURL:\(info.articleURL)")
         }
-        
+   */
 //---------------------------------------------------------
         
 //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」

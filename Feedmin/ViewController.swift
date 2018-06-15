@@ -55,8 +55,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //Webサイト表示用画面の設定
         webSiteView.isHidden = true
         backMenu.isHidden = true
+        
+        //myTableView設定
         myTableView.delegate = self
         myTableView.dataSource = self
         
@@ -66,11 +69,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.estimatedRowHeight = 250
         myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
         
+        //どのサイト化を識別するためのID
+        var siteID = ViewControllerNow
+        print("\(ViewControllerNow!)番目のView")
         
-        //print("\(ViewControllerNow!)番目のView")
         
-        
-
+        //RSS解析とダウンロード開始
         queue.async {() -> Void in
             print("画面表示中")
             self.startDownload(siteURL: (siteInfoList[ViewControllerNow]?.siteURL)!)
