@@ -46,10 +46,44 @@ class manyViewControllers:UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//テスト---------------------------------------------------
+        //CoreData初期化
+        deleteAllSiteInfo()
+        deleteAllArticleInfo()
         
-        print("テスト0\(readArticleInfo())")
-        writeArticleInfo(siteID:1,articleTitle:"とがみんブログ",articleURL:"とがみんURL", thumbImageURL:"https://togamin.com/wp/wp-content/uploads/2018/06/pic_180612_01-300x208.png",fav:false)
-        print("テスト1\(readArticleInfo())")
+        //CoreData読み出し
+        var SInfo = readSiteInfo()
+        var AInfo = readArticleInfo()
+        for info in SInfo {
+            print("[SiteInfo]siteID:\(info.siteID)")
+            print("[SiteInfo]siteTitlr:\(info.siteTitle)")
+            print("[SiteInfo]siteURL:\(info.siteURL)")
+        }
+        for info in AInfo {
+            print("[SiteInfo]siteID:\(info.siteID)")
+            print("[SiteInfo]articleTitlr:\(info.articleTitle)")
+            print("[SiteInfo]siteURL:\(info.articleURL)")
+        }
+        
+        //CoreDataへ書き込み
+        writeSiteInfo(siteID:0,siteTitle:"とがみんブログ",siteURL:"http://togamin.com/rss")
+        writeArticleInfo(siteID:0,articleTitle:"世界の仕組み",articleURL:"http://togamin.com/", thumbImageURL:"https://togamin.com/wp/wp-content/uploads/2018/06/pic_180612_01-300x208.png",fav:false)
+        
+        //CoreData読み出し
+        var sInfo = readSiteInfo()
+        var aInfo = readArticleInfo()
+        for info in SInfo {
+            print("[SiteInfo]siteID:\(info.siteID)")
+            print("[SiteInfo]siteTitlr:\(info.siteTitle)")
+            print("[SiteInfo]siteURL:\(info.siteURL)")
+        }
+        for info in AInfo {
+            print("[SiteInfo]siteID:\(info.siteID)")
+            print("[SiteInfo]articleTitlr:\(info.articleTitle)")
+            print("[SiteInfo]siteURL:\(info.articleURL)")
+        }
+        
+//---------------------------------------------------------
         
 //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
         //deleteAllSiteInfo()//CoreData全削除

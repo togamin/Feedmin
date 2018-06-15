@@ -33,7 +33,7 @@ func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImag
     do{
         //レコード(行)の即時保存
         try viewContext.save()
-        print("Article登録完了")
+        print("ArticleInfo登録完了")
     }catch{
         print("error")
     }
@@ -144,7 +144,7 @@ func deleteSiteInfo(Index:Int){
         print("error")
     }
 }
-//データ全削除
+//データ全削除(SiteInfo)
 func deleteAllSiteInfo(){
     //AppDelegateを使う用意をしておく
     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -152,6 +152,27 @@ func deleteAllSiteInfo(){
     let viewContext = appDelegate.persistentContainer.viewContext
     //どのエンティティからdataを取得してくるかの設定
     let query:NSFetchRequest<SiteInfo> = SiteInfo.fetchRequest()
+    do{
+        //データを一括取得
+        let fetchResults = try! viewContext.fetch(query)
+        for result in fetchResults{
+            let recode = result as! NSManagedObject
+            viewContext.delete(recode)
+        }
+        //削除した状態を保存
+        try viewContext.save()
+    }catch{
+        print("error")
+    }
+}
+//データ全削除(ArticleInfo)
+func deleteAllArticleInfo(){
+    //AppDelegateを使う用意をしておく
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    //Entityを操作するためのオブジェクトを作成
+    let viewContext = appDelegate.persistentContainer.viewContext
+    //どのエンティティからdataを取得してくるかの設定
+    let query:NSFetchRequest<ArticleInfo> = ArticleInfo.fetchRequest()
     do{
         //データを一括取得
         let fetchResults = try! viewContext.fetch(query)
