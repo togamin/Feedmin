@@ -8,41 +8,11 @@
 
 import UIKit
 
-struct siteInfo{
-    var siteID:Int!
-    var siteTitle:String!
-    var siteURL:String!
-    
-    init(siteID: Int, siteTitle: String,siteURL:String) {
-        self.siteID = siteID
-        self.siteTitle = siteTitle
-        self.siteURL = siteURL
-    }
-}
-struct articleInfo{
-    var siteID:Int!
-    var articleTitle:String!
-    var articleURL:String!
-    var thumbImageURL:String!
-    var fav:Bool!
-    
-    init(siteID: Int, articleTitle: String,articleURL: String,thumbImageURL: String,fav: Bool) {
-        self.siteID = siteID
-        self.articleTitle = articleTitle
-        self.articleURL = articleURL
-        self.thumbImageURL = thumbImageURL
-        self.fav = fav
-    }
-}
-var siteInfoList:[siteInfo?] = []
 
-//登録しているWebサイトのURLの数のViewControllerが格納
-var viewControllers:[UIViewController]?
 //今いるViewコントローラーの番号
 var NowViewNum:Int! = 0
 
 class manyViewControllers:UIViewController{
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,10 +57,7 @@ class manyViewControllers:UIViewController{
         
 //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
         //deleteAllSiteInfo()//CoreData全削除
-        
         siteInfoList = readSiteInfo()
-
-        
         if siteInfoList.count == 0{
             writeSiteInfo(siteID:0,siteTitle: "とがみんブログ",siteURL: "https://togamin.com/feed/")
             siteInfoList = readSiteInfo()

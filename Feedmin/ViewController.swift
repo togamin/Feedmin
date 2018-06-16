@@ -9,19 +9,41 @@
 /*TODO
 * URL登録ボタン押してから、再読み込みしない。(上手くいかない)
 * 記事情報にお気に入りかどうかの情報を入れる?(True false)
-    * Likeでfalseをtrueに、DisLikeでfalseに。
-* リンクとタイトルの記入欄とUserDefaultsに登録する方法
-* スライドで登録しているURLを削除できるようにする。
- おきにいり登録.選んだやつのURL保存.テキストデータ保存
+    * Likeでfalseをtrueに、DisLikeでfalseに
+* おきにいり登録.選んだやつのURL保存.テキストデータ保存
  ブログ・サイトタイトル取得と表示
- SNSで共有
- 他のブログのRSS対応
+*SNSで共有
+*  他のブログのRSS対応
 
-
- ペンギン画像ランダム表示
- 通知来る時間帯の設定
- Infeed広告を入れる
- 開発者プロフィール
+* 通知来る時間帯の設定
+* Infeed広告を入れる
+* 開発者プロフィール
+ 
+ 
+ 読み込みについて。
+ 
+ siteIDの記事がArticleInfoにあるかどうかを確認する。
+ ↓
+ CoreDataに記事情報ある場合
+    * CoreDataの情報を読み込む。
+    * 画像の取得をマルチスレッド処理。
+    * tableに表示する。
+    * fav = trueの場合はアイコンをお気に入り状態に.
+ ↓
+ CoreDataに記事情報ない場合
+    * RSSの解析を行う。
+    * ArticleInfoに記事情報を書き込む。
+    * 画像の処理をマルチスレッド処理。
+    * tableに表示.
+ 
+* お気に入り記事用の情報をCoreDataへ
+    * お気に入りを表示するときに呼び出し、tableに表示.
+ 
+ 
+ 
+ 
+ 
+ 
  */
 
 /*このファイルで行なっている作業の概要
@@ -69,9 +91,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.estimatedRowHeight = 250
         myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
         
-        //どのサイト化を識別するためのID
-        var siteID = ViewControllerNow
-        print("\(ViewControllerNow!)番目のView")
+        //どのサイトの処理を行っているかを識別するためのID
+        var viewID = ViewControllerNow
+        print("viewID:\(ViewControllerNow!)")
         
         
         //RSS解析とダウンロード開始
@@ -80,17 +102,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             self.startDownload(siteURL: (siteInfoList[ViewControllerNow]?.siteURL)!)
         }
 
-        
-        
-        
-        
         //マルチスレッド.別スレッドで画像の処理をさせることにより、その他の表示を早くすることで操作性をあげる。
         queue.async {() -> Void in
             //サムネイルの画像をItemクラスのインスタンスに代入
             print("サムネイル画像取得中")
             for i in 0..<self.items.count{
-                self.items[i].thumbImage = self.getImage(code:self.items[i].description)
-            //print(self.items[i].thumbImage)
+                self.items[i].thumbImageURL = self.getImageURL(code: self.items[i].description)!
+                self.items[i].thumbImage = self.getImageFromURL(thumbImageURL: self.items[i].thumbImageURL)
+                print("画像のURL:\(self.items[i].thumbImageURL)")
             }
         }
         
@@ -222,19 +241,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 self.item?.title = currentString
             case "link":
                 self.item?.link = currentString
-            case "pubData":
+            /*
+             case "pubData":
                 self.item?.pubDate = currentString
+             */
             case "description":
                 self.item?.description = currentString
             case "item": self.items.append(self.item!)
         default :break
         }
     }
-    //コードの中に入っているimgタグの中のURLを取得しUIImageに変換。画像のURLがない場合、デフォルト画像を取得する.
-    func getImage(code:String)->UIImage?{
+    //コードの中に入っているimgタグの中のURLを取得.
+    //UIImageに変換。画像のURLがない場合、デフォルト画像を取得する.
+    func getImageURL(code:String)->String?{
         
         var result:UIImage?
-        var url:String?
+        var thumbImageURL:String?
         
         let pattern1 = "<img(.*)/>"
         let pattern2 = "src=\"(.*?)\""
@@ -266,23 +288,29 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             let matches2 = regex2.matches(in: str2!, options: [], range: NSMakeRange(0, str2.characters.count))
             
             matches2.forEach { (match) -> () in
-                url = (str2 as NSString).substring(with: match.range(at: 1))
+                thumbImageURL = (str2 as NSString).substring(with: match.range(at: 1))
             }
-            
-            //URLから画像データに変換
-            let url = NSURL(string:url!)
-            let imageData = NSData(contentsOf: url! as URL)
-            result = UIImage(data:imageData! as Data)!
-            
-            
         }else if str2 == nil{
-            result = UIImage(named:"default.png")
+            thumbImageURL = "none"
         }
-       
-        //print("result:\(result)")
-
-        return result
+        print("画像のURL(getImageURL):\(thumbImageURL!)")
+        return thumbImageURL
     }
+    
+    //画像のURL[String]から画像[UIImage]を取得.引数がnilならデフォルトの画像を返す.
+    func getImageFromURL(thumbImageURL:String?)->UIImage!{
+        var thumbImage:UIImage!
+        if thumbImageURL != "none"{
+            let url = NSURL(string:thumbImageURL!)
+            let imageData = NSData(contentsOf: url! as URL)
+            thumbImage = UIImage(data:imageData! as Data)!
+        }else if thumbImageURL == "none"{
+            thumbImage = UIImage(named:"default.png")
+        }
+         print("画像(getImageFromURL):\(thumbImage!)")
+        return thumbImage
+    }
+    
     //解析後myTableViewをリロードする.
     func parserDidEndDocument(_ parser: XMLParser){
         self.myTableView.reloadData()

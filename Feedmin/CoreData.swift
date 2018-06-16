@@ -63,7 +63,7 @@ func readArticleInfo()->[articleInfo]{
             InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageURL:result.value(forKey:"thumbImageURL")! as! String,fav:result.value(forKey:"fav")! as! Bool))
         }
         for info in InfoList{
-            //print("[CoreData]ID:\(info.siteID!),タイトル:\(info.articleTitle!),URL:\(info.articleURL!),画像データ:\(info.thumbImageURL!),お気に入り:\(info.fav!)")
+            print("[readArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),URL:\(info.articleURL!),画像データ:\(info.thumbImageURL!),お気に入り:\(info.fav!)")
         }
     }catch{
         print("error:readSiteInfo",error)
@@ -115,7 +115,7 @@ func readSiteInfo()->[siteInfo]{
             InfoList.append(siteInfo(siteID:result.value(forKey:"siteID")! as! Int,siteTitle:result.value(forKey:"siteTitle")! as! String,siteURL:result.value(forKey:"siteURL")! as! String))
         }
         for info in InfoList{
-            print("[CoreData]ID:\(info.siteID!),タイトル\(info.siteTitle!),URL\(info.siteURL!)")
+            print("[readSiteInfo]ID:\(info.siteID!),タイトル\(info.siteTitle!),URL\(info.siteURL!)")
         }
     }catch{
         print("error:readSiteInfo",error)
