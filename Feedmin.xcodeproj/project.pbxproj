@@ -25,7 +25,7 @@
 		B794E8D320C9624E0037862E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D220C9624D0037862E /* SettingViewController.swift */; };
 		B794E8D520C982A20037862E /* urlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D420C982A20037862E /* urlTableViewController.swift */; };
 		B794E8D920CB38420037862E /* favTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D820CB38420037862E /* favTableViewController.swift */; };
-		B7E5304120D3DCCB0059028E /* ArticleData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7E5303F20D3DCCB0059028E /* ArticleData.xcdatamodeld */; };
+		B7E5304420D5E4EF0059028E /* ArticleData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7E5304220D5E4EF0059028E /* ArticleData.xcdatamodeld */; };
 		B7FE8FD620CE4A0A0095F455 /* favWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */; };
 		B7FE8FD820CE78760095F455 /* favCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7FE8FD720CE78760095F455 /* favCellView.xib */; };
 		B7FE8FDA20CE7A1D0095F455 /* default02.png in Resources */ = {isa = PBXBuildFile; fileRef = B7FE8FD920CE7A1C0095F455 /* default02.png */; };
@@ -54,7 +54,7 @@
 		B794E8D220C9624D0037862E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B794E8D420C982A20037862E /* urlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlTableViewController.swift; sourceTree = "<group>"; };
 		B794E8D820CB38420037862E /* favTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favTableViewController.swift; sourceTree = "<group>"; };
-		B7E5304020D3DCCB0059028E /* ArticleData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArticleData.xcdatamodel; sourceTree = "<group>"; };
+		B7E5304320D5E4EF0059028E /* ArticleData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArticleData.xcdatamodel; sourceTree = "<group>"; };
 		B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favWebViewController.swift; sourceTree = "<group>"; };
 		B7FE8FD720CE78760095F455 /* favCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = favCellView.xib; sourceTree = "<group>"; };
 		B7FE8FD920CE7A1C0095F455 /* default02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default02.png; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 				B7423A9620C5880600F02BDF /* PageMenuView.swift */,
 				B794E8D020C74C8A0037862E /* getURL.swift */,
 				B780FE6720D1011000814088 /* CoreData.swift */,
-				B7E5303F20D3DCCB0059028E /* ArticleData.xcdatamodeld */,
+				B7E5304220D5E4EF0059028E /* ArticleData.xcdatamodeld */,
 				B7423A6B20C5057100F02BDF /* images */,
 				B7423A4020C041E400F02BDF /* Assets.xcassets */,
 				B7423A4220C041E400F02BDF /* LaunchScreen.storyboard */,
@@ -215,7 +215,7 @@
 				B7423A3A20C041E000F02BDF /* AppDelegate.swift in Sources */,
 				B794E8D920CB38420037862E /* favTableViewController.swift in Sources */,
 				B7FE8FD620CE4A0A0095F455 /* favWebViewController.swift in Sources */,
-				B7E5304120D3DCCB0059028E /* ArticleData.xcdatamodeld in Sources */,
+				B7E5304420D5E4EF0059028E /* ArticleData.xcdatamodeld in Sources */,
 				B794E8D120C74C8A0037862E /* getURL.swift in Sources */,
 				B7423A5A20C128F400F02BDF /* cellContentView.swift in Sources */,
 				B780FE6820D1011000814088 /* CoreData.swift in Sources */,
@@ -420,12 +420,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B7E5303F20D3DCCB0059028E /* ArticleData.xcdatamodeld */ = {
+		B7E5304220D5E4EF0059028E /* ArticleData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				B7E5304020D3DCCB0059028E /* ArticleData.xcdatamodel */,
+				B7E5304320D5E4EF0059028E /* ArticleData.xcdatamodel */,
 			);
-			currentVersion = B7E5304020D3DCCB0059028E /* ArticleData.xcdatamodel */;
+			currentVersion = B7E5304320D5E4EF0059028E /* ArticleData.xcdatamodel */;
 			path = ArticleData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

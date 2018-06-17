@@ -18,6 +18,7 @@
 * 通知来る時間帯の設定
 * Infeed広告を入れる
 * 開発者プロフィール
+* サイト削除時のArticleInfoのsiteIDの変更
  
  
  読み込みについて。
@@ -107,19 +108,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             //サムネイルの画像をItemクラスのインスタンスに代入
             print("サムネイル画像取得中")
             for i in 0..<self.items.count{
-                self.items[i].thumbImageURL = self.getImageURL(code: self.items[i].description)!
-                self.items[i].thumbImage = self.getImageFromURL(thumbImageURL: self.items[i].thumbImageURL)
+                self.items[i].thumbImageData = self.getImageData(code: self.items[i].description)
+                
+               //CoreDataに記事情報を保存
+                writeArticleInfo(siteID:viewID!,articleTitle:self.items[i].title,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
+                
+                //NSDataからUIImageに変換
+                self.items[i].thumbImage = UIImage(data:self.items[i].thumbImageData! as Data)!
             }
+            //articleInfoList = readArticleInfo()
         }
-        //CoreDataに記事情報を保存
-        queue.async {() -> Void in
-            for i in 0..<self.items.count{
-                writeArticleInfo(siteID:viewID!,articleTitle:self.items[i].title,articleURL:self.items[i].link,thumbImageURL:self.items[i].thumbImageURL,fav:false)
-            }
-            readArticleInfo()
-        }
-        
-        
         
         print("リフレッシュコントローラー作成")
         //リフレッシュコントロールを作成する。
@@ -174,11 +172,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             //print(items[indexPath.row].thumbImage)
             //print("サムネイル画像取得完了")
-        }else{
+        }else{//書かなくても
             cell.cellView.image = UIImage(named: "default.png")
             //print("default画像")
         }
+        //favがtrueならLIKEの画像変更
 
+        
+        
         
         return cell
     }
@@ -257,12 +258,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         default :break
         }
     }
-    //コードの中に入っているimgタグの中のURLを取得.
-    //UIImageに変換。画像のURLがない場合、デフォルト画像を取得する.
-    func getImageURL(code:String)->String?{
+    //コードの中に入っているimgタグの中のURLを取得し,画像をNSDataとして出力.
+    func getImageData(code:String)->NSData!{
         
         var result:UIImage?
         var thumbImageURL:String?
+        var thumbImageData:NSData?
         
         let pattern1 = "<img(.*)/>"
         let pattern2 = "src=\"(.*?)\""
@@ -289,32 +290,20 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         //print("str2:\(str2)")
         
         if str2 != nil{
-            
             //imgタグの中のURLの部分のみを取得
             let matches2 = regex2.matches(in: str2!, options: [], range: NSMakeRange(0, str2.characters.count))
             
             matches2.forEach { (match) -> () in
                 thumbImageURL = (str2 as NSString).substring(with: match.range(at: 1))
             }
-        }else if str2 == nil{
-            thumbImageURL = "none"
-        }
-        //print("画像のURL(getImageURL):\(thumbImageURL!)")
-        return thumbImageURL
-    }
-    
-    //画像のURL[String]から画像[UIImage]を取得.引数がnilならデフォルトの画像を返す.
-    func getImageFromURL(thumbImageURL:String?)->UIImage!{
-        var thumbImage:UIImage!
-        if thumbImageURL != "none"{
             let url = NSURL(string:thumbImageURL!)
-            let imageData = NSData(contentsOf: url! as URL)
-            thumbImage = UIImage(data:imageData! as Data)!
-        }else if thumbImageURL == "none"{
-            thumbImage = UIImage(named:"default.png")
+            thumbImageData = NSData(contentsOf: url! as URL)
+        }else if str2 == nil{
+            thumbImageData = UIImageJPEGRepresentation(UIImage(named:"default.png")!, 1.0)! as NSData//圧縮率
         }
-         //print("画像(getImageFromURL):\(thumbImage!)")
-        return thumbImage
+            
+        //print("画像のURL(getImageURL):\(thumbImageURL!)")
+        return thumbImageData
     }
     
     //解析後myTableViewをリロードする.

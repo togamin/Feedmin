@@ -14,7 +14,7 @@ import CoreData
 //テストコード
 //writeArticleInfo(siteID:0,articleTitle:"とがみんみん",articleURL:"とがみんURL",thumbImage:"とがみん画像",fav:false)
 
-func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImageURL:String,fav:Bool){
+func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImageData:NSData,fav:Bool){
     print("writeArticleInfoのCoreDataへの登録")
     //AppDelegateを使う用意をしておく
     let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -28,7 +28,7 @@ func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImag
     newRecode.setValue(siteID, forKey: "siteID")
     newRecode.setValue(articleTitle, forKey: "articleTitle")
     newRecode.setValue(articleURL, forKey: "articleURL")
-    newRecode.setValue(thumbImageURL, forKey: "thumbImageURL")
+    newRecode.setValue(thumbImageData, forKey: "thumbImageData")
     newRecode.setValue(fav, forKey: "fav")
     do{
         //レコード(行)の即時保存
@@ -38,11 +38,6 @@ func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImag
         print("error")
     }
 }
-
-
-
-
-
 
 
 //Articleのデータ読み込み用
@@ -60,17 +55,16 @@ func readArticleInfo()->[articleInfo]{
         //データの取得
         for result:AnyObject in fetchResults{
             //print(result)
-            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageURL:result.value(forKey:"thumbImageURL")! as! String,fav:result.value(forKey:"fav")! as! Bool))
+            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
         }
         for info in InfoList{
-            print("[readArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),URL:\(info.articleURL!),画像データ:\(info.thumbImageURL!),お気に入り:\(info.fav!)")
+            print("[readArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),URL:\(info.articleURL!),画像データ:\(info.thumbImageData!),お気に入り:\(info.fav!)")
         }
     }catch{
         print("error:readSiteInfo",error)
     }
     return InfoList as! [articleInfo]
 }
-
 
 
 

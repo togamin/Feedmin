@@ -23,7 +23,7 @@ class Item {
     var link = ""
     var pubDate = ""
     var description = ""
-    var thumbImageURL = ""
+    var thumbImageData:NSData?
     var thumbImage:UIImage!
     var fav:Bool = false
 }
@@ -45,14 +45,14 @@ struct articleInfo{
     var siteID:Int!
     var articleTitle:String!
     var articleURL:String!
-    var thumbImageURL:String!
+    var thumbImageData:NSData!
     var fav:Bool!
     
-    init(siteID: Int, articleTitle: String,articleURL: String,thumbImageURL: String,fav: Bool) {
+    init(siteID: Int, articleTitle: String,articleURL: String,thumbImageData: NSData,fav: Bool) {
         self.siteID = siteID
         self.articleTitle = articleTitle
         self.articleURL = articleURL
-        self.thumbImageURL = thumbImageURL
+        self.thumbImageData = thumbImageData
         self.fav = fav
     }
 }
