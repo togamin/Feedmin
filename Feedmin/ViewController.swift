@@ -116,7 +116,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 //NSDataからUIImageに変換
                 self.items[i].thumbImage = UIImage(data:self.items[i].thumbImageData! as Data)!
             }
-            //articleInfoList = readArticleInfo()
+            articleInfoList = readArticleInfo()
         }
         
         print("リフレッシュコントローラー作成")

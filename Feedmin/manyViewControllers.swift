@@ -17,10 +17,10 @@ class manyViewControllers:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 //テスト---------------------------------------------------
- /*       //CoreData初期化
-        deleteAllSiteInfo()
-        deleteAllArticleInfo()
-        
+        //CoreData初期化
+        //deleteAllSiteInfo()
+        //deleteAllArticleInfo()
+      /*
         //CoreData読み出し
         var SInfo = readSiteInfo()
         var AInfo = readArticleInfo()

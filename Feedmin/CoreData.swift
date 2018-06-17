@@ -54,11 +54,12 @@ func readArticleInfo()->[articleInfo]{
         let fetchResults = try! viewContext.fetch(query)
         //データの取得
         for result:AnyObject in fetchResults{
-            //print(result)
+            //print("読み込めた?\(result)")
+            //print("テスト:\(result.value(forKey:"thumbImageData")! as! NSData)")
             InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
         }
         for info in InfoList{
-            print("[readArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),URL:\(info.articleURL!),画像データ:\(info.thumbImageData!),お気に入り:\(info.fav!)")
+            //print("[readArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),URL:\(info.articleURL!),画像データ:\(info.thumbImageData!),お気に入り:\(info.fav!)")
         }
     }catch{
         print("error:readSiteInfo",error)
