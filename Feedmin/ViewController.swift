@@ -10,8 +10,7 @@
 * URL登録ボタン押してから、再読み込みしない。(上手くいかない)
 * 記事情報にお気に入りかどうかの情報を入れる?(True false)
     * Likeでfalseをtrueに、DisLikeでfalseに
-* おきにいり登録.選んだやつのURL保存.テキストデータ保存
- ブログ・サイトタイトル取得と表示
+* ブログ・サイトタイトル取得と表示
 *SNSで共有
 *  他のブログのRSS対応
 
@@ -176,6 +175,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         //favがtrueならLIKEのデザイン変更.favに代入される前に動作するとエラーが出てしまうので、代入されるたびに動作させるために、別スレッドで処理。
         queue.async {() -> Void in
             cell.currentLike = self.thisViewArticleInfo[indexPath.row]!.fav
+        }
+        if cell.currentLike {
+            cell.likeButton.setTitleColor(UIColor.magenta, for: UIControlState.normal)
+            cell.likeButton.backgroundColor = UIColor(red: 1.0, green: 0.8, blue: 1.0, alpha: 1.0)
+        }else{
+            cell.likeButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+            cell.likeButton.backgroundColor = UIColor.darkGray
         }
         return cell
     }

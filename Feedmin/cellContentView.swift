@@ -18,6 +18,7 @@ class cellContentView:UITableViewCell{
     
     var cellIndex:Int!
     var currentLike:Bool = false//likeButtonを押したか押していないか。
+    
 
     //LikeButtonが押された時、そのセルのItemをfavListに登録する。
     @IBAction func likeButton(_ sender: UIButton) {
