@@ -92,6 +92,40 @@ func selectSiteArticleInfo(siteID:Int)->[articleInfo]{
     return InfoList as! [articleInfo]
 }
 
+//指定したIDの記事情報を削除
+func deleteArticleInfo(siteID:Int){
+    //AppDelegateを使う用意をしておく
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    //Entityを操作するためのオブジェクトを作成
+    let viewContext = appDelegate.persistentContainer.viewContext
+    //どのエンティティからdataを取得してくるかの設定
+    let query:NSFetchRequest<ArticleInfo> = ArticleInfo.fetchRequest()
+    //絞り込み検索
+    let namePredicte = NSPredicate(format: "%K = %d","siteID",siteID)
+    query.predicate = namePredicte
+    do{
+        //データを一括取得
+        let featchResults = try! viewContext.fetch(query)
+        //データの取得
+        for result:AnyObject in featchResults{
+            let recode = result as! NSManagedObject
+            viewContext.delete(recode)
+            
+            print("[deleteArticleInfo]siteID:\(result.value(forKey:"siteID")! as! Int),siteTitle:\(result.value(forKey:"articleTitle")! as! String),fav:\(result.value(forKey:"fav")!)")
+            
+            //削除した状態を保存
+            try viewContext.save()
+        }
+    }catch{
+        print("error[deleteArticleInfo]")
+    }
+}
+
+
+
+
+
+
 //SiteInfoへのデータの書き込み
 func writeSiteInfo(siteID:Int,siteTitle:String,siteURL:String){
     print("SiteInfoのCoreDataへの登録")
@@ -204,7 +238,7 @@ func deleteAllArticleInfo(){
         print("error")
     }
 }
-//データの更新.(siteIDを1低い値に更新する)
+//データの更新.SiteInfoのsiteIDを1低い値に更新する
 func updateSiteInfo(siteID:Int){
     //AppDelegateを使う用意をしておく
     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -225,6 +259,41 @@ func updateSiteInfo(siteID:Int){
             let recode = result as! NSManagedObject
             //更新したいデータのセット
             recode.setValue(siteID - 1,forKey:"siteID")
+            do{
+                //レコード(行)の即時保存
+                try viewContext.save()
+            }catch{
+                
+            }
+        }
+    }
+}
+
+//データの更新.ArticleInfoのsiteIDを1低い値に更新する
+func updateArticleInfo(siteID:Int){
+    //AppDelegateを使う用意をしておく
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    //Entityを操作するためのオブジェクトを作成
+    let viewContext = appDelegate.persistentContainer.viewContext
+    //どのエンティティからdataを取得してくるかの設定
+    let query:NSFetchRequest<ArticleInfo> = ArticleInfo.fetchRequest()
+    
+    //絞り込み検索
+    let namePredicte = NSPredicate(format: "%K = %d","siteID",siteID)
+    query.predicate = namePredicte
+    do{
+        //データを一括取得
+        let featchResults = try! viewContext.fetch(query)
+        
+        //データの取得
+        for result:AnyObject in featchResults{
+            
+            let recode = result as! NSManagedObject
+            //更新したいデータのセット
+            recode.setValue(siteID - 1,forKey:"siteID")
+            
+            print("[updateArticleInfo]siteID:\(result.value(forKey:"siteID")! as! Int),siteTitle:\(result.value(forKey:"articleTitle")! as! String),fav:\(result.value(forKey:"fav")!)")
+            
             do{
                 //レコード(行)の即時保存
                 try viewContext.save()
@@ -282,6 +351,11 @@ func updateFav(siteID:Int,articleURL:String,bool:Bool){
             result.setValue(bool,forKey:"fav")
             //変更した記事のタイトルと変更後の状態の表示
             print("[updateFav]\(result.value(forKey:"articleTitle")! as! String)","\(result.value(forKey:"fav")!)")
+            do{
+                //レコード(行)の即時保存
+                try viewContext.save()
+            }catch{
+            }
         }
     }catch{
         print("error:updateFav",error)
