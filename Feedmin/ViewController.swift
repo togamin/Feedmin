@@ -109,8 +109,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             for i in 0..<self.items.count{
                 self.items[i].thumbImageURL = self.getImageURL(code: self.items[i].description)!
                 self.items[i].thumbImage = self.getImageFromURL(thumbImageURL: self.items[i].thumbImageURL)
-                print("画像のURL:\(self.items[i].thumbImageURL)")
             }
+        }
+        //CoreDataに記事情報を保存
+        queue.async {() -> Void in
+            for i in 0..<self.items.count{
+                writeArticleInfo(siteID:viewID!,articleTitle:self.items[i].title,articleURL:self.items[i].link,thumbImageURL:self.items[i].thumbImageURL,fav:false)
+            }
+            readArticleInfo()
         }
         
         
@@ -293,7 +299,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }else if str2 == nil{
             thumbImageURL = "none"
         }
-        print("画像のURL(getImageURL):\(thumbImageURL!)")
+        //print("画像のURL(getImageURL):\(thumbImageURL!)")
         return thumbImageURL
     }
     
@@ -307,7 +313,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }else if thumbImageURL == "none"{
             thumbImage = UIImage(named:"default.png")
         }
-         print("画像(getImageFromURL):\(thumbImage!)")
+         //print("画像(getImageFromURL):\(thumbImage!)")
         return thumbImage
     }
     
@@ -323,8 +329,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
 
