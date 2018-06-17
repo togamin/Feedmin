@@ -59,7 +59,7 @@ func readArticleInfo()->[articleInfo]{
             //,URL:\(info.articleURL!),画像データ:\(info.thumbImageData!)
         }
     }catch{
-        print("error:readSiteInfo",error)
+        print("error:readArticleInfo",error)
     }
     return InfoList as! [articleInfo]
 }
@@ -235,6 +235,32 @@ func updateSiteInfo(siteID:Int){
     }
 }
 
+//お気に入りの記事のみ取り出し.
+func readFav()->[articleInfo]{
+    var InfoList:[articleInfo] = []
+    //AppDelegateを使う用意をしておく
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    //Entityを操作するためのオブジェクトを作成
+    let viewContext = appDelegate.persistentContainer.viewContext
+    //どのエンティティからdataを取得してくるかの設定
+    let query:NSFetchRequest<ArticleInfo> = ArticleInfo.fetchRequest()
+    let namePredicte = NSPredicate(format: "fav = true")
+    query.predicate = namePredicte
+    do{
+        //絞り込んだデータを一括取得
+        let fetchResults = try! viewContext.fetch(query)
+        for result in fetchResults{
+            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
+        }
+        for info in InfoList{
+            print("[readFav]ID:\(info.siteID!),タイトル:\(info.articleTitle!),お気に入り:\(info.fav!)")
+            //,URL:\(info.articleURL!),画像データ:\(info.thumbImageData!)
+        }
+    }catch{
+        print("error:readFav",error)
+    }
+    return InfoList as [articleInfo]
+}
 
 
 

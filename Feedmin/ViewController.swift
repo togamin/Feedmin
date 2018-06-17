@@ -163,8 +163,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for:indexPath) as! cellContentView
         
-        print(indexPath.row)
-        
         cell.cellIndex = indexPath.row
         cell.titleLabel.text = self.items[indexPath.row].title
         cell.cellWenLink = self.items[indexPath.row].link

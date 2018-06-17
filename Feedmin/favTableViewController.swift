@@ -14,6 +14,7 @@ import UIKit
 class favTableViewController:UITableViewController{
     
     @IBOutlet weak var favTableView: UITableView!
+    var favArticleList:[articleInfo]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +27,7 @@ class favTableViewController:UITableViewController{
         favTableView.estimatedRowHeight = 250
         favTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
         
-        
-        
-        
-        
-        
-        
+        favArticleList = readFav()
         
         print("リフレッシュコントローラー作成")
         //リフレッシュコントロールを作成する。
@@ -55,8 +51,9 @@ class favTableViewController:UITableViewController{
     //テーブルビュー引っ張り時の呼び出しメソッド
     @objc func relode(_ sender: UIRefreshControl){
         print("再読み込み")
+        favArticleList = readFav()
         //テーブルを再読み込みする。
-        favTableView.reloadData()
+        self.favTableView.reloadData()
         //読込中の表示を消す。
         refreshControl?.endRefreshing()
     }
@@ -67,15 +64,18 @@ class favTableViewController:UITableViewController{
 
     //行数を決める
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favTitleList.count
+        return favArticleList!.count
     }
 
     //セルのインスタンス化
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "favCell",for:indexPath) as! favCellView
-        cell.favTitle.text = favTitleList[indexPath.row]
-        cell.favImageView.image = favImageList[indexPath.row]
-        cell.mainTitle.text = favMainTitleList[indexPath.row]
+        
+        cell.favTitle.text = self.favArticleList![indexPath.row].articleTitle
+        cell.favImageView.image = UIImage(data:self.favArticleList![indexPath.row].thumbImageData as Data)!
+        
+        //cell.mainTitle.text = self.favArticleList![indexPath.row]
+        
         return cell
     }
     
@@ -87,8 +87,8 @@ class favTableViewController:UITableViewController{
     override func prepare(for segue:UIStoryboardSegue,sender:Any?){
         print("画面遷移中")
         if let indexPath = self.favTableView.indexPathForSelectedRow{
-            let title = favTitleList[indexPath.row]
-            let link = favLinkList[indexPath.row]
+            let title = self.favArticleList![indexPath.row].articleTitle
+            let link = self.favArticleList![indexPath.row].articleURL
             //遷移先のViewControllerを格納
             let controller = segue.destination as! fabWevViewController
             
@@ -100,11 +100,12 @@ class favTableViewController:UITableViewController{
     //セルを横にスライドさせた時に呼ばれる
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            favTitleList.remove(at: indexPath.row)
-            favImageList.remove(at: indexPath.row)
-            favLinkList.remove(at: indexPath.row)
-            favTableView.deleteRows(at: [indexPath], with: .fade)
-            favMainTitleList.remove(at: indexPath.row)
+            print("消すね??")
+            let articleURL = self.favArticleList![indexPath.row].articleURL
+            updateFav(siteID:NowViewNum,articleURL:articleURL!,bool:false)
+            favArticleList = readFav()
+            //テーブルを再読み込みする。
+            self.favTableView.reloadData()
         }
     }
     
