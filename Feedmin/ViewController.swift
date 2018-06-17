@@ -71,6 +71,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var currentString = ""
     var imageList = [""]//サムネイル画像のデータが代入される
     let queue:DispatchQueue = DispatchQueue(label: "com.togamin.queue")//マルチスレッド用
+    
+    var thisViewArticleInfo:[articleInfo?] = []
     /*########################################*/
     
     
@@ -116,7 +118,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 //NSDataからUIImageに変換
                 self.items[i].thumbImage = UIImage(data:self.items[i].thumbImageData! as Data)!
             }
-            articleInfoList = readArticleInfo()
+            //現在のviewに関連するサイトだけのURLを取得するように変更する。
+            self.thisViewArticleInfo = selectSiteArticleInfo(siteID: viewID!)
         }
         
         print("リフレッシュコントローラー作成")
@@ -163,24 +166,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         cell.titleLabel.text = self.items[indexPath.row].title
         cell.cellWenLink = self.items[indexPath.row].link
-        //print(cell.titleLabel.text)
         
-        //print("Itemの中のサムネイル表示\(items[indexPath.row].thumbImage)")
-        
-        if items[indexPath.row].thumbImage != nil{
+        if items[indexPath.row].thumbImage != nil {
             cell.cellView.image = items[indexPath.row].thumbImage
-            
-            //print(items[indexPath.row].thumbImage)
-            //print("サムネイル画像取得完了")
-        }else{//書かなくても
+        }else{//画像が取得されるまではデフォルト画像
             cell.cellView.image = UIImage(named: "default.png")
-            //print("default画像")
         }
-        //favがtrueならLIKEの画像変更
+        
+        //cell.currentLike =
 
-        
-        
-        
+        //favがtrueならLIKEのデザイン変更
+
         return cell
     }
     

@@ -19,7 +19,7 @@ class manyViewControllers:UIViewController{
 //テスト---------------------------------------------------
         //CoreData初期化
         //deleteAllSiteInfo()
-        //deleteAllArticleInfo()
+        deleteAllArticleInfo()
       /*
         //CoreData読み出し
         var SInfo = readSiteInfo()

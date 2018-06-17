@@ -16,7 +16,7 @@ class cellContentView:UITableViewCell{
     @IBOutlet weak var likeButton: UIButton!
     var cellWenLink:String!
     
-    var currentLike:Bool = false//likeButtonを押したか押していないか。
+    var currentLike:Bool!//likeButtonを押したか押していないか。
 
     //LikeButtonが押された時、そのセルのItemをfavListに登録する。
     @IBAction func likeButton(_ sender: UIButton) {

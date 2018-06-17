@@ -10,10 +10,6 @@ import UIKit
 import CoreData
 
 //Articleへのデータの書き込み
-
-//テストコード
-//writeArticleInfo(siteID:0,articleTitle:"とがみんみん",articleURL:"とがみんURL",thumbImage:"とがみん画像",fav:false)
-
 func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImageData:NSData,fav:Bool){
     print("writeArticleInfoのCoreDataへの登録")
     //AppDelegateを使う用意をしておく
@@ -59,13 +55,50 @@ func readArticleInfo()->[articleInfo]{
             InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
         }
         for info in InfoList{
-            //print("[readArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),URL:\(info.articleURL!),画像データ:\(info.thumbImageData!),お気に入り:\(info.fav!)")
+            print("[readArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),お気に入り:\(info.fav!)")
+            //,URL:\(info.articleURL!),画像データ:\(info.thumbImageData!)
         }
     }catch{
         print("error:readSiteInfo",error)
     }
     return InfoList as! [articleInfo]
 }
+
+//指定したsiteIDのArticleInfoの呼び出し.
+func selectSiteArticleInfo(siteID:Int)->[articleInfo]{
+    var InfoList:[articleInfo] = []
+    //AppDelegateを使う用意をしておく
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    //Entityを操作するためのオブジェクトを作成
+    let viewContext = appDelegate.persistentContainer.viewContext
+    //どのエンティティからdataを取得してくるかの設定
+    let query:NSFetchRequest<ArticleInfo> = ArticleInfo.fetchRequest()
+    let namePredicte = NSPredicate(format: "%K = %d","siteID",siteID)
+    query.predicate = namePredicte
+    do{
+        //絞り込んだデータを一括取得
+        let fetchResults = try! viewContext.fetch(query)
+        //データの取得
+        for result:AnyObject in fetchResults{
+            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
+        }
+        for info in InfoList{
+            print("[selectSiteArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),お気に入り:\(info.fav!)")
+            //,URL:\(info.articleURL!),画像データ:\(info.thumbImageData!)
+        }
+    }catch{
+        print("error:selectSiteArticleInfo",error)
+    }
+    return InfoList as! [articleInfo]
+}
+
+
+
+
+
+
+
+
 
 
 
