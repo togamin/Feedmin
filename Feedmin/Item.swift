@@ -8,6 +8,9 @@
 
 import UIKit
 
+//今いるViewコントローラーの番号
+var NowViewNum:Int! = 0
+
 //登録しているWebサイトのURLの数のViewControllerが格納
 var viewControllers:[UIViewController]?
 

@@ -9,8 +9,7 @@
 import UIKit
 
 
-//今いるViewコントローラーの番号
-var NowViewNum:Int! = 0
+
 
 class manyViewControllers:UIViewController{
     

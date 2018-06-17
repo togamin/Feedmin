@@ -92,16 +92,6 @@ func selectSiteArticleInfo(siteID:Int)->[articleInfo]{
     return InfoList as! [articleInfo]
 }
 
-
-
-
-
-
-
-
-
-
-
 //SiteInfoへのデータの書き込み
 func writeSiteInfo(siteID:Int,siteTitle:String,siteURL:String){
     print("SiteInfoのCoreDataへの登録")
@@ -229,6 +219,7 @@ func updateSiteInfo(siteID:Int){
     do{
         //データを一括取得
         let featchResults = try! viewContext.fetch(query)
+        
         //データの取得
         for result:AnyObject in featchResults{
             let recode = result as! NSManagedObject
@@ -247,7 +238,29 @@ func updateSiteInfo(siteID:Int){
 
 
 
-
+//お気に入りかどうかの更新
+func updateFav(siteID:Int,articleURL:String,bool:Bool){
+    var InfoList:[articleInfo] = []
+    //AppDelegateを使う用意をしておく
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    //Entityを操作するためのオブジェクトを作成
+    let viewContext = appDelegate.persistentContainer.viewContext
+    //どのエンティティからdataを取得してくるかの設定
+    let query:NSFetchRequest<ArticleInfo> = ArticleInfo.fetchRequest()
+    let namePredicte = NSPredicate(format: "articleURL = %@",articleURL)
+    query.predicate = namePredicte
+    do{
+        //絞り込んだデータを一括取得
+        let fetchResults = try! viewContext.fetch(query)
+        for result in fetchResults{
+            result.setValue(bool,forKey:"fav")
+            //変更した記事のタイトルと変更後の状態の表示
+            print("[updateFav]\(result.value(forKey:"articleTitle")! as! String)","\(result.value(forKey:"fav")!)")
+        }
+    }catch{
+        print("error:updateFav",error)
+    }
+}
 
 
 

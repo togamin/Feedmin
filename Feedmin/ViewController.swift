@@ -118,8 +118,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 //NSDataからUIImageに変換
                 self.items[i].thumbImage = UIImage(data:self.items[i].thumbImageData! as Data)!
             }
-            //現在のviewに関連するサイトだけのURLを取得するように変更する。
+            //現在のviewに関連するサイトだけの記事を取得.
             self.thisViewArticleInfo = selectSiteArticleInfo(siteID: viewID!)
+            print("記事数：\(self.thisViewArticleInfo.count)")
         }
         
         print("リフレッシュコントローラー作成")
@@ -162,8 +163,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for:indexPath) as! cellContentView
         
+        print(indexPath.row)
         
-        
+        cell.cellIndex = indexPath.row
         cell.titleLabel.text = self.items[indexPath.row].title
         cell.cellWenLink = self.items[indexPath.row].link
         
@@ -173,10 +175,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             cell.cellView.image = UIImage(named: "default.png")
         }
         
-        //cell.currentLike =
-
-        //favがtrueならLIKEのデザイン変更
-
+        //favがtrueならLIKEのデザイン変更.favに代入される前に動作するとエラーが出てしまうので、代入されるたびに動作させるために、別スレッドで処理。
+        queue.async {() -> Void in
+            cell.currentLike = self.thisViewArticleInfo[indexPath.row]!.fav
+        }
         return cell
     }
     
