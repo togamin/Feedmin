@@ -21,6 +21,13 @@ class manyViewControllers:UIViewController{
         deleteAllArticleInfo()//もしCoreDataに記事が入っている場合、過去記事URLと同じURLが出るまで行う.その処理を書いたら、記事の初期化消す。
 //--------------------------------------------------------
         
+        
+//ステータスバーの背景色変更.UIViewを作成し追加することで実現
+        let statusBar = UIView(frame:CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 20.0))
+            statusBar.backgroundColor = UIColor(red: 0, green: 0.02, blue: 0.06, alpha: 0.85)
+            view.addSubview(statusBar)
+
+        
 //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
         //deleteAllSiteInfo()//CoreData全削除
         siteInfoList = readSiteInfo()
@@ -108,19 +115,19 @@ extension manyViewControllers {
         option.menuTitleFont = .boldSystemFont(ofSize: 16)
         
         //メニュータイトルの色(未選択時)
-        option.menuTitleColorNormal = .white
+        option.menuTitleColorNormal = .lightGray
         
         //メニュータイトルの色(選択時)
         option.menuTitleColorSelected = .white
         
         //メニューの背景色(未選択時)
-        option.menuItemBackgroundColorNormal = UIColor(red: 0, green: 0.02, blue: 0.06, alpha: 1.0)
+        option.menuItemBackgroundColorNormal = UIColor(red: 0, green: 0.02, blue: 0.06, alpha: 0.61)
         
         //メニューの背景色
-        option.menuItemBackgroundColorSelected = UIColor(red: 0, green: 0.02, blue: 0.06, alpha: 1.0)
+        option.menuItemBackgroundColorSelected = UIColor(red: 0, green: 0.02, blue: 0.06, alpha: 0.61)
         
         //アンダーラインの色
-        option.menuIndicatorColor = UIColor(red: 0.6, green: 0.7, blue: 1.0, alpha: 0.8)
+        option.menuIndicatorColor = UIColor(red: 0.5, green: 0.8, blue: 1.0, alpha: 0.8)
         return option
     }
     

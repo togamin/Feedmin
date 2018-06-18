@@ -36,7 +36,7 @@ struct PageMenuOption {
        menuItemWidth: CGFloat = 0,
        menuItemBackgroundColorNormal: UIColor = .white,
        menuItemBackgroundColorSelected: UIColor = .white,
-       menuTitleMargin: CGFloat = 40,
+       menuTitleMargin: CGFloat = 50,
        menuTitleFont: UIFont = .systemFont(ofSize: 16),
        menuTitleColorNormal: UIColor = .lightGray,
        menuTitleColorSelected: UIColor = .black,
