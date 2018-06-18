@@ -59,6 +59,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var webSiteView: UIWebView!
     @IBOutlet weak var backMenu: UIButton!
+    @IBOutlet weak var share: UIButton!
+    
     
     
     var parser:XMLParser!//parser:構文解析
@@ -79,6 +81,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         //Webサイト表示用画面の設定
         webSiteView.isHidden = true
         backMenu.isHidden = true
+        share.isHidden = true
         
         //myTableView設定
         myTableView.delegate = self
@@ -183,21 +186,31 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         return cell
     }
     
-    
+    //shareする際のURL格納
+    var shareURL = URL(string: "https://togamin.com/")
     //セルをタップしたら発動する処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let url = URL(string: self.items[indexPath.row].link){
+            self.shareURL = url
             let request = URLRequest(url:url)
             self.webSiteView.loadRequest(request)
             webSiteView.isHidden = false
             backMenu.isHidden = false
+            share.isHidden = false
         }
     }
 
     @IBAction func backMenu(_ sender: UIButton) {
         webSiteView.isHidden = true
         backMenu.isHidden = true
+        share.isHidden = true
+    }
+    // シェア用ボタン
+    @IBAction func share(_ sender: UIButton) {
+        func showMessage(){print("表示完了")}
+        let controller = UIActivityViewController(activityItems: [self.shareURL], applicationActivities:nil)
+        self.present(controller, animated: true,completion:showMessage)
     }
     
     
@@ -310,6 +323,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.myTableView.reloadData()
         print("RSS解析後のリロード完了")
     }
+    
+    
+    
+
+    
+    
     
     /*---------------------------------------------------*/
     

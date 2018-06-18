@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,40 +34,58 @@
                                 </prototypes>
                             </tableView>
                             <wkWebView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ewe-nn-4hK">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLi-CW-Uim">
-                                <rect key="frame" x="33" y="78" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5S-Np-YiO">
+                                <rect key="frame" x="10" y="30" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Asr-Dd-GKZ"/>
+                                    <constraint firstAttribute="height" constant="40" id="gUo-2N-SQt"/>
+                                </constraints>
+                                <state key="normal" image="ico01.png"/>
                                 <connections>
-                                    <action selector="backMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P08-7S-esz"/>
+                                    <action selector="backMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ACQ-L5-Fq6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdB-x5-awz">
+                                <rect key="frame" x="325" y="574" width="40" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="A90-Fi-jtx"/>
+                                    <constraint firstAttribute="width" secondItem="SdB-x5-awz" secondAttribute="height" multiplier="155:128" id="Kbv-qT-88P"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="ico02.png"/>
+                                <connections>
+                                    <action selector="share:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YiS-Xo-Y5S"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ewe-nn-4hK" firstAttribute="trailing" secondItem="c4C-u7-t1n" secondAttribute="trailing" id="20d-5y-LQN"/>
-                            <constraint firstItem="fLi-CW-Uim" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="33" id="8SO-7D-gK0"/>
+                            <constraint firstAttribute="trailing" secondItem="SdB-x5-awz" secondAttribute="trailing" constant="10" id="7LQ-ca-2gs"/>
+                            <constraint firstItem="k5S-Np-YiO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="Ddh-Gw-tY7"/>
                             <constraint firstItem="ewe-nn-4hK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FeI-pY-XSD"/>
                             <constraint firstItem="c4C-u7-t1n" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Gwk-Lh-BxM"/>
-                            <constraint firstItem="fLi-CW-Uim" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="REM-6K-DTt"/>
                             <constraint firstAttribute="trailing" secondItem="ewe-nn-4hK" secondAttribute="trailing" id="Te0-30-Knn"/>
                             <constraint firstItem="c4C-u7-t1n" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="YJA-yJ-dvX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ewe-nn-4hK" secondAttribute="bottom" constant="52" id="ZVs-ut-Gv7"/>
+                            <constraint firstItem="k5S-Np-YiO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="bDK-YI-bfY"/>
                             <constraint firstItem="c4C-u7-t1n" firstAttribute="top" secondItem="ewe-nn-4hK" secondAttribute="top" id="ooZ-VX-ifq"/>
                             <constraint firstItem="ewe-nn-4hK" firstAttribute="leading" secondItem="c4C-u7-t1n" secondAttribute="leading" id="qnd-H4-a7g"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SdB-x5-awz" secondAttribute="bottom" constant="60" id="yws-FI-ABV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="記事一覧" leftItemsSupplementBackButton="YES" id="q5l-ea-uKP"/>
                     <connections>
-                        <outlet property="backMenu" destination="fLi-CW-Uim" id="J4G-9r-A7O"/>
+                        <outlet property="backMenu" destination="k5S-Np-YiO" id="ulS-TL-1q9"/>
                         <outlet property="myTableView" destination="c4C-u7-t1n" id="21P-n3-aPJ"/>
+                        <outlet property="share" destination="SdB-x5-awz" id="EKL-4B-1oq"/>
                         <outlet property="webSiteView" destination="ewe-nn-4hK" id="Clf-zY-D2E"/>
                     </connections>
                 </viewController>
@@ -403,4 +422,8 @@
             <point key="canvasLocation" x="2029.5999999999999" y="849.62518740629696"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ico01.png" width="256" height="256"/>
+        <image name="ico02.png" width="256" height="256"/>
+    </resources>
 </document>
