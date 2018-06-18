@@ -154,8 +154,9 @@ http://togamin.com/rss/
 http://why-not-1017.hatenablog.com/rss
 * アメーバブログ
 http://feedblog.ameba.jp/rss/ameblo/oranger13
-
 #-----------------------------------------------*/
+            //print(siteURL)
+//-----------------------------------------------
 //CoreData
             
             writeSiteInfo(siteID: siteID,siteTitle: siteTitle,siteURL: siteURL)
@@ -164,9 +165,11 @@ http://feedblog.ameba.jp/rss/ameblo/oranger13
             
 //-----------------------------------------------
             
+            
 
-    
-            //ここでmanyViewControllerのviewDidLoadをもう一度
+            let mVC = tabBarController?.customizableViewControllers![0] as! manyViewControllers
+                mVC.addPage(siteTitle: siteTitle)
+            
             print("リロード完了")
             
             getURLTableView.reloadData()

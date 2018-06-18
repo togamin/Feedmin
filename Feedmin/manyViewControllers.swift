@@ -22,7 +22,7 @@ class manyViewControllers:UIViewController{
 //--------------------------------------------------------
         
         
-//ステータスバーの背景色変更.UIViewを作成し追加することで実現
+//ステータスバーの背景色変更.UIViewを作成し追加することで実装
         let statusBar = UIView(frame:CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 20.0))
             statusBar.backgroundColor = UIColor(red: 0, green: 0.02, blue: 0.06, alpha: 0.85)
             view.addSubview(statusBar)
@@ -129,6 +129,31 @@ extension manyViewControllers {
         //アンダーラインの色
         option.menuIndicatorColor = UIColor(red: 0.5, green: 0.8, blue: 1.0, alpha: 0.8)
         return option
+    }
+    
+    
+    //サイトを追加した時に呼ばれる関数.追加した際ページメニューに反映。
+    func addPage(siteTitle:String) {
+        
+        // pageMenuを一度リセットする
+        //pageMenu.removeFromSuperview()
+        
+        // 追加したいViewControllerをviewControllersにセットする
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
+        
+        //ViewControllerのtitleを代入
+        viewController.title = siteTitle
+        
+        viewControllers?.append(viewController)
+        
+        // 再度pageMenuを設定
+        //メニューバーのレイアウト
+        let option = getPageMenuOption()
+        let pageMenu = PageMenuView(
+            viewControllers: viewControllers!,
+            option: option)
+        view.addSubview(pageMenu)
     }
     
 }

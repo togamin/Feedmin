@@ -11,7 +11,7 @@ import CoreData
 
 //Articleへのデータの書き込み
 func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImageData:NSData,fav:Bool){
-    print("writeArticleInfoのCoreDataへの登録")
+    //print("writeArticleInfoのCoreDataへの登録")
     //AppDelegateを使う用意をしておく
     let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     //Entityを操作するためのオブジェクトを作成
@@ -29,7 +29,7 @@ func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImag
     do{
         //レコード(行)の即時保存
         try viewContext.save()
-        print("ArticleInfo登録完了")
+        //print("ArticleInfo登録完了")
     }catch{
         print("error")
     }
