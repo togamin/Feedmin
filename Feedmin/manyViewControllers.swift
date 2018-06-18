@@ -18,41 +18,8 @@ class manyViewControllers:UIViewController{
 //テスト---------------------------------------------------
         //CoreData初期化
         //deleteAllSiteInfo()
-        deleteAllArticleInfo()
-      /*
-        //CoreData読み出し
-        var SInfo = readSiteInfo()
-        var AInfo = readArticleInfo()
-        for info in SInfo {
-            print("[SiteInfo]siteID:\(info.siteID)")
-            print("[SiteInfo]siteTitlr:\(info.siteTitle)")
-            print("[SiteInfo]siteURL:\(info.siteURL)")
-        }
-        for info in AInfo {
-            print("[SiteInfo]siteID:\(info.siteID)")
-            print("[SiteInfo]articleTitlr:\(info.articleTitle)")
-            print("[SiteInfo]siteURL:\(info.articleURL)")
-        }
-        
-        //CoreDataへ書き込み
-        writeSiteInfo(siteID:0,siteTitle:"とがみんブログ",siteURL:"http://togamin.com/rss")
-        writeArticleInfo(siteID:0,articleTitle:"世界の仕組み",articleURL:"http://togamin.com/", thumbImageURL:"https://togamin.com/wp/wp-content/uploads/2018/06/pic_180612_01-300x208.png",fav:false)
-        
-        //CoreData読み出し
-        var sInfo = readSiteInfo()
-        var aInfo = readArticleInfo()
-        for info in SInfo {
-            print("[SiteInfo]siteID:\(info.siteID)")
-            print("[SiteInfo]siteTitlr:\(info.siteTitle)")
-            print("[SiteInfo]siteURL:\(info.siteURL)")
-        }
-        for info in AInfo {
-            print("[SiteInfo]siteID:\(info.siteID)")
-            print("[SiteInfo]articleTitlr:\(info.articleTitle)")
-            print("[SiteInfo]siteURL:\(info.articleURL)")
-        }
-   */
-//---------------------------------------------------------
+        deleteAllArticleInfo()//もしCoreDataに記事が入っている場合、過去記事URLと同じURLが出るまで行う.その処理を書いたら、記事の初期化消す。
+//--------------------------------------------------------
         
 //CoreDataからサイトタイトルとサイトURLを取り出し、配列に格納。もし何も入っていなかったらデフォルトで「とがみんブログを表示する」
         //deleteAllSiteInfo()//CoreData全削除
@@ -141,19 +108,19 @@ extension manyViewControllers {
         option.menuTitleFont = .boldSystemFont(ofSize: 16)
         
         //メニュータイトルの色(未選択時)
-        option.menuTitleColorNormal = .lightGray
+        option.menuTitleColorNormal = .white
         
         //メニュータイトルの色(選択時)
-        option.menuTitleColorSelected = .black
+        option.menuTitleColorSelected = .white
         
         //メニューの背景色(未選択時)
-        option.menuItemBackgroundColorNormal = .white
+        option.menuItemBackgroundColorNormal = UIColor(red: 0, green: 0.02, blue: 0.06, alpha: 1.0)
         
         //メニューの背景色
-        option.menuItemBackgroundColorSelected = .white
+        option.menuItemBackgroundColorSelected = UIColor(red: 0, green: 0.02, blue: 0.06, alpha: 1.0)
         
         //アンダーラインの色
-        option.menuIndicatorColor = .black
+        option.menuIndicatorColor = UIColor(red: 0.6, green: 0.7, blue: 1.0, alpha: 0.8)
         return option
     }
     

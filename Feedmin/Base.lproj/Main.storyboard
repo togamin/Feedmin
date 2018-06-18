@@ -345,10 +345,10 @@
             </objects>
             <point key="canvasLocation" x="2030" y="120"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--My Tab View Controller-->
         <scene sceneID="Xqf-h9-UIy">
             <objects>
-                <tabBarController id="PeB-us-zsR" sceneMemberID="viewController">
+                <tabBarController id="PeB-us-zsR" customClass="myTabViewController" customModule="Feedmin" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4hj-Rg-Dbf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

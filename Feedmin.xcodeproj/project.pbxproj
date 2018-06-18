@@ -26,6 +26,7 @@
 		B794E8D520C982A20037862E /* urlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D420C982A20037862E /* urlTableViewController.swift */; };
 		B794E8D920CB38420037862E /* favTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D820CB38420037862E /* favTableViewController.swift */; };
 		B7E5304420D5E4EF0059028E /* ArticleData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7E5304220D5E4EF0059028E /* ArticleData.xcdatamodeld */; };
+		B7E5304820D787810059028E /* myTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5304720D787810059028E /* myTabViewController.swift */; };
 		B7FE8FD620CE4A0A0095F455 /* favWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */; };
 		B7FE8FD820CE78760095F455 /* favCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7FE8FD720CE78760095F455 /* favCellView.xib */; };
 		B7FE8FDA20CE7A1D0095F455 /* default02.png in Resources */ = {isa = PBXBuildFile; fileRef = B7FE8FD920CE7A1C0095F455 /* default02.png */; };
@@ -55,6 +56,7 @@
 		B794E8D420C982A20037862E /* urlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlTableViewController.swift; sourceTree = "<group>"; };
 		B794E8D820CB38420037862E /* favTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favTableViewController.swift; sourceTree = "<group>"; };
 		B7E5304320D5E4EF0059028E /* ArticleData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArticleData.xcdatamodel; sourceTree = "<group>"; };
+		B7E5304720D787810059028E /* myTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myTabViewController.swift; sourceTree = "<group>"; };
 		B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favWebViewController.swift; sourceTree = "<group>"; };
 		B7FE8FD720CE78760095F455 /* favCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = favCellView.xib; sourceTree = "<group>"; };
 		B7FE8FD920CE7A1C0095F455 /* default02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default02.png; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		B7423A3820C041E000F02BDF /* Feedmin */ = {
 			isa = PBXGroup;
 			children = (
+				B7423A3D20C041E000F02BDF /* Main.storyboard */,
 				B7423A3920C041E000F02BDF /* AppDelegate.swift */,
 				B794E8CC20C673110037862E /* manyViewControllers.swift */,
 				B7423A3B20C041E000F02BDF /* ViewController.swift */,
@@ -103,7 +106,7 @@
 				B794E8D220C9624D0037862E /* SettingViewController.swift */,
 				B7423A5720C1275400F02BDF /* cellContentView.xib */,
 				B7423A5920C128F400F02BDF /* cellContentView.swift */,
-				B7423A3D20C041E000F02BDF /* Main.storyboard */,
+				B7E5304720D787810059028E /* myTabViewController.swift */,
 				B7423A4B20C04BAF00F02BDF /* Item.swift */,
 				B7423A9620C5880600F02BDF /* PageMenuView.swift */,
 				B794E8D020C74C8A0037862E /* getURL.swift */,
@@ -213,6 +216,7 @@
 				B7423A9720C5880600F02BDF /* PageMenuView.swift in Sources */,
 				B7423A4C20C04BAF00F02BDF /* Item.swift in Sources */,
 				B7423A3A20C041E000F02BDF /* AppDelegate.swift in Sources */,
+				B7E5304820D787810059028E /* myTabViewController.swift in Sources */,
 				B794E8D920CB38420037862E /* favTableViewController.swift in Sources */,
 				B7FE8FD620CE4A0A0095F455 /* favWebViewController.swift in Sources */,
 				B7E5304420D5E4EF0059028E /* ArticleData.xcdatamodeld in Sources */,

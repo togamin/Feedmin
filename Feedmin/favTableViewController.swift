@@ -73,8 +73,7 @@ class favTableViewController:UITableViewController{
         
         cell.favTitle.text = self.favArticleList![indexPath.row].articleTitle
         cell.favImageView.image = UIImage(data:self.favArticleList![indexPath.row].thumbImageData as Data)!
-        
-        //cell.mainTitle.text = self.favArticleList![indexPath.row]
+        cell.mainTitle.text = siteInfoList[self.favArticleList![indexPath.row].siteID]?.siteTitle
         
         return cell
     }
