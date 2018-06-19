@@ -14,7 +14,7 @@ class cellContentView:UITableViewCell{
     @IBOutlet weak var character: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
-    var cellWenLink:String!
+    var cellWebLink:String!
     
     var cellIndex:Int!
     var currentLike:Bool = false//likeButtonを押したか押していないか。
@@ -25,13 +25,13 @@ class cellContentView:UITableViewCell{
         if currentLike {
             likeButton.setTitleColor(UIColor.white, for: UIControlState.normal)
             likeButton.backgroundColor = UIColor.darkGray
-            updateFav(siteID: NowViewNum, articleURL: cellWenLink, bool: false)
+            updateFav(siteID: NowViewNum, articleURL: cellWebLink, bool: false)
             self.currentLike = false
         }else{
             likeButton.setTitleColor(UIColor.magenta, for: UIControlState.normal)
             
             likeButton.backgroundColor = UIColor(red: 1.0, green: 0.8, blue: 1.0, alpha: 1.0)
-            updateFav(siteID: NowViewNum, articleURL: cellWenLink, bool: true)
+            updateFav(siteID: NowViewNum, articleURL: cellWebLink, bool: true)
             self.currentLike = true
         }
     }

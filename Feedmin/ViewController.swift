@@ -177,11 +177,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         //元々記事がCoreDataに存在していた場合、それを呼び出し。そうでない場合、Itemから呼び出す.処理を早くするため。
         if self.existenceArticle{
             cell.titleLabel.text = self.thisViewArticleInfo[indexPath.row]?.articleTitle!
-            cell.cellWenLink = self.thisViewArticleInfo[indexPath.row]?.articleURL!
+            cell.cellWebLink = self.thisViewArticleInfo[indexPath.row]?.articleURL!
             cell.cellView.image = UIImage(data:self.thisViewArticleInfo[indexPath.row]?.thumbImageData! as! Data)
         }else{
             cell.titleLabel.text = self.items[indexPath.row].title
-            cell.cellWenLink = self.items[indexPath.row].link
+            cell.cellWebLink = self.items[indexPath.row].link
             
             if items[indexPath.row].thumbImage != nil {
                 cell.cellView.image = items[indexPath.row].thumbImage
@@ -211,7 +211,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //セルをタップしたら発動する処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let url = URL(string: self.items[indexPath.row].link){
+        
+        //articleに入ってる方からとらないとだめ
+        if let url = URL(string: (self.thisViewArticleInfo[indexPath.row]?.articleURL)!){
             self.shareURL = url
             let request = URLRequest(url:url)
             self.webSiteView.loadRequest(request)
