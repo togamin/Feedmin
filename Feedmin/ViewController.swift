@@ -59,15 +59,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     var thisViewArticleInfo:[articleInfo?] = []
     var existenceArticle:Bool = false//起動する際CoreDateにArticle情報が存在するならtrue,存在しないならfalse
+    var newArticleUpdate:Bool = false//記事を更新する場合のRSS解析の場合はtrue
     /*########################################*/
     
+    var endFunc:Bool = false//テスト
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
 //テスト-------------------------------------
-
+        
 //------------------------------------------
         
         
@@ -143,6 +145,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //テーブルビュー引っ張り時の呼び出しメソッド
     @objc func relode(_ sender: UIRefreshControl){
         print("再読み込み")
+        self.rssUpdate(siteURL:(siteInfoList[ViewControllerNow]?.siteURL)!)
+        //データの読み込み
+        self.thisViewArticleInfo = selectSiteArticleInfo(siteID: ViewControllerNow!)
+        //データのソート
+
         //テーブルを再読み込みする。
         myTableView.reloadData()
         //読込中の表示を消す。
@@ -211,8 +218,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //セルをタップしたら発動する処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        //articleに入ってる方からとらないとだめ
         if let url = URL(string: (self.thisViewArticleInfo[indexPath.row]?.articleURL)!){
             self.shareURL = url
             let request = URLRequest(url:url)
@@ -236,8 +241,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     
+//記事を更新する際の関数
     
-    
+    func rssUpdate(siteURL:String){
+        newArticleUpdate = true
+        self.startDownload(siteURL: siteURL)
+        print("テスト:self.startDownload完了")
+        newArticleUpdate = false
+        self.existenceArticle = true
+        self.endFunc = false
+        //新規データの書き込み
+        for i in 0..<self.items.count{
+            self.items[i].thumbImageData = self.getImageData(code: self.items[i].description)
+            print("テストitemsの中身:\(self.items[i].title)")
+            writeArticleInfo(siteID:ViewControllerNow!,articleTitle:self.items[i].title,updateDate:self.items[i].pubDate!,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
+        }
+    }
 
 /*---------------------------------------------------*/
     
@@ -261,41 +280,51 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //開始タグが見つかるたびに毎回呼び出される関数
     func parser(_ parser: XMLParser,didStartElement elementName:String,namespaceURI:String?,qualifiedName qName:String?,attributes attributeDict:[String:String]) {
         
-        self.currentString = ""
-        //print(elementName)//タグすべてプリント
-        if elementName == "item"{
-            self.item = Item()//タグ名がitemもときのみ、記事を入れる箱を作成
+        if self.endFunc == false{
+            self.currentString = ""
+            //print(elementName)//タグすべてプリント
+            if elementName == "item"{
+                self.item = Item()//タグ名がitemのときのみ、記事を入れる箱を作成
+            }
         }
+        
     }
     //タグで囲まれた内容が見つかるたびに呼び出されるメソッド。
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         //print(string)
-        self.currentString = string
+        if self.endFunc == false{
+            self.currentString = string
+        }
     }
     
     
     //終了タグが見つかるたびに呼び出されるメソッド。
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         //print(elementName)
-        switch elementName {
-            case "title":
-                self.item?.title = currentString
-            case "link":
-                self.item?.link = currentString
-            
-            case "pubDate":
-                self.item?.pubDate = self.pubDate(pubDate: currentString)
-                //print("pubDate中身:\(self.item?.pubDate!)")
-            
-            case "description":
-                self.item?.description = currentString
-            case "item": self.items.append(self.item!)
-        default :break
+        if self.endFunc == false{
+            switch elementName {
+                case "title":
+                    self.item?.title = currentString
+                case "link":
+                    self.item?.link = currentString
+                    if newArticleUpdate {
+                        if getSameArticle(articleURL:currentString).count != 0{
+                            //print("テスト:\(currentString)")
+                            self.endFunc = true
+                        }
+                    }
+                case "pubDate":
+                    self.item?.pubDate = self.pubDate(pubDate: currentString)
+                case "description":
+                    self.item?.description = currentString
+                case "item": self.items.append(self.item!)
+            default :break
+            }
         }
     }
     //pubDataの情報を扱いやすいデータに変換.
     //[Sun, 17 Jun 2018 12:00:22 +0000]を
-    //[2018-06-17 12:00:22 +0000]に変換.時差の部分はとりあえず考慮しない.
+    //[2018-06-17 12:00:22 +0000]に変換.
     func pubDate(pubDate:String)->Date?{
         //print("pubDate0:\(pubDate)")
         let dateFormatter = DateFormatter()
@@ -360,10 +389,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         print("RSS解析後のリロード完了")
     }
     
-    
-    
 
-    
     
     
     /*---------------------------------------------------*/

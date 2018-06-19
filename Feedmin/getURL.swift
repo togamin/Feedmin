@@ -87,6 +87,8 @@ class getURL:UITableViewController{
                 updateArticleInfo(siteID: i)
             }
             getURLTableView.reloadData()
+            //再読み込みの必要ありManyViewPage
+            
         }else{
             let alert = UIAlertController(title: "エラー", message: "登録しているサイトが1つの場合、削除できません。", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {action in print("OK")}))
