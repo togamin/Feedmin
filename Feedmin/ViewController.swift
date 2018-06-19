@@ -58,6 +58,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     let queue:DispatchQueue = DispatchQueue(label: "com.togamin.queue")//マルチスレッド用
     
     var thisViewArticleInfo:[articleInfo?] = []
+    var existenceArticle:Bool = false//起動する際CoreDateにArticle情報が存在するならtrue,存在しないならfalse
     /*########################################*/
     
     
@@ -90,29 +91,39 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         print("viewID:\(ViewControllerNow!)")
         
         
-        //RSS解析とダウンロード開始
-        queue.async {() -> Void in
-            print("画面表示中")
-            self.startDownload(siteURL: (siteInfoList[ViewControllerNow]?.siteURL)!)
+        //Articleに記事が入っているかどうかの処理
+        self.thisViewArticleInfo = selectSiteArticleInfo(siteID: viewID!)
+        print("記事数解析前:\(self.thisViewArticleInfo.count)")
+        if self.thisViewArticleInfo.count != 0{
+            self.existenceArticle = true
         }
-
-        //マルチスレッド.別スレッドで画像の処理をさせることにより、その他の表示を早くすることで操作性をあげる。
-        queue.async {() -> Void in
-            //サムネイルの画像をItemクラスのインスタンスに代入
-            print("サムネイル画像取得中")
-            for i in 0..<self.items.count{
-                self.items[i].thumbImageData = self.getImageData(code: self.items[i].description)
-                
-               //CoreDataに記事情報を保存
-                writeArticleInfo(siteID:viewID!,articleTitle:self.items[i].title,updateDate:self.items[i].pubDate!,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
-                
-                //NSDataからUIImageに変換
-                self.items[i].thumbImage = UIImage(data:self.items[i].thumbImageData! as Data)!
+        
+        //ArticleInfoにViewIDの記事が存在しないなら、RSSデータ解析.
+        if self.existenceArticle == false{
+            //RSS解析とダウンロード開始
+            queue.async {() -> Void in
+                print("画面表示中")
+                self.startDownload(siteURL: (siteInfoList[ViewControllerNow]?.siteURL)!)
             }
-            //現在のviewに関連するサイトだけの記事を取得.
-            self.thisViewArticleInfo = selectSiteArticleInfo(siteID: viewID!)
-            print("記事数：\(self.thisViewArticleInfo.count)")
+            //マルチスレッド.別スレッドで画像の処理をさせることにより、その他の表示を早くすることで操作性をあげる。
+            queue.async {() -> Void in
+                //サムネイルの画像をItemクラスのインスタンスに代入
+                print("サムネイル画像取得中")
+                for i in 0..<self.items.count{
+                    self.items[i].thumbImageData = self.getImageData(code: self.items[i].description)
+                    
+                    //CoreDataに記事情報を保存
+                    writeArticleInfo(siteID:viewID!,articleTitle:self.items[i].title,updateDate:self.items[i].pubDate!,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
+                    
+                    //NSDataからUIImageに変換
+                    self.items[i].thumbImage = UIImage(data:self.items[i].thumbImageData! as Data)!
+                }
+                //現在のviewに関連するサイトだけの記事を取得.
+                self.thisViewArticleInfo = selectSiteArticleInfo(siteID: viewID!)
+                print("記事数解析後：\(self.thisViewArticleInfo.count)")
+            }
         }
+        
         
         print("リフレッシュコントローラー作成")
         //リフレッシュコントロールを作成する。
@@ -147,34 +158,51 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 /*---------------------------------------------------*/
     //行数を決める
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        var cellNum:Int?
+        if self.existenceArticle{
+            cellNum = self.thisViewArticleInfo.count
+        }else{
+            cellNum = items.count
+        }
+        return cellNum!
     }
     
     //セルのインスタンス化
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for:indexPath) as! cellContentView
         
         cell.cellIndex = indexPath.row
-        cell.titleLabel.text = self.items[indexPath.row].title
-        cell.cellWenLink = self.items[indexPath.row].link
         
-        if items[indexPath.row].thumbImage != nil {
-            cell.cellView.image = items[indexPath.row].thumbImage
-        }else{//画像が取得されるまではデフォルト画像
-            cell.cellView.image = UIImage(named: "default.png")
+        //元々記事がCoreDataに存在していた場合、それを呼び出し。そうでない場合、Itemから呼び出す.処理を早くするため。
+        if self.existenceArticle{
+            cell.titleLabel.text = self.thisViewArticleInfo[indexPath.row]?.articleTitle!
+            cell.cellWenLink = self.thisViewArticleInfo[indexPath.row]?.articleURL!
+            cell.cellView.image = UIImage(data:self.thisViewArticleInfo[indexPath.row]?.thumbImageData! as! Data)
+        }else{
+            cell.titleLabel.text = self.items[indexPath.row].title
+            cell.cellWenLink = self.items[indexPath.row].link
+            
+            if items[indexPath.row].thumbImage != nil {
+                cell.cellView.image = items[indexPath.row].thumbImage
+            }else{//画像が取得されるまではデフォルト画像
+                cell.cellView.image = UIImage(named: "default.png")
+            }
         }
         
         //favがtrueならLIKEのデザイン変更.favに代入される前に動作するとエラーが出てしまうので、代入されるたびに動作させるために、別スレッドで処理。
         queue.async {() -> Void in
+            //たまにインデックスアウトオブレンジ.後で考える
             cell.currentLike = self.thisViewArticleInfo[indexPath.row]!.fav
+            if cell.currentLike {
+                cell.likeButton.setTitleColor(UIColor.magenta, for: UIControlState.normal)
+                cell.likeButton.backgroundColor = UIColor(red: 1.0, green: 0.8, blue: 1.0, alpha: 1.0)
+            }else{
+                cell.likeButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+                cell.likeButton.backgroundColor = UIColor.darkGray
+            }
         }
-        if cell.currentLike {
-            cell.likeButton.setTitleColor(UIColor.magenta, for: UIControlState.normal)
-            cell.likeButton.backgroundColor = UIColor(red: 1.0, green: 0.8, blue: 1.0, alpha: 1.0)
-        }else{
-            cell.likeButton.setTitleColor(UIColor.white, for: UIControlState.normal)
-            cell.likeButton.backgroundColor = UIColor.darkGray
-        }
+        
         return cell
     }
     

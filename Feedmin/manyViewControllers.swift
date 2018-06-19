@@ -18,7 +18,8 @@ class manyViewControllers:UIViewController{
 //テスト---------------------------------------------------
         //CoreData初期化
         //deleteAllSiteInfo()
-        deleteAllArticleInfo()//もしCoreDataに記事が入っている場合、過去記事URLと同じURLが出るまで行う.その処理を書いたら、記事の初期化消す。
+        //もしCoreDataに記事が入っている場合、過去記事URLと同じURLが出るまで行う.その処理を書いたら、記事の初期化消す。
+        //deleteAllArticleInfo()
 //--------------------------------------------------------
         
         
