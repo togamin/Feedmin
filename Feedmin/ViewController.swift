@@ -65,6 +65,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+//テスト-------------------------------------
+
+//------------------------------------------
+        
+        
         //Webサイト表示用画面の設定
         webSiteView.isHidden = true
         backMenu.isHidden = true
@@ -247,16 +252,30 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 self.item?.title = currentString
             case "link":
                 self.item?.link = currentString
-            /*
-             case "pubData":
-                self.item?.pubDate = currentString
-             */
+            
+            case "pubDate":
+                self.item?.pubDate = self.pubDate(pubDate: currentString)
+                //print("pubDate中身:\(self.item?.pubDate!)")
+            
             case "description":
                 self.item?.description = currentString
             case "item": self.items.append(self.item!)
         default :break
         }
     }
+    //pubDataの情報を扱いやすいデータに変換.
+    //[Sun, 17 Jun 2018 12:00:22 +0000]を
+    //[2018-06-17 12:00:22 +0000]に変換.時差の部分はとりあえず考慮しない.
+    func pubDate(pubDate:String)->Date?{
+        //print("pubDate0:\(pubDate)")
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
+        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss ZZZZ"
+        let getDate = dateFormatter.date(from: pubDate)
+        //print("pubDate1:\(getDate!)")
+        return getDate
+    }
+    
     //コードの中に入っているimgタグの中のURLを取得し,画像をNSDataとして出力.
     func getImageData(code:String)->NSData!{
         

@@ -24,7 +24,7 @@ var articleInfoList:[articleInfo?] = []
 class Item {
     var title = ""
     var link = ""
-    var pubDate = ""
+    var pubDate:Date?
     var description = ""
     var thumbImageData:NSData?
     var thumbImage:UIImage!
