@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 //Articleへのデータの書き込み
-func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImageData:NSData,fav:Bool){
+func writeArticleInfo(siteID:Int,articleTitle:String,updateDate:Date,articleURL:String,thumbImageData:NSData,fav:Bool){
     //print("writeArticleInfoのCoreDataへの登録")
     //AppDelegateを使う用意をしておく
     let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -23,6 +23,7 @@ func writeArticleInfo(siteID:Int,articleTitle:String,articleURL:String,thumbImag
     //値のセット
     newRecode.setValue(siteID, forKey: "siteID")
     newRecode.setValue(articleTitle, forKey: "articleTitle")
+    newRecode.setValue(updateDate, forKey: "updateDate")
     newRecode.setValue(articleURL, forKey: "articleURL")
     newRecode.setValue(thumbImageData, forKey: "thumbImageData")
     newRecode.setValue(fav, forKey: "fav")
@@ -52,10 +53,10 @@ func readArticleInfo()->[articleInfo]{
         for result:AnyObject in fetchResults{
             //print("読み込めた?\(result)")
             //print("テスト:\(result.value(forKey:"thumbImageData")! as! NSData)")
-            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
+            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,updateDate:result.value(forKey:"updateDate")! as! Date,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
         }
         for info in InfoList{
-            print("[readArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),お気に入り:\(info.fav!)")
+            //print("[readArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),お気に入り:\(info.updateDate!)")
             //,URL:\(info.articleURL!),画像データ:\(info.thumbImageData!)
         }
     }catch{
@@ -80,7 +81,7 @@ func selectSiteArticleInfo(siteID:Int)->[articleInfo]{
         let fetchResults = try! viewContext.fetch(query)
         //データの取得
         for result:AnyObject in fetchResults{
-            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
+            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,updateDate:result.value(forKey:"updateDate")! as! Date,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
         }
         for info in InfoList{
             print("[selectSiteArticleInfo]ID:\(info.siteID!),タイトル:\(info.articleTitle!),お気に入り:\(info.fav!)")
@@ -319,7 +320,7 @@ func readFav()->[articleInfo]{
         //絞り込んだデータを一括取得
         let fetchResults = try! viewContext.fetch(query)
         for result in fetchResults{
-            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
+            InfoList.append(articleInfo(siteID:result.value(forKey:"siteID")! as! Int,articleTitle:result.value(forKey:"articleTitle")! as! String,updateDate:result.value(forKey:"updateDate")! as! Date,articleURL:result.value(forKey:"articleURL")! as! String,thumbImageData:result.value(forKey:"thumbImageData")! as! NSData,fav:result.value(forKey:"fav")! as! Bool))
         }
         for info in InfoList{
             print("[readFav]ID:\(info.siteID!),タイトル:\(info.articleTitle!),お気に入り:\(info.fav!)")
@@ -350,7 +351,7 @@ func updateFav(siteID:Int,articleURL:String,bool:Bool){
         for result in fetchResults{
             result.setValue(bool,forKey:"fav")
             //変更した記事のタイトルと変更後の状態の表示
-            print("[updateFav]\(result.value(forKey:"articleTitle")! as! String)","\(result.value(forKey:"fav")!)")
+            print("[updateFav]\(result.value(forKey:"articleTitle")! as! String)","\(result.value(forKey:"updateDate")!)")
             do{
                 //レコード(行)の即時保存
                 try viewContext.save()

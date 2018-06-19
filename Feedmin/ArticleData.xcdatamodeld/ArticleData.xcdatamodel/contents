@@ -6,6 +6,7 @@
         <attribute name="fav" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="siteID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="thumbImageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="siteInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ArticleInfo" syncable="YES"/>
     </entity>
     <entity name="SiteInfo" representedClassName="SiteInfo" syncable="YES" codeGenerationType="class">
@@ -15,7 +16,7 @@
         <relationship name="articleInfo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SiteInfo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ArticleInfo" positionX="-45" positionY="0" width="128" height="135"/>
+        <element name="ArticleInfo" positionX="-45" positionY="0" width="128" height="150"/>
         <element name="SiteInfo" positionX="-18" positionY="27" width="128" height="105"/>
     </elements>
 </model>

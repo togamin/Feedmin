@@ -46,14 +46,16 @@ struct siteInfo{
 //CoreDataからの記事情報を格納するための構造体
 struct articleInfo{
     var siteID:Int!
+    var updateDate:Date?
     var articleTitle:String!
     var articleURL:String!
     var thumbImageData:NSData!
     var fav:Bool!
     
-    init(siteID: Int, articleTitle: String,articleURL: String,thumbImageData: NSData,fav: Bool) {
+    init(siteID: Int, articleTitle: String,updateDate:Date,articleURL: String,thumbImageData: NSData,fav: Bool) {
         self.siteID = siteID
         self.articleTitle = articleTitle
+        self.updateDate = updateDate
         self.articleURL = articleURL
         self.thumbImageData = thumbImageData
         self.fav = fav

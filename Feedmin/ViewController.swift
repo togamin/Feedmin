@@ -104,7 +104,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 self.items[i].thumbImageData = self.getImageData(code: self.items[i].description)
                 
                //CoreDataに記事情報を保存
-                writeArticleInfo(siteID:viewID!,articleTitle:self.items[i].title,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
+                writeArticleInfo(siteID:viewID!,articleTitle:self.items[i].title,updateDate:self.items[i].pubDate!,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
                 
                 //NSDataからUIImageに変換
                 self.items[i].thumbImage = UIImage(data:self.items[i].thumbImageData! as Data)!
