@@ -29,11 +29,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // このアプリで通知（Local Notification）を使用する許可を
         // ユーザーに求めるためのコード
-        
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [UIUserNotificationType.sound,UIUserNotificationType.alert,UIUserNotificationType.badge], categories: nil))
+        
+        //バックグランドフェッチするタイミング.OSの判断
+        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 
         
         return true
+    }
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        //バックグラウンドで実行する処理
+        print("バックグラウンド処理を実行")
+        
+        //適切なものを渡します → 新規データ: .newData 失敗: .failed データなし: .noData
+        completionHandler(.newData)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B700E97720DA834A0084FFD6 /* ico01.png in Resources */ = {isa = PBXBuildFile; fileRef = B700E97620DA834A0084FFD6 /* ico01.png */; };
 		B7423A3A20C041E000F02BDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7423A3920C041E000F02BDF /* AppDelegate.swift */; };
 		B7423A3C20C041E000F02BDF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7423A3B20C041E000F02BDF /* ViewController.swift */; };
 		B7423A3F20C041E000F02BDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7423A3D20C041E000F02BDF /* Main.storyboard */; };
@@ -27,7 +28,6 @@
 		B794E8D920CB38420037862E /* favTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794E8D820CB38420037862E /* favTableViewController.swift */; };
 		B7E5304420D5E4EF0059028E /* ArticleData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7E5304220D5E4EF0059028E /* ArticleData.xcdatamodeld */; };
 		B7E5304820D787810059028E /* myTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5304720D787810059028E /* myTabViewController.swift */; };
-		B7E5304E20D7B9A60059028E /* ico01.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E5304D20D7B9A60059028E /* ico01.png */; };
 		B7E5305020D7B9E50059028E /* ico02.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E5304F20D7B9E50059028E /* ico02.png */; };
 		B7FE8FD620CE4A0A0095F455 /* favWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */; };
 		B7FE8FD820CE78760095F455 /* favCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7FE8FD720CE78760095F455 /* favCellView.xib */; };
@@ -37,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B700E97620DA834A0084FFD6 /* ico01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico01.png; sourceTree = "<group>"; };
 		B7423A3620C041E000F02BDF /* Feedmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feedmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7423A3920C041E000F02BDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7423A3B20C041E000F02BDF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		B794E8D820CB38420037862E /* favTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favTableViewController.swift; sourceTree = "<group>"; };
 		B7E5304320D5E4EF0059028E /* ArticleData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArticleData.xcdatamodel; sourceTree = "<group>"; };
 		B7E5304720D787810059028E /* myTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myTabViewController.swift; sourceTree = "<group>"; };
-		B7E5304D20D7B9A60059028E /* ico01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ico01.png; path = ../../../ico01.png; sourceTree = "<group>"; };
 		B7E5304F20D7B9E50059028E /* ico02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico02.png; sourceTree = "<group>"; };
 		B7FE8FD520CE4A0A0095F455 /* favWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favWebViewController.swift; sourceTree = "<group>"; };
 		B7FE8FD720CE78760095F455 /* favCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = favCellView.xib; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 		B7423A6B20C5057100F02BDF /* images */ = {
 			isa = PBXGroup;
 			children = (
-				B7E5304D20D7B9A60059028E /* ico01.png */,
+				B700E97620DA834A0084FFD6 /* ico01.png */,
 				B7E5304F20D7B9E50059028E /* ico02.png */,
 				B794E8CE20C741700037862E /* default.png */,
 				B7FE8FD920CE7A1C0095F455 /* default02.png */,
@@ -170,6 +170,11 @@
 				TargetAttributes = {
 					B7423A3520C041E000F02BDF = {
 						CreatedOnToolsVersion = 9.3.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -204,9 +209,9 @@
 				B7E5305020D7B9E50059028E /* ico02.png in Resources */,
 				B7FE8FDC20CE7E450095F455 /* pengin02.png in Resources */,
 				B7FE8FD820CE78760095F455 /* favCellView.xib in Resources */,
+				B700E97720DA834A0084FFD6 /* ico01.png in Resources */,
 				B7423A5820C1275400F02BDF /* cellContentView.xib in Resources */,
 				B7423A3F20C041E000F02BDF /* Main.storyboard in Resources */,
-				B7E5304E20D7B9A60059028E /* ico01.png in Resources */,
 				B794E8CF20C741700037862E /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
