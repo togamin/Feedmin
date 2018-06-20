@@ -26,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //ナビゲーションアイテムの色を変更
         UINavigationBar.appearance().tintColor = .white
+        
+        // このアプリで通知（Local Notification）を使用する許可を
+        // ユーザーに求めるためのコード
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [UIUserNotificationType.sound,UIUserNotificationType.alert,UIUserNotificationType.badge], categories: nil))
 
         
         return true

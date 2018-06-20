@@ -14,22 +14,9 @@
 * Infeed広告を入れる
 * 開発者プロフィール
 
- 
 * 記事登録の際ネットから検索
  
- 読み込みについて。
- siteIDの記事がArticleInfoにあるかどうかを確認する。
- ↓
- CoreDataに記事情報ある場合
-    * CoreDataの情報を読み込む。
-    * 画像の取得をマルチスレッド処理。
-    * tableに表示する。
- ↓
- CoreDataに記事情報ない場合
-    * RSSの解析を行う。
-    * ArticleInfoに記事情報を書き込む。
-    * 画像の処理をマルチスレッド処理。
-    * tableに表示.
+
  
  
  デザイン
@@ -248,7 +235,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func rssUpdate(siteURL:String){
         newArticleUpdate = true
         self.startDownload(siteURL: siteURL)
-        print("テスト:self.startDownload完了")
         newArticleUpdate = false
         self.existenceArticle = true
         self.endFunc = false
@@ -257,7 +243,23 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             self.items[i].thumbImageData = self.getImageData(code: self.items[i].description)
             print("テストitemsの中身:\(self.items[i].title)")
             writeArticleInfo(siteID:self.viewID,articleTitle:self.items[i].title,updateDate:self.items[i].pubDate!,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
+            
+            //もしバックグラウンドフェッチによる更新なら、通知をするが、そうでない場合は通知しないといった処理を加える
+            
+            // ローカル通知の設定
+            let notification : UILocalNotification = UILocalNotification()
+            // タイトル
+            notification.alertTitle = siteInfoList[self.viewID]?.siteTitle
+            // 通知メッセージ
+            notification.alertBody = self.items[i].title
+            // Timezoneの設定
+            notification.timeZone = TimeZone.current
+            // 5秒後に通知を設定
+            notification.fireDate = Date(timeIntervalSinceNow: 5)
+            // Notificationを表示する
+            UIApplication.shared.scheduleLocalNotification(notification)
         }
+        print("更新完了")
     }
 
 /*---------------------------------------------------*/
