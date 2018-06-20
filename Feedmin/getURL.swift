@@ -88,6 +88,9 @@ class getURL:UITableViewController{
             }
             getURLTableView.reloadData()
             //再読み込みの必要ありManyViewPage
+            let mVC1 = tabBarController?.customizableViewControllers![0] as! manyViewControllers
+            mVC1.initPageMenu()
+            
             
         }else{
             let alert = UIAlertController(title: "エラー", message: "登録しているサイトが1つの場合、削除できません。", preferredStyle: .alert)
@@ -154,8 +157,9 @@ http://feedblog.ameba.jp/rss/ameblo/oranger13
             
             
 
-            let mVC = tabBarController?.customizableViewControllers![0] as! manyViewControllers
-                mVC.addPage(siteTitle: siteTitle)
+            //タブの0番目
+            let mVC2 = tabBarController?.customizableViewControllers![0] as! manyViewControllers
+                mVC2.addPage(siteTitle: siteTitle)
             
             print("リロード完了")
             
