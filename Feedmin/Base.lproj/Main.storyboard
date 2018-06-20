@@ -128,7 +128,7 @@
             </objects>
             <point key="canvasLocation" x="2895" y="850"/>
         </scene>
-        <!--Fab Wev View Controller-->
+        <!--記事-->
         <scene sceneID="LOm-e1-m61">
             <objects>
                 <viewController id="Lx6-be-DuX" customClass="fabWevViewController" customModule="Feedmin" customModuleProvider="target" sceneMemberID="viewController">
@@ -154,6 +154,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3D6-B4-UC1"/>
                     </view>
+                    <navigationItem key="navigationItem" title="記事" id="1fi-dH-rhV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="pZb-Il-Nrw">
+                            <connections>
+                                <action selector="favShare:" destination="Lx6-be-DuX" id="bK1-tl-rgS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="favWebKitView" destination="O2s-T3-dau" id="bu3-LN-fty"/>
                     </connections>

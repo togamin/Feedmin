@@ -22,6 +22,11 @@ class fabWevViewController:UIViewController{
             self.favWebKitView.load(request)
             //self.ArticleNav.topItem!.title = title
         }
-        
     }
+    
+    @IBAction func favShare(_ sender: UIBarButtonItem) {
+        let controller = UIActivityViewController(activityItems: [URL(string:self.link)], applicationActivities:nil)
+        self.present(controller, animated: true,completion:nil)
+    }
+    
 }

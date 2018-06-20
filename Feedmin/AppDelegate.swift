@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+var backFetch:Bool = false
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -40,6 +42,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //バックグラウンドで実行する処理
         print("バックグラウンド処理を実行")
+        backFetch = true
+
+        //initPageMenu()を動作させる.
+        //backFetch = trueの場合、rssUPdateが動作するようにviewControllerにコード追加.
+        
+        
+        
+        
         
         //適切なものを渡します → 新規データ: .newData 失敗: .failed データなし: .noData
         completionHandler(.newData)

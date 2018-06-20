@@ -136,9 +136,6 @@ extension manyViewControllers {
     //サイトを追加した時に呼ばれる関数.追加した際ページメニューに反映。
     func addPage(siteTitle:String) {
         
-        // pageMenuを一度リセットする
-        //pageMenu.removeFromSuperview()
-        
         // 追加したいViewControllerをviewControllersにセットする
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController")
@@ -156,7 +153,6 @@ extension manyViewControllers {
             option: option)
         view.addSubview(pageMenu)
     }
-    
 }
 
 
