@@ -55,6 +55,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var item:Item?
     var currentString = ""
     var imageList = [""]//サムネイル画像のデータが代入される
+    //どのサイトの処理を行っているかを識別するためのID
+    var viewID:Int = 0
     let queue:DispatchQueue = DispatchQueue(label: "com.togamin.queue")//マルチスレッド用
     
     var thisViewArticleInfo:[articleInfo?] = []
@@ -71,7 +73,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 //テスト-------------------------------------
         
 //------------------------------------------
-        
+        self.viewID = ViewControllerNow
         
         //Webサイト表示用画面の設定
         webSiteView.isHidden = true
@@ -88,13 +90,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         myTableView.estimatedRowHeight = 250
         myTableView.rowHeight = UITableViewAutomaticDimension//自動的にセルの高さを調節する
         
-        //どのサイトの処理を行っているかを識別するためのID
-        var viewID = ViewControllerNow
-        print("viewID:\(ViewControllerNow!)")
+        
+        print("viewID:\(self.viewID)")
         
         
         //Articleに記事が入っているかどうかの処理
-        self.thisViewArticleInfo = selectSiteArticleInfo(siteID: viewID!)
+        self.thisViewArticleInfo = selectSiteArticleInfo(siteID: self.viewID)
         print("記事数解析前:\(self.thisViewArticleInfo.count)")
         if self.thisViewArticleInfo.count != 0{
             self.existenceArticle = true
@@ -105,7 +106,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             //RSS解析とダウンロード開始
             queue.async {() -> Void in
                 print("画面表示中")
-                self.startDownload(siteURL: (siteInfoList[ViewControllerNow]?.siteURL)!)
+                self.startDownload(siteURL: (siteInfoList[self.viewID]?.siteURL)!)
             }
             //マルチスレッド.別スレッドで画像の処理をさせることにより、その他の表示を早くすることで操作性をあげる。
             queue.async {() -> Void in
@@ -115,13 +116,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                     self.items[i].thumbImageData = self.getImageData(code: self.items[i].description)
                     
                     //CoreDataに記事情報を保存
-                    writeArticleInfo(siteID:viewID!,articleTitle:self.items[i].title,updateDate:self.items[i].pubDate!,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
+                    writeArticleInfo(siteID:self.viewID,articleTitle:self.items[i].title,updateDate:self.items[i].pubDate!,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
                     
                     //NSDataからUIImageに変換
                     self.items[i].thumbImage = UIImage(data:self.items[i].thumbImageData! as Data)!
                 }
                 //現在のviewに関連するサイトだけの記事を取得.
-                self.thisViewArticleInfo = selectSiteArticleInfo(siteID: viewID!)
+                self.thisViewArticleInfo = selectSiteArticleInfo(siteID: self.viewID)
                 print("記事数解析後：\(self.thisViewArticleInfo.count)")
             }
         }
@@ -145,9 +146,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //テーブルビュー引っ張り時の呼び出しメソッド
     @objc func relode(_ sender: UIRefreshControl){
         print("再読み込み")
-        self.rssUpdate(siteURL:(siteInfoList[ViewControllerNow]?.siteURL)!)
+        print("ViewID:\(self.viewID)")
+        self.rssUpdate(siteURL:(siteInfoList[self.viewID]?.siteURL)!)
         //データの読み込み
-        self.thisViewArticleInfo = selectSiteArticleInfo(siteID: ViewControllerNow!)
+        self.thisViewArticleInfo = selectSiteArticleInfo(siteID: self.viewID)
         //データのソート
 
         //テーブルを再読み込みする。
@@ -254,7 +256,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         for i in 0..<self.items.count{
             self.items[i].thumbImageData = self.getImageData(code: self.items[i].description)
             print("テストitemsの中身:\(self.items[i].title)")
-            writeArticleInfo(siteID:ViewControllerNow!,articleTitle:self.items[i].title,updateDate:self.items[i].pubDate!,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
+            writeArticleInfo(siteID:self.viewID,articleTitle:self.items[i].title,updateDate:self.items[i].pubDate!,articleURL:self.items[i].link,thumbImageData:self.items[i].thumbImageData!,fav:false)
         }
     }
 
