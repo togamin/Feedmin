@@ -147,13 +147,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @objc func relode(_ sender: UIRefreshControl){
         print("再読み込み")
         print("ViewID:\(self.viewID)")
-        self.rssUpdate(siteURL:(siteInfoList[self.viewID]?.siteURL)!)
-        //データの読み込み
-        self.thisViewArticleInfo = selectSiteArticleInfo(siteID: self.viewID)
-        //データのソート
-
-        //テーブルを再読み込みする。
-        myTableView.reloadData()
+        queue.async {() -> Void in
+            self.rssUpdate(siteURL:(siteInfoList[self.viewID]?.siteURL)!)
+            //データの読み込み
+            self.thisViewArticleInfo = selectSiteArticleInfo(siteID: self.viewID)
+            //テーブルを再読み込みする。
+            self.myTableView.reloadData()
+        }
         //読込中の表示を消す。
         sender.endRefreshing()
     }
